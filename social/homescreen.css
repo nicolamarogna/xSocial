@@ -1,4 +1,4 @@
-html {font-size:80%;height:100%;background:#f2f2f2;}
+html {font-size:80%;height:100%;background:#e9ebee;}
 body {font-family: 'Hind', sans-serif;height:100%;color:#333;line-height:1.5;}
 h1, h2, h3, h4, h5, h6 {font-family: 'Hind', sans-serif;}
 body, div, fieldset, form {margin:0;padding:0;}
@@ -65,8 +65,8 @@ td {margin:0 1px;padding: 2px 5px 0 5px;vertical-align: top;}
 
 #left {float:left;width:180px;}
 #right {float:left;width:500px;}
-#right_content {border:solid 1px #CCC;padding:5px;margin:0 5px 10px 5px;background-color:#fff;}
-#right_info {float:right;width:175px;}
+#right_content {border:solid 1px #CCC;padding:5px;margin:0 0 10px 5px;background-color:#fff;}
+#right_info {float:right;width:195px;}
 
 #results {background-color:#F9F9F9;}
 #results tr {border-bottom:solid #FFF 1px;}
@@ -200,7 +200,7 @@ ul.h li {display:inline;margin:0 8px;}
 ul.h li a.on {color:#333;}
 
 /* menu */
-#menu td {background-color:#F3F3F3;border-bottom:1px solid #DADADA;}
+#menu td {background-color:#e9ebee;border-bottom:1px solid #DADADA;}
 
 .comments_full {font-weight:bold;}
 

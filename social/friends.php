@@ -42,6 +42,7 @@ function checkAll(form,state,identifier){
 		header('Location: ?p=friends');
 	}
 
+	echo '<div id="right_content">';
 	echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_friends.png">Elenco amici</div>';
 
 	//check if I am or is another user
@@ -175,5 +176,7 @@ function checkAll(form,state,identifier){
 	} else {
 		echo 'Non hai ancora fatto amicizia con nessuno.';
 	}
+	
+	echo '</div>';
 	
 ?>

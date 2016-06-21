@@ -13,8 +13,8 @@
 	}; };
 	// $_SERVER['DOCUMENT_ROOT'] is now set - you can use it as usual...
 	
-	define('SITE_TITLE', "XSocial");
-	define('INIT_DIR', '/social/social/');
+	define('SITE_TITLE', "xSocial");
+	define('INIT_DIR', '/social/xSocial/social/');
 
 	//////////////////////////////
 	//CONFIG DB IN classes/db.php
@@ -26,7 +26,7 @@
 	define('BASE_URL', 'http://'.$_SERVER['HTTP_HOST'].INIT_DIR);
 
 	//items for pagination
-	define('PP', 20);
+	define('PP', 5);
 	
 	//enable ratings YES/NO
 	define('ENABLE_RATING', 'YES');

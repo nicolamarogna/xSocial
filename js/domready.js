@@ -10,6 +10,33 @@
 				}
 			});
 			
+			
+			
+			//infinite scroll
+			var win = $(window);
+			var pageNumber = 0;
+			var totalPages = parseInt($("#lastPage").text());
+			win.scroll(function() {
+				// End of the document reached?
+				if ($(document).height() - win.height() == win.scrollTop()) {
+					//$('#loading').show();
+					if (pageNumber != totalPages) {
+						$.ajax({
+							url: '?page='+pageNumber,
+							dataType: 'html',
+							success: function(html) {
+									var content = $( html ).find("#right_content:not(:first)").remove();
+									content.fadeIn("slow").appendTo("#right");
+									pageNumber++;
+								//$('#loading').hide();
+							}
+						});
+					}
+				}
+			});
+			//end infinite scroll
+			
+			
 			//rating
 			$("select[id^='rating']").barrating('show', {
 			  theme: 'fontawesome-stars',
@@ -52,12 +79,18 @@
 			
 			$( ".swing" ).click(function( event ) {
 				// Stop form from submitting normally
-				event.preventDefault();
+				event.stopPropagation();
 				var item = ($(this).attr('item'));
-				$("#"+item).toggle(500,"swing");
+				$("div[item='hide']").slideUp().promise().done(function(){
+					$("#"+item).slideDown(500,"swing");
+				});
 			});
 			
-		
+			//hide all divs with "item=hide" if open (like Carica foto or Carica Video)
+			$( document ).click(function( event ) {
+				$("div[item='hide']").slideUp().promise().done();
+			});
+			
 		   // comments load more
 			$("tr[id^='post_comment']").each(function(i) {
 				var item = ($(this).attr('id'));

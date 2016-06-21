@@ -34,7 +34,7 @@ class Pagination {
 		
 		if ($info[1] < ($info[0]-1)) {
 			$link .= '<a class="xsmall" href="'.$url.($info[1]+1).'" title="'._NEXT.'">>>></a>';
-			$link .= '<a class="xsmall" href="'.$url.($info[0]-1).'" title="'._LAST_PAGE.'">'.$info[0].'</a>';
+			$link .= '<a id="lastPage" class="xsmall" href="'.$url.($info[0]-1).'" title="'._LAST_PAGE.'">'.$info[0].'</a>';
 		}
 		return $link;
 	}
