@@ -1,0 +1,48 @@
+div#menu1 {
+	float:left;
+	width: 146px;
+	height: 20px;
+	overflow: hidden;
+	background-color: #F2F2F2;
+	margin-right:4.4px;
+	cursor:default;
+}
+
+div#menu2 {
+	float:left;
+	width: 146px;
+	height: 20px;
+	overflow: hidden;
+	background-color: #F2F2F2;
+	margin-right:4.4px;
+	cursor:default;
+}
+
+div#menu3 {
+	float:left;
+	width: 146px;
+	height: 20px;
+	overflow: hidden;
+	background-color: #F2F2F2;
+	margin-right:4.4px;
+	cursor:default;
+}
+
+div#menu4 {
+	float:left;
+	width: 146px;
+	height: 20px;
+	overflow: hidden;
+	background-color: #F2F2F2;
+	margin-right:4.4px;
+	cursor:default;
+}
+
+div#menu5 {
+	float:left;
+	width: 146px;
+	height: 20px;
+	overflow: hidden;
+	background-color: #F2F2F2;
+	cursor:default;
+}

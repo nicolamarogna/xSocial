@@ -1,0 +1,27 @@
+/*
+Title 	: CSS for Simple Star Rating Script Using Mootools
+Author 	: Nikhil Kunder
+Date 	: 2008/01/12
+Version : 1.0
+    moorating_v1.0.js & moorating.css  is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ 	Lesser General Public License for more details.
+*/
+@charset "utf-8";
+/* CSS Document */
+/* Star rating container: can vary as per design , or even remove this is not required */
+.moostar_container{z-index:9999999;width:200px; height:20px; padding:0px 0px 0px 0px; overflow:hidden; }
+.moostar_container_inner{padding:3px 3px 3px 3px;z-index:9999999;}
+/* End of container */
+/* DO NOT touch below this line */
+.moostar { float: left; margin:0px 0px 0px 5px;padding:0px; overflow:hidden; width: 110px; height: 15px; background: url('../social/files/img_private/stars.gif') repeat-x; cursor:pointer;}
+.moostar span {  margin:0px;padding:0;display: block; width: 108px; height: 15px; text-decoration: none; text-indent: -9000px; z-index: 50; }
+.moostar .curr { background: url('../social/files/img_private/stars.gif') left 17px;}
+.moostartval{ left:5px; position: relative; float: left; font-size:12px; color:#999999;font-weight:bold;}
+
+
+.no_moostar { float: left; margin:0;padding:0px; overflow:hidden; height: 15px; width: 110px; background: url('../social/files/img_private/stars.gif') repeat-x;}
+.no_moostar span {  margin:0;padding:0;display: block; width: 108px; height: 15px; text-decoration: none; text-indent: -9000px; z-index: 50; }
+.no_moostar .curr { background: url('../social/files/img_private/stars.gif') left 17px;}
+.no_moostartval{ left:5px; position: relative; float: left; font-size:12px; color:#900;font-weight:bold;}
