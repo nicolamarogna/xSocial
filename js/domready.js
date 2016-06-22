@@ -35,9 +35,9 @@ $(document).ready(function(){
 									var content = $( html ).find("#right_content:not(:first)");
 									$("#right").fadeIn("slow").append(content);
 									
-$('select[id^="rating"]').on('change', function() { alert('fffff') });	
+			$('select[id^="rating"]').on('change', function() { rating(); });
 
-									rating();
+									//rating();
 									pageNumber++;
 								//$('#loading').hide();
 							}
@@ -48,8 +48,10 @@ $('select[id^="rating"]').on('change', function() { alert('fffff') });
 					}
 				}
 			});
-
 			//end infinite scroll
+	
+	
+	
 			
 			//rating
 		function rating() {
