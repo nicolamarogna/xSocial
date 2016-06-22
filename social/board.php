@@ -104,7 +104,9 @@ class Board {
 					'id_status' => $_POST['id_status'],
 					);
 			$db->update('social_status', $_POST['id_status'], $post_update);	
-			$db->insert('social_ratings', $post_insert);	
+			$db->insert('social_ratings', $post_insert);
+			
+			//$this->ratings($_POST['id_status'], $element->rating_numbers + 1, $average);
 		}
 	}
 	
@@ -429,7 +431,7 @@ class Board {
 				echo '</div></div>';
 					}
 			// pagination view
-			//echo '<div id="pager">'.Pagination::pager('?page=', $pager[1]).'</div>';
+			echo '<div id="pager">'.Pagination::pager('?page=', $pager[1]).'</div>';
 		}
 	}
 	
@@ -904,23 +906,23 @@ class Board {
 		// rating section
 		echo '<div id="rating_result'.$id_status.'">';
 		$already_voted = $mod->query('SELECT * FROM social_ratings WHERE id_user = '.$_SESSION['user']->id.' AND id_status = '.$id_status);
-		
-		if ((!$already_voted) || ($already_voted[0]->id_user != $_SESSION['user']->id)) {
-			// rating element
-			echo '<span class="fleft xsmall" style="margin-right:5px;color:#2348a0;"><b>Vota questo elemento</b></span>
-					  <select id="rating'.$id_status.'">
-					  <option value=""></option>
-					  <option value="1">'.$id_status.'</option>
-					  <option value="2">'.$id_status.'</option>
-					  <option value="3">'.$id_status.'</option>
-					  <option value="4">'.$id_status.'</option>
-					  <option value="5">'.$id_status.'</option>
-					   </select>
-					   ';
-			} else {
-				echo '<span>Voto medio: '.str_replace('.',',',$rating_average).' di '.$rating_numbers.' utenti</span>';
-			}
-			echo '</div>';
+
+			if ((!$already_voted) || ($already_voted[0]->id_user != $_SESSION['user']->id)) {
+				// rating element
+				echo '<span class="fleft xsmall" style="margin-right:5px;color:#2348a0;"><b>Vota questo elemento</b></span>
+						  <select id="rating'.$id_status.'">
+						  <option value=""></option>
+						  <option value="1">'.$id_status.'</option>
+						  <option value="2">'.$id_status.'</option>
+						  <option value="3">'.$id_status.'</option>
+						  <option value="4">'.$id_status.'</option>
+						  <option value="5">'.$id_status.'</option>
+						   </select>
+						   ';
+		} else {
+			echo '<span>Voto medio: '.str_replace('.',',',$rating_average).' di '.$rating_numbers.' utenti</span>';
+		}
+		echo '</div>';
 	}
 	
 		

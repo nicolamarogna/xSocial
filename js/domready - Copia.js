@@ -34,9 +34,6 @@ $(document).ready(function(){
 							success: function(html) {
 									var content = $( html ).find("#right_content:not(:first)");
 									$("#right").fadeIn("slow").append(content);
-									
-$('select[id^="rating"]').on('change', function() { alert('fffff') });	
-
 									rating();
 									pageNumber++;
 								//$('#loading').hide();
@@ -51,6 +48,7 @@ $('select[id^="rating"]').on('change', function() { alert('fffff') });
 
 			//end infinite scroll
 			
+			
 			//rating
 		function rating() {
 			$( "select[id^='rating']" ).barrating('show', {
@@ -62,11 +60,9 @@ $('select[id^="rating"]').on('change', function() { alert('fffff') });
 								rating: value,
 								action:'store_rating'
 							})
-							.done(function( data ) {
-								var content = $(data).find("#rating_result"+text).html();
-								console.log(content);
+							.done(function( data ) {	
+								var content = $( data ).find("#rating_result"+text);
 								$("#rating_result"+text).html( content );
-
 							});
 				} else {
 					
