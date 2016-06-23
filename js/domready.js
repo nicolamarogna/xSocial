@@ -4,7 +4,7 @@ $(document).ready(function(){
 			$("div[item='hide']").hide();			
 
 			//init rating
-			rating();
+			$( "select[id^='rating']" ).barrating('show', {theme: 'fontawesome-stars',});
 			
 			//fancybox
 			function fancybox() {
@@ -28,31 +28,77 @@ $(document).ready(function(){
 				if ($(document).height() - win.height() == win.scrollTop()) {
 					//$('#loading').show();
 					if ((totalPages) && (pageNumber != totalPages)) {
+						if (getQuerystring()) {
+							url = '?page='+pageNumber+'&'+getQuerystring();
+						} else {
+							url = getQuerystring();
+						}
 						$.ajax({
-							url: '?page='+pageNumber,
+							url: url,
 							dataType: 'html',
-							success: function(html) {
-									var content = $( html ).find("#right_content:not(:first)");
+							success: function(data) {
+									//find div with new posts
+									var content = $( data ).find("#right_content:not(:first)");
+									//set custom attribute "inpage" to query correct page
+									content.find("select[id^='rating']").attr('inpage',pageNumber)
+									//view more posts
 									$("#right").fadeIn("slow").append(content);
-									
-			$('select[id^="rating"]').on('change', function() { rating(); });
-
-									//rating();
+									//apply widget rating
+									$( "select[id^='rating']" ).barrating('show', {theme: 'fontawesome-stars',});									
 									pageNumber++;
-								//$('#loading').hide();
+									//$('#loading').hide();
 							}
 						})
 						.done(function(data){
-							//
+							//nothing to do for now
 						});
 					}
 				}
 			});
 			//end infinite scroll
 	
-	
-	
-			
+			//rating  
+			$(document).on("change", "select[id^='rating']", function( event ) {
+				var value = $(this).val();
+				var id_status = $(this).find("option:selected").text();
+				var page = $(this).attr('inpage');
+				if (getQuerystring()) {
+					url = '?page='+page+'&'+getQuerystring();
+				} else {
+					url = getQuerystring();
+				}
+				$.post( url , {
+								id_status: id_status,
+								rating: value,
+								action:'store_rating'
+							})
+							.done(function( data ) {
+								var content = $(data).find("#rating_result"+id_status).html();
+								$("#rating_result"+id_status).html( content );
+							});
+			});
+		
+		/*
+		$.urlParam = function(name){
+			var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+			if (results==null){
+			   return null;
+			}
+			else{
+			   return results[1] || 0;
+			}
+		}
+		console.log(decodeURIComponent($.urlParam('userboard'))); 
+		*/
+		function getQuerystring() {
+			if (document.URL.split('?')[1]) {
+				return document.URL.split('?')[1];
+			} else {
+				return false;
+			}
+		}
+		
+		/*
 			//rating
 		function rating() {
 			$( "select[id^='rating']" ).barrating('show', {
@@ -77,7 +123,7 @@ $(document).ready(function(){
 			});
 		};
 			//end rating
-			
+		*/	
 			//datepicker
 			$(function() {
 				$.datepicker.setDefaults($.datepicker.regional['it']);
@@ -94,7 +140,7 @@ $(document).ready(function(){
 			//end datepicker
 			
 			//swing
-			$( "body" ).on("click", ".swing", function( event ) {
+			$( document ).on("click", ".swing", function( event ) {
 				// Stop form from submitting normally
 				event.stopPropagation();
 				var item = ($(this).attr('item'));
@@ -104,7 +150,7 @@ $(document).ready(function(){
 			});
 			
 			//on click outside div, hide all divs with "item=hide" if open (like Carica foto or Carica Video)
-			$( "body" ).click(function( event ) {
+			$( document ).click(function( event ) {
 				$("div[item='hide']").slideUp().promise().done();
 			});
 			

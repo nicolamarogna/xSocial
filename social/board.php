@@ -587,7 +587,7 @@ class Board {
 				echo '</div></div>';	
 			}
 			//pagination view
-			//echo '<div id="pager">'.Pagination::pager('?type=all&page=', $pager[1]).'</div>';
+			echo '<div id="pager">'.Pagination::pager('?page=', $pager[1]).'</div>';
 		
 		}
 	}
@@ -769,7 +769,7 @@ class Board {
 						echo '</div></div>';
 					}
 					//pagination view
-					//echo '<div id="pager">'.Pagination::pager('?userboard='.$_GET['userboard'].'&page=', $pager[1]).'</div>';
+					echo '<div id="pager">'.Pagination::pager('?page=', $pager[1]).'</div>';
 				}
 				break;
 				
