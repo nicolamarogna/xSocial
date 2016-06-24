@@ -43,7 +43,8 @@ $(document).ready(function(){
 									//find div with new posts
 									var content = $( data ).find("#right_content:not(:first)");
 									//set custom attribute "inpage" to query correct page
-									content.find("select[id^='rating']").attr('inpage',pageNumber)
+									content.find("select[id^='rating']").attr('inpage',pageNumber);
+									content.find("div[id^='post']").attr('inpage',pageNumber);
 									//view more posts
 									$("#right").fadeIn("slow").append(content);
 									viewcomments();							
@@ -157,7 +158,7 @@ $(document).ready(function(){
 			//ajax submit
 			$( document ).on("click", ".ajaxsubmit", function( event ) {
 					// Stop form from submitting normally
-					event.preventDefault();				
+					event.preventDefault();
 					// Get some values from elements on the page:
 					var $params = $( this );
 					url = $params.attr( "href" );
@@ -185,6 +186,36 @@ $(document).ready(function(){
 				});
 				//end ajax submit
 		
+			//form submit
+			$( document ).on("click", ".formsubmit", function( event ) {
+					// Stop form from submitting normally
+					event.preventDefault();
+					// Get some values from elements on the page
+					var $params = $( this );
+					var idform = $params.attr( "idform" );
+					var id = idform.replace('submit_comment', '');
+					var url = $('#'+idform).attr( "action" );
+					var pageNumber = $('#post'+id).attr('inpage');
+						if (getQuerystring()) {
+							var qs = '?page='+pageNumber+'&'+getQuerystring();
+						} else {
+							var qs = '?page='+pageNumber;
+						}
+						$.ajax({
+						   type: "POST",
+						   url: url+qs,
+						   data: $('#'+idform).serialize(),
+						   success: function(data)
+						   {
+							   console.log(url+qs);
+							   aftersubmit(data, id, 'post_comment'); // show response from the php script.
+						   }
+						 });
+					
+				});
+				//end ajax submit
+
+
 		function aftersubmit(data, id, action, reloadPage) {
 			if (reloadPage) {
 				location.reload();
@@ -199,6 +230,12 @@ $(document).ready(function(){
 				$('tr[cid='+id+']').toggle(500,"swing").promise().done(function(){
 					$('tr[cid='+id+']').remove();
 				});
+			}
+			if (action == 'post_comment') {
+				var addcomment = $(data).find('#comments'+id);
+				console.log(addcomment)
+				$('#comments'+id).html(addcomment);
+				viewcomments();
 			}
 		}
 

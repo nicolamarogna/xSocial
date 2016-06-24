@@ -393,7 +393,7 @@ class Board {
 						<td>
 						<div id="comments'.$i->id_status.'">
 						<table id="results">';
-						echo ($numcomments > 3) ? '<a href="#" class="loadMore" item="post_comment'.$i->id_status.'" numcomments="'.$numcomments.'">Mostra più vecchi</a>' : '';
+						echo ($numcomments > 3) ? '<a style="cursor:pointer;" class="loadMore" item="post_comment'.$i->id_status.'" numcomments="'.$numcomments.'">Mostra più vecchi</a>' : '';
 				if ($comments) {
 					foreach ($comments as $c) {
 						echo '<tr id="post_comment'.$i->id_status.'" numcomments="'.$numcomments.'" cid='.$c->id.'><td style="width:50px;">
@@ -414,11 +414,11 @@ class Board {
 					}
 				}
 				echo '</table>
-						<form action="'.$_SERVER["REQUEST_URI"].'#'.$i->id.'" method="post">
+						<form action="'.$_SERVER["REQUEST_URI"].'#'.$i->id.'" method="post" id=submit_comment'.$i->id_status.'>
 						<span class="xsmall">Scrivi un commento...<textarea class="textarea_comment" name="comment"></textarea></span>
 						<input type="hidden" name="to_user" value="'.$i->id.'">
 						<input type="hidden" name="id_comment" value="'.$i->id_status.'">
-						<button class="button_comments">Commenta</button>
+						<button class="button_comments formsubmit" idform=submit_comment'.$i->id_status.'>Commenta</button>
 						</div>
 						</form>
 						</td>
@@ -550,7 +550,7 @@ class Board {
 						<td>
 						<div id="comments'.$i->id_status.'">
 						<table id="results">';
-						echo ($numcomments > 3) ? '<a href="#" class="loadMore" item="post_comment'.$i->id_status.'" numcomments="'.$numcomments.'">Mostra più vecchi</a>' : '';
+						echo ($numcomments > 3) ? '<a style="cursor:pointer;" class="loadMore" item="post_comment'.$i->id_status.'" numcomments="'.$numcomments.'">Mostra più vecchi</a>' : '';
 				if ($comments) {
 					foreach ($comments as $c) {
 						echo '<tr id="post_comment'.$i->id_status.'" numcomments="'.$numcomments.'" cid='.$c->id.'><td style="width:50px;">
@@ -724,7 +724,7 @@ class Board {
 								<td>
 								<div id="comments'.$i->id_status.'">
 								<table id="results">';
-								echo ($numcomments > 3) ? '<a href="#" class="loadMore" item="post_comment'.$i->id_status.'" numcomments="'.$numcomments.'">Mostra più vecchi</a>' : '';
+								echo ($numcomments > 3) ? '<a style="cursor:pointer;" class="loadMore" item="post_comment'.$i->id_status.'" numcomments="'.$numcomments.'">Mostra più vecchi</a>' : '';
 						if ($comments) {
 							foreach ($comments as $c) {
 						echo '<tr id="post_comment'.$i->id_status.'" numcomments="'.$numcomments.'" cid='.$c->id.'><td style="width:50px;">
