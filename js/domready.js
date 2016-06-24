@@ -6,7 +6,10 @@ $(document).ready(function(){
 			//init rating
 			$( "select[id^='rating']" ).barrating('show', {theme: 'fontawesome-stars',});
 			
-			//fancybox
+			//init comments
+			viewcomments();
+			
+			// init fancybox
 			function fancybox() {
 				$(".fancybox").fancybox();
 				$('.fancybox-media').fancybox({
@@ -31,7 +34,7 @@ $(document).ready(function(){
 						if (getQuerystring()) {
 							url = '?page='+pageNumber+'&'+getQuerystring();
 						} else {
-							url = getQuerystring();
+							url = '?page='+pageNumber;
 						}
 						$.ajax({
 							url: url,
@@ -43,8 +46,9 @@ $(document).ready(function(){
 									content.find("select[id^='rating']").attr('inpage',pageNumber)
 									//view more posts
 									$("#right").fadeIn("slow").append(content);
+									viewcomments();							
 									//apply widget rating
-									$( "select[id^='rating']" ).barrating('show', {theme: 'fontawesome-stars',});									
+									$( "select[id^='rating']" ).barrating('show', {theme: 'fontawesome-stars',});		
 									pageNumber++;
 									//$('#loading').hide();
 							}
@@ -65,7 +69,7 @@ $(document).ready(function(){
 				if (getQuerystring()) {
 					url = '?page='+page+'&'+getQuerystring();
 				} else {
-					url = getQuerystring();
+					url = '?page='+page;
 				}
 				$.post( url , {
 								id_status: id_status,
@@ -77,6 +81,7 @@ $(document).ready(function(){
 								$("#rating_result"+id_status).html( content );
 							});
 			});
+			//end rating
 		
 		/*
 		$.urlParam = function(name){
@@ -98,32 +103,7 @@ $(document).ready(function(){
 			}
 		}
 		
-		/*
-			//rating
-		function rating() {
-			$( "select[id^='rating']" ).barrating('show', {
-			  theme: 'fontawesome-stars',
-			  onSelect: function(value, text, event) {
-				if (typeof(event) !== 'undefined') {
-					$.post( '', {
-								id_status: text,
-								rating: value,
-								action:'store_rating'
-							})
-							.done(function( data ) {
-								var content = $(data).find("#rating_result"+text).html();
-								console.log(content);
-								$("#rating_result"+text).html( content );
-
-							});
-				} else {
-					
-				}
-			  }
-			});
-		};
-			//end rating
-		*/	
+	
 			//datepicker
 			$(function() {
 				$.datepicker.setDefaults($.datepicker.regional['it']);
@@ -155,27 +135,27 @@ $(document).ready(function(){
 			});
 			
 		   
-		    // comments load more
-			function loadmorecomments() {
+		    // comments & load more
+			function viewcomments() {
 				$("tr[id^='post_comment']").each(function(i) {
-					var item = ($(this).attr('id'));
+					var item = ($(this).attr('id'))
 					var numcomments = ($(this).attr('numcomments'));
-					$("tr[id^='"+item+"']").slice(-3, numcomments).show();
+					$("tr[id^='"+item+"']").slice(-3, numcomments).fadeIn();
 				});
-				$(".loadMore").click(function ( event ) {
-					event.preventDefault();
-					var item = ($(this).attr('item'));
-					var numcomments = ($(this).attr('numcomments'));
-				   $("tr[id^='"+item+"']:hidden").slice(-5, numcomments).fadeIn('slow');
-					if ($("tr[id^='"+item+"']:hidden").length == 0) {
-						$($(this)).hide();
-					}
-				});
-				// end comments load more
-			}
+			};
+			$( document ).on("click", ".loadMore", function( event ) {
+				event.preventDefault();
+				var item = ($(this).attr('item'));
+				var numcomments = ($(this).attr('numcomments'));
+			   $("tr[id^='"+item+"']:hidden").slice(-5, numcomments).fadeIn('slow');
+				if ($("tr[id^='"+item+"']:hidden").length == 0) {
+					$($(this)).hide();
+				}
+			});
+			// end comments load more
 
 			//ajax submit
-			$( "body" ).on("click", ".ajaxsubmit", function( event ) {
+			$( document ).on("click", ".ajaxsubmit", function( event ) {
 					// Stop form from submitting normally
 					event.preventDefault();				
 					// Get some values from elements on the page:
@@ -220,9 +200,6 @@ $(document).ready(function(){
 					$('tr[cid='+id+']').remove();
 				});
 			}
-			//console.log(data);
-			//var content = $( data ).find( "#content" );
-			//$( "#live"+id ).html( content );	
 		}
 
 		
