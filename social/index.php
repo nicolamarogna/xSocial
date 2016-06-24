@@ -57,22 +57,16 @@
 <link href='https://fonts.googleapis.com/css?family=Hind:300,600' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href="homescreen.css" />
 <link rel="stylesheet" type="text/css" href="../js/flipside/style.css" />
-<link rel="stylesheet" type="text/css" href="../js/moorating.css" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 <link rel="stylesheet" href="../js/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+<link rel="stylesheet" href="../js/rating/themes/font-awesome.min.css">
 <link rel="stylesheet" href="../js/rating/themes/fontawesome-stars.css">
 
 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
     <script type="text/javascript" src="../js/flipside/script.js" >//</script>
-	<script type="text/javascript" src="../js/mootools-1.2.4-core-nc.js" >//</script>
-    <script type="text/javascript" src="../js/mootools-1.2.4.2-more-nc.js" >//</script>
-    <!--<script type="text/javascript" src="../js/sexyalertbox.v1.2.moo.js" >//</script>-->
 	<script type="text/javascript" src="../js/datepicker.js" >//</script>
 	<script type="text/javascript" src="../js/domready.js" >//</script>
-	<script type="text/javascript" src="../js/cwcomplete.js" >//</script>
-    <script type="text/javascript" src="../js/moorating_v1.0.js" >//</script>
     <script type="text/javascript" src="../js/fancybox/lib/jquery.mousewheel-3.0.6.pack.js"></script>
 	<script type="text/javascript" src="../js/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 	<script type="text/javascript" src="../js/fancybox/source/helpers/jquery.fancybox-media.js?v=2.1.5"></script>
