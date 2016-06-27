@@ -7,7 +7,7 @@ class Form {
 	{
 		// extra can be enctype="multipart/form-data"
 		
-		if (!empty($submit_action) ) $extra .= ' onsubmit="return false"';
+		//if (!empty($submit_action) ) $extra .= ' onsubmit="return false"';
 		
 		$str = '<form id="'.$name.'"  name="'.$name.'" action="'.$action.'" method="'.$method.'" '.$extra.'>
 		<fieldset>';
@@ -61,8 +61,7 @@ class Form {
 				}
 				break;
 			case 'file_u_pop':
-				$str_u_pop = '
-				<a href="#" class="swing" item="load_photo">Carica foto</a>&nbsp;';
+				$str_u_pop = '<button type="button" class="swing buttonGrey" item="load_photo">Carica foto</button>';
 				$u_pops = '<div id="load_photo" item="hide">
 				<span class="bold">Immagine:</span> <input type="file" name="'.$i['name'].'" id="'.$i['name'].'" value="'.$i['value'].'" />';
 				if (isset($i['old']) && !empty($i['old'])) {
@@ -75,8 +74,7 @@ class Form {
 				$u_pops .= '</div>';
 				break;
 			case 'youtube_u_pop':
-				$str_u_pop .= SEP.'
-				<a href="#" class="swing" item="load_youtube">Carica video</a>';
+				$str_u_pop .= '<button type="button" class="swing buttonGrey" item="load_youtube">Carica video</button>';
 				$u_pops .= '<div id="load_youtube" item="hide">
 				<span class="bold">Link youtube:</span> <input type="text" name="'.$i['name'].'" id="'.$i['name'].'" value="'.$i['value'].'" />
 				</div>';
@@ -135,11 +133,11 @@ class Form {
 		}
 		$reset = $submit = '';
 		if (!is_null($buttons[0])) $reset = (empty($reset_action)) ? '<button type="reset">'.$buttons[0].'</button>' : '<button type="button" '.$reset_action.'>'.$buttons[0].'</button>';
-		if (!is_null($buttons[1])) $submit = (empty($submit_action)) ? '<button name="'.strrev($name).'" type="submit">'.$buttons[1].'</button>' : '<button name="'.strrev($name).'" type="button" '.$submit_action.'>'.$buttons[1].'</button>';
-		$str .= '<div>
-					'.$reset.$submit.$str_u_pop.$u_pops.'
-				</div>
-				</fieldset>
+		if (!is_null($buttons[1])) $submit = (empty($submit_action)) ? '<button name="'.strrev($name).'" type="submit">'.$buttons[1].'</button>' : '<button name="'.strrev($name).'" type="submit" '.$submit_action.'>'.$buttons[1].'</button>';
+		$str .= '<div class="fleft" style="width:20px;">'.$reset.$submit.'</div>';
+					
+		$str .= '<div class="fright">'.$str_u_pop.'</div><div class="clear">'.$u_pops.'</div>';
+		$str. '</fieldset>
 			</form>';
 		return $str;
 	}

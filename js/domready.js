@@ -11,7 +11,7 @@ $(document).ready(function(){
 			
 			//init fancybox
 			fancybox();
-			
+						
 			// init fancybox
 			function fancybox() {
 				$(".fancybox").fancybox();
@@ -25,6 +25,17 @@ $(document).ready(function(){
 			}
 			
 			
+			textboxDisabled('statusbox','publishButton');
+
+			function textboxDisabled(idTextbox,idButton) {
+				$('#'+idButton).prop('disabled',true);
+				$('#'+idTextbox).keyup(function(){
+					$('#'+idButton).prop('disabled', this.value == "" ? true : false);     
+				})
+			}
+			
+//////////////////////////////////////////////////////////////////////////////////////////////			
+
 			//infinite scroll
 			var win = $(window);
 			var pageNumber = 1;
@@ -108,7 +119,6 @@ $(document).ready(function(){
 		}
 		
 	
-			//datepicker
 			$(function() {
 				$.datepicker.setDefaults($.datepicker.regional['it']);
 				$(".dashboard_notime").datepicker({
@@ -129,7 +139,7 @@ $(document).ready(function(){
 				event.stopPropagation();
 				var item = ($(this).attr('item'));
 				$("div[item='hide']").slideUp().promise().done(function(){
-					$("#"+item).slideDown(500,"swing");
+					$("#"+item).slideDown(200,"swing");
 				});
 			});
 			
@@ -142,7 +152,7 @@ $(document).ready(function(){
 				}
 			});
 			
-		   
+		    
 		    // comments & load more
 			function viewcomments() {
 				$("tr[id^='post_comment']").each(function(i) {

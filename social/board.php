@@ -226,7 +226,7 @@ class Board {
 				$output .= 'Scrivi qualcosa...';
 			}
 			$output .= '</p>';			
-			$output .= Form::doform('formadd', $_SERVER["REQUEST_URI"], $fields, array(NULL,'Pubblica'), 'post', 'enctype="multipart/form-data"');
+			$output .= Form::doform('formadd', $_SERVER["REQUEST_URI"], $fields, array(NULL,'Pubblica'), 'post', 'enctype="multipart/form-data" ', 'id="publishButton"');
 			$output .= '</div>';
 			
 			echo $output;
