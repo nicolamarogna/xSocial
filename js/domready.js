@@ -9,6 +9,9 @@ $(document).ready(function(){
 			//init comments
 			viewcomments();
 			
+			//init fancybox
+			fancybox();
+			
 			// init fancybox
 			function fancybox() {
 				$(".fancybox").fancybox();
@@ -132,7 +135,11 @@ $(document).ready(function(){
 			
 			//on click outside div, hide all divs with "item=hide" if open (like Carica foto or Carica Video)
 			$( document ).click(function( event ) {
-				$("div[item='hide']").slideUp().promise().done();
+				var selector = $("div[item='hide']");
+				if ($(event.target).closest(selector).length === 0)
+				{
+					selector.slideUp().promise().done();
+				}
 			});
 			
 		   

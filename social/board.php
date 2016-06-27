@@ -352,17 +352,19 @@ class Board {
 							</span>';	
 				}
 				
-				echo stripslashes(nl2br($i->status)).'
-				<br>';
-						
+				echo stripslashes(nl2br($i->status));
+				
+				echo '<ul>';
 				if ($i->upl_img) {
-					echo '<a href="files/img/'.$i->upl_img.'" class="fancybox"><img class="borded pad_all" src="files/img/thumb_'.$i->upl_img.'"></a><br><img class="fleft padright" src="'.BASE_URL.'files/img_private/thumb_foto.png">';
+					echo '<li><a href="files/img/'.$i->upl_img.'" class="fancybox"><img class="borded pad_all" src="files/img/thumb_'.$i->upl_img.'"></a><br><span class="xsmall">Immagine</span><img class="fleft padright" src="'.BASE_URL.'files/img_private/thumb_foto.png"></li>';
 				}
 				
 				if ($i->youtube) {
-					Utils::youtube($i->youtube);
+					echo '<li>'.Utils::youtube($i->youtube).'</li>';
 				}
-				echo '<div id="foot_status">'.Utils::f_date($i->upd).'</div>';
+				echo '</ul>';
+				
+				echo '<div id="foot_status" class="clear" style="text-align:right;">Creato il '.Utils::f_date($i->upd).'</div>';
 				echo '<div id="buttons_actions" class="tbox sbox bold box_up_down">';
 								
 				//echo Delete button ajaxLink($title, $params, $askConfirm = FALSE)
@@ -414,11 +416,11 @@ class Board {
 					}
 				}
 				echo '</table>
-						<form action="'.$_SERVER["REQUEST_URI"].'#'.$i->id.'" method="post" id=submit_comment'.$i->id_status.'>
+						<form action="'.$_SERVER["REQUEST_URI"].'#'.$i->id.'" method="post" id="submit_comment'.$i->id_status.'">
 						<span class="xsmall">Scrivi un commento...<textarea class="textarea_comment" name="comment"></textarea></span>
 						<input type="hidden" name="to_user" value="'.$i->id.'">
 						<input type="hidden" name="id_comment" value="'.$i->id_status.'">
-						<button class="button_comments formsubmit" idform=submit_comment'.$i->id_status.'>Commenta</button>
+						<button class="button_comments formsubmit" idform="submit_comment'.$i->id_status.'">Commenta</button>
 						</div>
 						</form>
 						</td>
@@ -506,17 +508,19 @@ class Board {
 								</span>';	
 					}
 						
-						echo ' '.stripslashes(nl2br($i->status)).'
-						<br>';
+						echo ' '.stripslashes(nl2br($i->status));
 						
+				echo '<ul>';
 				if ($i->upl_img) {
-					echo '<a href="files/img/'.$i->upl_img.'" class="fancybox"><img class="borded pad_all" src="files/img/thumb_'.$i->upl_img.'"></a><br><img class="fleft padright" src="'.BASE_URL.'files/img_private/thumb_foto.png">';
+					echo '<li><a href="files/img/'.$i->upl_img.'" class="fancybox"><img class="borded pad_all" src="files/img/thumb_'.$i->upl_img.'"></a><br><span class="xsmall">Immagine</span><img class="fleft padright" src="'.BASE_URL.'files/img_private/thumb_foto.png"></li>';
 				}
 				
 				if ($i->youtube) {
-					Utils::youtube($i->youtube);
+					echo '<li>'.Utils::youtube($i->youtube).'</li>';
 				}
-				echo '<div id="foot_status">'.Utils::f_date($i->upd).'</div>';
+				echo '</ul>';
+				
+				echo '<div id="foot_status" class="clear" style="text-align:right;">Creato il '.Utils::f_date($i->upd).'</div>';
 				echo '<div id="buttons_actions" class="tbox sbox bold box_up_down">';
 				
 				if (($i->upl_img || $i->youtube) && ($i->id != $_SESSION['user']->id)) {
@@ -571,11 +575,11 @@ class Board {
 					}
 				}
 				echo '</table>
-						<form action="'.$_SERVER["REQUEST_URI"].'#'.$i->id.'" method="post">
+						<form action="'.$_SERVER["REQUEST_URI"].'#'.$i->id.'" method="post" id="submit_comment'.$i->id_status.'">
 						<span class="xsmall">Scrivi un commento...<textarea class="textarea_comment" name="comment"></textarea></span>
 						<input type="hidden" name="to_user" value="'.$i->id.'">
 						<input type="hidden" name="id_comment" value="'.$i->id_status.'">
-						<button class="button_comments">Commenta</button>
+						<button class="button_comments formsubmit" idform="submit_comment'.$i->id_status.'">Commenta</button>
 						</div>
 						</form>
 						</td>
@@ -678,18 +682,19 @@ class Board {
 									</span>';	
 						}
 						
-						echo stripslashes(nl2br($i->status)).'
-								<br>';
+						echo stripslashes(nl2br($i->status));
 								
+						echo '<ul>';
 						if ($i->upl_img) {
-							echo '<a href="files/img/'.$i->upl_img.'" class="fancybox"><img class="borded pad_all" src="files/img/thumb_'.$i->upl_img.'"></a><br><img class="fleft padright" src="'.BASE_URL.'files/img_private/thumb_foto.png">';
+							echo '<li><a href="files/img/'.$i->upl_img.'" class="fancybox"><img class="borded pad_all" src="files/img/thumb_'.$i->upl_img.'"></a><br><span class="xsmall">Immagine</span><img class="fleft padright" src="'.BASE_URL.'files/img_private/thumb_foto.png"></li>';
 						}
 						
 						if ($i->youtube) {
-							Utils::youtube($i->youtube);
+							echo '<li>'.Utils::youtube($i->youtube).'</li>';
 						}
+						echo '</ul>';
 						
-						echo '<div id="foot_status">'.Utils::f_date($i->upd).'</div>';
+						echo '<div id="foot_status" class="clear" style="text-align:right;">Creato il '.Utils::f_date($i->upd).'</div>';
 						echo '<div id="buttons_actions" class="tbox sbox bold box_up_down">';
 		
 						if (($i->upl_img || $i->youtube) && ($i->id != $_SESSION['user']->id)) {
@@ -748,7 +753,7 @@ class Board {
 							}
 						}
 						echo '</table>
-								<form action="'.$_SERVER["REQUEST_URI"].'#'.$i->id.'" method="post">
+								<form action="'.$_SERVER["REQUEST_URI"].'#'.$i->id.'" method="post" id="submit_comment'.$i->id_status.'">
 								<span class="xsmall">Scrivi un commento...
 								<textarea class="textarea_comment" name="comment"></textarea>
 								</span>
@@ -756,7 +761,7 @@ class Board {
 								<input type="hidden" name="to_user" value="'.$i->id.'">
 								<input type="hidden" name="in_board_of" value="'.$id.'">
 								<input type="hidden" name="id_comment" value="'.$i->id_status.'">
-								<button class="button_comments">Commenta</button>
+								<button class="button_comments formsubmit" idform="submit_comment'.$i->id_status.'">Commenta</button>
 								</div>
 								</form>
 								</td>

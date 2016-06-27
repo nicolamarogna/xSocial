@@ -17,8 +17,8 @@ a:hover {text-decoration:underline;}
 a img {border:none;}
 a.cancel, a.ok {padding: 2px 5px; }
 a.on {text-decoration:underline;font-weight:bold;}
-ul {list-style:square;}
-ul li ul {margin-bottom:5px;}
+ul {list-style-type:none;padding-left: 0;}
+li {margin:0px 5px;float:left;}
 p {margin:0;}
 
 input, textarea, select {border:1px solid #ccc;padding:1px 3px;margin:1px;font-family:inherit;font-size:1em;font-weight:bold;}
@@ -141,7 +141,7 @@ p .xsmall, li .xsmall, td .xsmall {color:#999;}
 .block {display:block;}
 .scroller {height:400px;overflow:auto;}
 .txt_red {color:#F00;}
-.img_profile {width:180px;margin-bottom:10px;}
+.img_profile {width:168px;margin-bottom:10px;border:1px solid #CCC;padding:5px;background-color:#fff;}
 .img_event {max-width:250px;padding:5px;border:1px solid #E4E4E4}
 
 /* status zone */
@@ -552,50 +552,3 @@ input.unselected {border:none;background:url(../img/rdo_off.png);}
 		cursor: default !important;
 		text-decoration: line-through;
 	}
-	
-	
-/* CSS file for CwComplete (a small mootools-autocompleter) */
-
-/* Outer div (positioned absolute below the input field */
-.cwCompleteOuter {
-	position: absolute;
-}
-
-/* UL inside the outer div */
-ul.cwCompleteChoices {
-	list-style: none;
-	list-style-position: inside;
-	margin: 0;
-	padding: 1px; /* ie6 trash workaround */
-	z-index: 999;
-	
-	width: 200px;
-	background: #DCE4F8;
-	opacity: 0.85;
-	-webkit-box-shadow: 2px 2px 7px #333; -moz-box-shadow: 2px 2px 7px #333;
-}
-
-/* LIs (choices) inside the UL */
-ul.cwCompleteChoices li {
-	display: block;
-	cursor: pointer;
-	padding: 3px;
-	margin: 3px;
-	text-align: left;
-	color: #333;
-	font-size: 11px;
-}
-
-/* Style for hovered (selected) LIs */
-ul.cwCompleteChoices li:hover,.cwCompleteChoicesHover {
-	text-decoration: none;
-	background-color: #fff;
-}
-
-/* Style for outer div while loading values */
-.cwCompleteLoading {
-	background: transparent url('files/img_private/ajax-loader-pipe.gif') no-repeat;
-	width: 112px;
-	height: 12px;
-	padding-bottom: 12px; /* ie6 trash workaround */
-}
