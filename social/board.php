@@ -77,7 +77,7 @@ class Board {
 					$mod->notify($_SESSION['user']->id, $_POST['in_board_of'], $type, $_POST['id_comment']);
 				}
 			}
-			header('Location: '.$_SERVER['HTTP_REFERER']);
+			//header('Location: '.$_SERVER['HTTP_REFERER']);
 		}
 		
 		//store rating

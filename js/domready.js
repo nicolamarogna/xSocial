@@ -195,19 +195,12 @@ $(document).ready(function(){
 					var idform = $params.attr( "idform" );
 					var id = idform.replace('submit_comment', '');
 					var url = $('#'+idform).attr( "action" );
-					var pageNumber = $('#post'+id).attr('inpage');
-						if (getQuerystring()) {
-							var qs = '?page='+pageNumber+'&'+getQuerystring();
-						} else {
-							var qs = '?page='+pageNumber;
-						}
 						$.ajax({
 						   type: "POST",
-						   url: url+qs,
+						   url: url,
 						   data: $('#'+idform).serialize(),
 						   success: function(data)
 						   {
-							   console.log(url+qs);
 							   aftersubmit(data, id, 'post_comment'); // show response from the php script.
 						   }
 						 });
