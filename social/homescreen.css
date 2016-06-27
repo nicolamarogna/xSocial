@@ -24,7 +24,7 @@ p {margin:0;}
 input, textarea, select {border:1px solid #ccc;padding:1px 3px;margin:1px;font-family:inherit;font-size:1em;font-weight:bold;}
 input:focus, textarea:focus, select:focus {border:1px solid #3b5f94;}
 
-button {border:1px solid #ccc;background-color:#3b5f94;font-size:1em;padding:1px 10px;margin:1px;font-family:inherit;color:#FFF;}
+button {border:1px solid #ccc;background-color:#3b5f94;font-size:1em;padding:1px 10px;margin:1px;font-family:inherit;color:#FFF;border-radius: 3px;}
 textarea {width:98%;height:100px;}
 .editfile {height:500px;}
 table {width:100%;padding:0;border-collapse:collapse;border-spacing:0;font-size:inherit;margin-top:1px;}

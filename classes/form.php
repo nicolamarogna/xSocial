@@ -136,10 +136,8 @@ class Form {
 		$reset = $submit = '';
 		if (!is_null($buttons[0])) $reset = (empty($reset_action)) ? '<button type="reset">'.$buttons[0].'</button>' : '<button type="button" '.$reset_action.'>'.$buttons[0].'</button>';
 		if (!is_null($buttons[1])) $submit = (empty($submit_action)) ? '<button name="'.strrev($name).'" type="submit">'.$buttons[1].'</button>' : '<button name="'.strrev($name).'" type="button" '.$submit_action.'>'.$buttons[1].'</button>';
-		$str .= $str_u_pop.$u_pops;
-		$str .= '
-				<div>
-					'.$reset.$submit.'
+		$str .= '<div>
+					'.$reset.$submit.$str_u_pop.$u_pops.'
 				</div>
 				</fieldset>
 			</form>';

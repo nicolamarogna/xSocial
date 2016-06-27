@@ -143,13 +143,13 @@ class Calendar {
 		
 	public function edit($id = 0) {
 		$mod = new Db;
+		$output = '<div id="right_content">';
 		if ($id > 0) {
 			//check permissions
 			$user = $mod->get_by_id('social_calendar', $id);
 			if ($user->id_user != $_SESSION['user']->id) {
 				header('Location: ?p=msg&msg=permission_denied');
 			}
-			$output = '<div id="right_content">';
 			$output .= '<div id="head_under"><img class="fright" src="files/img_private/thumb_calendar.png">Modifica calendario</div>';
 			$calendar = $mod->get_by_id('social_calendar', $id);
 		} else {

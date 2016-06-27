@@ -114,7 +114,7 @@ class Album {
 				$c++;
 			}
 			echo '</tr></table>';
-			echo '<br><span class="xsmall fright">Creato il '.Utils::f_date($album->updated).'</span>';
+			echo '<br><span class="xsmall fright">Creato il '.Utils::f_date($album->updated).'</span><div class="clear"></div>';
 		} else {
 			echo 'Nessuna foto inserita.';
 		}
