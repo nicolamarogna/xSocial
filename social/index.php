@@ -61,6 +61,7 @@
 <link rel="stylesheet" href="../js/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
 <link rel="stylesheet" href="../js/rating/themes/font-awesome.min.css">
 <link rel="stylesheet" href="../js/rating/themes/fontawesome-stars.css">
+<link rel="stylesheet" href="../js/jcrop/css/jquery.Jcrop.css">
 
 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
@@ -71,6 +72,7 @@
 	<script type="text/javascript" src="../js/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 	<script type="text/javascript" src="../js/fancybox/source/helpers/jquery.fancybox-media.js?v=2.1.5"></script>
     <script type="text/javascript" src="../js/rating/jquery.barrating.min.js" >//</script>
+    <script type="text/javascript" src="../js/jcrop/jquery.Jcrop.min.js" >//</script>
 
 </head>
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">

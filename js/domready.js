@@ -36,6 +36,34 @@ $(document).ready(function(){
 				})
 			}
 			
+
+/*
+			//init jcrop
+			$('#jcrop').Jcrop({
+				//onSelect:    showCoords,
+				bgColor:     'black',
+				bgOpacity:   .4,
+				setSelect:   [ 0, 0, 50, 50 ],
+				aspectRatio: 1
+			});
+*/		
+
+			//display image before upload				
+			$("#displayImg").css('display', 'none');
+			
+			$("#img").change(function(){
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					// get loaded data and render thumbnail.
+					$("#displayImg").attr({src: e.target.result});
+					$("#displayImg").fadeIn();
+				};
+			
+				// read the image file as a data URL.
+				reader.readAsDataURL(this.files[0]);
+			});
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////			
 
 			//infinite scroll

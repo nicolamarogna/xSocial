@@ -88,6 +88,7 @@ class Profile {
 		//prepare form
 		$output .= '<div id="right_content">';
 		$output .= '<div id="head_under"><img class="fright" src="files/img_private/thumb_profile.png">Il mio profilo</div>';
+		$output .= '<img id="displayImg" src="#" alt="your image" style="width:300px;" />';
 		$output .= Form::doform('formadd', $_SERVER["REQUEST_URI"], $fields, array('Cancella','Modifica'), 'post', 'enctype="multipart/form-data"');
 		$output .= '</div>';
 		echo $output;
