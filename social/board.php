@@ -9,7 +9,7 @@ class Board {
 		}
 		
 		//share
-		if (isset($_GET['a']) && ($_GET['a'] == 'share')) {
+		if (isset($_GET['action']) && ($_GET['action'] == 'share')) {
 			$db = new Db();
 			$post = $db->get_by_id('social_status', $_GET['id']);
 			if ($post->img) {
@@ -21,6 +21,7 @@ class Board {
 			$array = array(
 					'from_user' => $_SESSION['user']->id,
 					'to_user' => $_SESSION['user']->id,
+					'status' => $post->status,
 					'img' => $img_name,
 					'youtube' => $post->youtube,
 					'share' => $post->from_user
@@ -343,16 +344,16 @@ class Board {
 						<div id="status_msg">
 						<span class="bold">
 						<a href="?userboard='.$i->id.'">'.stripslashes($i->nome).' '.stripslashes($i->cognome).'</a>
-						</span><br>';
+						</span>';
 				
 				if ($i->share > 0) {
 					$share_user = $mod->get_by_id('social_users', $i->share);
-						echo 'tramite <span class="bold">
+						echo ' tramite <span class="bold">
 							<a href="?userboard='.$i->share.'">'.stripslashes($share_user->nome).' '.stripslashes($share_user->cognome).'</a>
 							</span>';	
 				}
 				
-				echo stripslashes(nl2br($i->status));
+				echo '<br>'.stripslashes(nl2br($i->status));
 				
 				echo '<ul>';
 				if ($i->upl_img) {
@@ -369,12 +370,13 @@ class Board {
 								
 				//echo Delete button ajaxLink($title, $params, $askConfirm = FALSE)
 				if (($i->from_user == $_SESSION['user']->id) || (!isset($_GET['detail']))) {
-					Utils::ajaxLink('Elimina', 'href="'.$_SERVER['PHP_SELF'].'" action="delete_post" id='.$i->id_status, TRUE);
+					Utils::ajaxButton('Elimina', 'href="'.$_SERVER['PHP_SELF'].'" action="delete_post" id='.$i->id_status, TRUE);
 				}
 				
 				echo '</div>';
 				// rating section
 				if (ENABLE_RATING == 'YES') {
+					echo '<div class="clear"></div>';
 					$this->ratings($i->id_status, $i->rating_numbers, $i->rating_average);
 				}
 				
@@ -498,17 +500,17 @@ class Board {
 						
 						if ($i->from_user != $i->to_user) {
 							$to = $mod->get_by_id('social_users', $i->to_user);
-							echo '<span> >> </span><a class="bold" href="?userboard='.$i->to_user.'">'.stripslashes($to->nome).' '.stripslashes($to->cognome).'</a><br>';
+							echo '<span> >> </span><a class="bold" href="?userboard='.$i->to_user.'">'.stripslashes($to->nome).' '.stripslashes($to->cognome).'</a>';
 						}
 						
 						if ($i->share > 0) {
 						$share_user = $mod->get_by_id('social_users', $i->share);
-							echo 'tramite <span class="bold">
+							echo ' tramite <span class="bold">
 								<a href="?userboard='.$i->share.'">'.stripslashes($share_user->nome).' '.stripslashes($share_user->cognome).'</a>
 								</span>';	
 					}
 						
-						echo ' '.stripslashes(nl2br($i->status));
+						echo '<br>'.stripslashes(nl2br($i->status));
 						
 				echo '<ul>';
 				if ($i->upl_img) {
@@ -523,19 +525,20 @@ class Board {
 				echo '<div id="foot_status" class="clear" style="text-align:right;">Creato il '.Utils::f_date($i->upd).'</div>';
 				echo '<div id="buttons_actions" class="tbox sbox bold box_up_down">';
 				
-				if (($i->upl_img || $i->youtube) && ($i->id != $_SESSION['user']->id)) {
-					echo '<a href="?a=share&id='.$i->id_status.'">Pubblica</a>'.SEP;
+				if ($i->id != $_SESSION['user']->id) {
+					Utils::ajaxButton('Condividi', 'href="?action=share&id='.$i->id_status.'" action="share_post"', TRUE);
 				}
 				
 				//echo Delete button ajaxLink($title, $params, $askConfirm = FALSE)
 				if ($i->id == $_SESSION['user']->id) {
-					Utils::ajaxLink('Elimina', 'href="'.$_SERVER['PHP_SELF'].'" action="delete_post" id='.$i->id_status, TRUE);
+					Utils::ajaxButton('Elimina', 'href="'.$_SERVER['PHP_SELF'].'" action="delete_post" id='.$i->id_status, TRUE);
 				}
 				
 				echo '</div>';
 				
 				// rating section
 				if (ENABLE_RATING == 'YES') {
+					echo '<div class="clear"></div>';
 					$this->ratings($i->id_status, $i->rating_numbers, $i->rating_average);
 				}
 				
@@ -565,13 +568,12 @@ class Board {
 							</td><td>
 							<a href="?userboard='.$c->id_user.'"><span class="bold">'.stripslashes($c->nome).' '.stripslashes($c->cognome).'</a></span> <span>'.nl2br(stripslashes($c->comment)).'<br>'.Utils::f_date($c->updated).'</span>';
 							
-							if ($c->id_user == $_SESSION['user']->id) {
-								echo SEP;
-								//delete comment
-								Utils::ajaxLink('Elimina', 'href="'.$_SERVER['PHP_SELF'].'" action="delete_comment" id='.$c->id, TRUE);
-							}
-							echo '</td></tr>
-							</form>';
+						if ($c->id_user == $_SESSION['user']->id) {
+							echo SEP;
+							//delete comment
+							Utils::ajaxLink('Elimina', 'href="'.$_SERVER['PHP_SELF'].'" action="delete_comment" id='.$c->id, TRUE);
+						}
+						echo '</td></form></tr>';
 					}
 				}
 				echo '</table>
@@ -673,16 +675,16 @@ class Board {
 								<input type="hidden" name="id_status" value="'.$i->id_status.'">
 								<input type="hidden" name="img_status" value="'.$i->upl_img.'">
 								<div id="status_msg">
-								<span class="bold txt_red"><a href="?userboard='.$i->id.'">'.stripslashes($i->nome).' '.stripslashes($i->cognome).'</a></span><br>';
+								<span class="bold txt_red"><a href="?userboard='.$i->id.'">'.stripslashes($i->nome).' '.stripslashes($i->cognome).'</a></span>';
 								
 						if ($i->share > 0) {
 							$share_user = $mod->get_by_id('social_users', $i->share);
-								echo 'tramite <span class="bold">
+								echo ' tramite <span class="bold">
 									<a href="?userboard='.$i->share.'">'.stripslashes($share_user->nome).' '.stripslashes($share_user->cognome).'</a>
 									</span>';	
 						}
 						
-						echo stripslashes(nl2br($i->status));
+						echo '<br>'.stripslashes(nl2br($i->status));
 								
 						echo '<ul>';
 						if ($i->upl_img) {
@@ -697,19 +699,20 @@ class Board {
 						echo '<div id="foot_status" class="clear" style="text-align:right;">Creato il '.Utils::f_date($i->upd).'</div>';
 						echo '<div id="buttons_actions" class="tbox sbox bold box_up_down">';
 		
-						if (($i->upl_img || $i->youtube) && ($i->id != $_SESSION['user']->id)) {
-							echo '<a href="?a=share&id='.$i->id_status.'">Pubblica</a>'.SEP;
+						if ($i->id != $_SESSION['user']->id) {
+							Utils::ajaxButton('Condividi', 'href="?action=share&id='.$i->id_status.'" action="share_post"', TRUE);
 						}
 						
 						//echo Delete button ajaxLink($title, $params, $askConfirm = FALSE)
 						if (($_SESSION['user']->id == $i->id) || ($is_admin == 1)) {
-							Utils::ajaxLink('Elimina', 'href="'.$_SERVER['PHP_SELF'].'" action="delete_post" id='.$i->id_status, TRUE);
+							Utils::ajaxButton('Elimina', 'href="'.$_SERVER['PHP_SELF'].'" action="delete_post" id='.$i->id_status, TRUE);
 						}
 							
 						echo '</div>';
 													
 						// rating section
 						if (ENABLE_RATING == 'YES') {
+							echo '<div class="clear"></div>';
 							$this->ratings($i->id_status, $i->rating_numbers, $i->rating_average);
 						}
 						

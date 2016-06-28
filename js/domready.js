@@ -245,9 +245,11 @@ $(document).ready(function(){
 			}
 			if (action == 'post_comment') {
 				var addcomment = $(data).find('#comments'+id);
-				console.log(addcomment)
 				$('#comments'+id).html(addcomment);
 				viewcomments();
+			}
+			if (action == 'share_post') {
+				alert('Post condiviso sulla tua bacheca');
 			}
 		}
 

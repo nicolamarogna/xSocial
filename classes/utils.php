@@ -631,5 +631,11 @@ class Utils {
 		echo '<a class="ajaxsubmit" '.$params.$askConfirm.'>'.$title.'</a>';
 	}
 	
+	public static function ajaxButton($title, $submit_action, $askConfirm = FALSE) {
+		$askConfirm = ($askConfirm) ? ' askConfirm="true" ' : '';
+		echo '<button class="ajaxsubmit buttonGrey" type="submit" style="cursor:pointer;" '.$submit_action.$askConfirm.'>'.$title.'</button>';
+		
+	}
+	
 }
 ?>
