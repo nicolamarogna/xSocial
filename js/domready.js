@@ -1,4 +1,6 @@
 $(document).ready(function(){
+	$(window).load(function() {
+    
 												
 			//start hiding all divs with item='hide'
 			$("div[item='hide']").hide();			
@@ -249,7 +251,7 @@ $(document).ready(function(){
 			}
 		}
 
-		
+	});	
 });
 
 
