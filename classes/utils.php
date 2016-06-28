@@ -517,8 +517,7 @@ class Utils {
 
 	public static function copy_file($path, $name, $obj) 
 	{
-		$check = @move_uploaded_file($obj, $path.$name);
-		//print_r($check);die;
+		$check = move_uploaded_file($obj, $path.$name);
 		if ($check) {
 			chmod($path.$name, 0777);
 		}

@@ -37,16 +37,18 @@ $(document).ready(function(){
 			}
 			
 
-/*
+
 			//init jcrop
-			$('#jcrop').Jcrop({
-				//onSelect:    showCoords,
-				bgColor:     'black',
-				bgOpacity:   .4,
-				setSelect:   [ 0, 0, 50, 50 ],
-				aspectRatio: 1
-			});
-*/		
+			function startjcrop() {
+				$('#displayImg').Jcrop({
+					//onSelect:    showCoords,
+					bgColor:     'black',
+					bgOpacity:   .4,
+					setSelect:   [ 0, 0, 50, 50 ],
+					aspectRatio: 1
+				});
+			}
+	
 
 			//display image before upload				
 			$("#displayImg").css('display', 'none');
@@ -57,10 +59,11 @@ $(document).ready(function(){
 					// get loaded data and render thumbnail.
 					$("#displayImg").attr({src: e.target.result});
 					$("#displayImg").fadeIn();
-				};
-			
+					startjcrop();
+				};			
 				// read the image file as a data URL.
 				reader.readAsDataURL(this.files[0]);
+
 			});
 
 

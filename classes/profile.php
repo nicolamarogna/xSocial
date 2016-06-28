@@ -102,7 +102,6 @@ class Profile {
 						
 			//on file insert, upload file
 			$filename = Utils::upload('img', ROOT.'files/');
-			
 			$thumb = Utils::create_resized($path.$filename, $path.'thumb_'.$filename, array(50,50));
 
 			if ($filename === false) {
