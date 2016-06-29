@@ -45,7 +45,7 @@ $(document).ready(function(){
 					onSelect: showCoords,
 					bgColor:     'black',
 					bgOpacity:   .4,
-					setSelect:   [ 0, 0, 50, 50 ],
+					setSelect:   [ 0, 0, 100, 100 ],
 					aspectRatio: 1
 				});
 			}
