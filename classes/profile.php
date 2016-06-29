@@ -23,6 +23,36 @@ class Profile {
 			'name' => 'from'
 			);
 		$fields[] = array(
+			'label' => null,
+			'type' => 'text', 
+			'name' => 'x'
+			);
+		$fields[] = array(
+			'label' => null,
+			'type' => 'text', 
+			'name' => 'y'
+			);
+		$fields[] = array(
+			'label' => null,
+			'type' => 'text', 
+			'name' => 'x2'
+			);
+		$fields[] = array(
+			'label' => null,
+			'type' => 'text', 
+			'name' => 'y2'
+			);
+		$fields[] = array(
+			'label' => null,
+			'type' => 'text', 
+			'name' => 'w'
+			);
+		$fields[] = array(
+			'label' => null,
+			'type' => 'text', 
+			'name' => 'h'
+			);
+		$fields[] = array(
 			'label' => 'Nome',
 			'type' => 'text',
 			'value' => stripslashes($_SESSION['user']->nome),
@@ -99,10 +129,11 @@ class Profile {
 		$mod = new Db();
 
 		$path = ROOT.'files/img/';
-						
+				
 			//on file insert, upload file
 			$filename = Utils::upload('img', ROOT.'files/');
 			$thumb = Utils::create_resized($path.$filename, $path.'thumb_'.$filename, array(50,50));
+			$crop = Utils::create_crop($path.$filename, $path.'crop_'.$filename, $_POST['x'],$_POST['y'],$_POST['x2'],$_POST['y2'],$_POST['w'],$_POST['h']);
 
 			if ($filename === false) {
 				header('Location: '.$_POST['from']);
@@ -114,6 +145,7 @@ class Profile {
 			{
 				Utils::del_file($path, $_SESSION['user']->img);
 				Utils::del_file($path, 'thumb_'.$_SESSION['user']->img);
+				Utils::del_file($path, 'crop_'.$_SESSION['user']->img);
 			}
 
 			if (sizeof($filename) == 0) {

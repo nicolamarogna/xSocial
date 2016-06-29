@@ -497,6 +497,20 @@ class Utils {
 		else return 0;
 	}
 	
+	public static function create_crop($src_img, $new_img, $x, $y, $x2, $y2, $w, $h) {
+		$jpeg_quality = 100;
+		
+		$img_r = imagecreatefromjpeg($src_img);
+		$dst_r = ImageCreateTrueColor( $w, $h );
+
+		imagecopyresampled($dst_r,$img_r,0,0,$x,$y,$x2,$y2,$w,$h);
+
+		header('Content-type: image/jpeg');
+		imagejpeg($dst_r, $new_img, $jpeg_quality);
+		
+		return file_exists($new_img);
+	}
+
 	public static function get_final_name($path, $name) 
 	{
 		while (file_exists($path.$name)) {

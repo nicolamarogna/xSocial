@@ -41,15 +41,23 @@ $(document).ready(function(){
 			//init jcrop
 			function startjcrop() {
 				$('#displayImg').Jcrop({
-					//onSelect:    showCoords,
+					onChange: showCoords,
+					onSelect: showCoords,
 					bgColor:     'black',
 					bgOpacity:   .4,
 					setSelect:   [ 0, 0, 50, 50 ],
 					aspectRatio: 1
 				});
 			}
-	
-
+			function showCoords(c)
+			{
+				$('#x').val(c.x);
+				$('#y').val(c.y);
+				$('#x2').val(c.x2);
+				$('#y2').val(c.y2);
+				$('#w').val(c.w);
+				$('#h').val(c.h);
+			};
 			//display image before upload				
 			$("#displayImg").css('display', 'none');
 			
