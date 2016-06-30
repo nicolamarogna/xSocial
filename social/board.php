@@ -186,19 +186,21 @@ class Board {
 			'type' => 'textarea',
 			'value' => '',
 			'name' => 'statusbox',
-			'extra' => 'class="statusbox"',
+			'extra' => 'class="statusbox checkIfEmpty"',
 			);
 		$fields[] = array(
 			'label' => null,
 			'type' => 'file_u_pop', 
 			'value' => '',
-			'name' => 'img'
+			'name' => 'img',
+			'extra' => 'class="swing buttonGrey"',
 			);
 		$fields[] = array(
 			'label' => null,
 			'type' => 'youtube_u_pop', 
 			'value' => '',
 			'name' => 'youtube',
+			'extra' => 'class="swing buttonGrey"',
 			);
 
 		//on submit

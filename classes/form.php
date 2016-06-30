@@ -61,8 +61,9 @@ class Form {
 				}
 				break;
 			case 'file_u_pop':
-				$str_u_pop = '<button type="button" class="swing buttonGrey" item="load_photo">Carica foto</button>';
-				$u_pops = '<div id="load_photo" item="hide">
+				$iextra = (isset($i['extra'])) ? $i['extra'] : '';
+				$str_u_pop = '<button type="button" '.$iextra.' item="load_photo">Carica foto</button>';
+				$u_pops = '<div id="load_photo" item="hide" class="checkIfEmpty">
 				<span class="bold">Immagine:</span> <input type="file" name="'.$i['name'].'" id="'.$i['name'].'" value="'.$i['value'].'" />';
 				if (isset($i['old']) && !empty($i['old'])) {
 					$imgdir = (isset($i['imgdir']) && !empty($i['imgdir'])) ? $i['imgdir'] : $i['name'];
@@ -74,8 +75,9 @@ class Form {
 				$u_pops .= '</div>';
 				break;
 			case 'youtube_u_pop':
-				$str_u_pop .= '<button type="button" class="swing buttonGrey" item="load_youtube">Carica video</button>';
-				$u_pops .= '<div id="load_youtube" item="hide">
+				$iextra = (isset($i['extra'])) ? $i['extra'] : '';
+				$str_u_pop .= '<button type="button" '.$iextra.' item="load_youtube">Carica video</button>';
+				$u_pops .= '<div id="load_youtube" item="hide" class="checkIfEmpty">
 				<span class="bold">Link youtube:</span> <input type="text" name="'.$i['name'].'" id="'.$i['name'].'" value="'.$i['value'].'" />
 				</div>';
 				break;

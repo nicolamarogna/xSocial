@@ -26,16 +26,28 @@ $(document).ready(function(){
 				});
 			}
 			
-			
-			textboxDisabled('statusbox','publishButton');
-
-			function textboxDisabled(idTextbox,idButton) {
-				$('#'+idButton).prop('disabled',true);
-				$('#'+idTextbox).keyup(function(){
-					$('#'+idButton).prop('disabled', this.value == "" ? true : false);     
-				})
+			//status post button check
+			$('#publishButton').prop('disabled',true);
+			//textboxDisabled('statusbox','publishButton');
+			$('#statusbox.checkIfEmpty').on("change keyup input", function( event ) {
+				$('#publishButton').prop('disabled', this.value == "" ? checkIfEmpty() : false);
+			})
+			$('#load_photo.checkIfEmpty').on("change keyup input", function( event ) {
+				checkIfEmpty();
+			});
+			$('#load_youtube.checkIfEmpty').on("change keyup input", function( event ) {
+				checkIfEmpty();
+			})
+			function checkIfEmpty() {
+				if (($('input[id="img"]').val()=='') && ($('input[id="youtube"]').val()=='') && ($('#statusbox').val()=='')) {
+					$('#publishButton').prop('disabled',true);
+				} else {
+					$('#publishButton').prop('disabled',false);
+				}
 			}
 			
+			
+			//end status post button check
 
 
 			//init jcrop
