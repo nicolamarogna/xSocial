@@ -501,13 +501,13 @@ class Utils {
 		$jpeg_quality = 100;
 		
 		$img_r = imagecreatefromjpeg($src_img);
-		$dst_r = imagecreatetruecolor(100,100);
-
-		imagecopyresampled($dst_r,$img_r,0,0,$x,$y,100,100,$w, $h);
+		$dst_r = imagecreatetruecolor($x2,$y2);
+		$sizes = getimagesize($src_img);
+				
+		imagecopyresampled($dst_r,$img_r,0,0,$x,$y,$x2,$y2,$w, $h);
 
 		header('Content-type: image/jpeg');
 		imagejpeg($dst_r, $new_img, $jpeg_quality);
-						print_r($y);die;
 
 		return file_exists($new_img);
 	}

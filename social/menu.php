@@ -11,7 +11,7 @@ class Menu {
 		$mod = new Db;
 		$_SESSION['action'] = 'Utils::logout();';
 		if ($_SESSION['user']->img) {
-			$path = 'files/img/';
+			$path = 'files/img/crop_';
 			$img = $_SESSION['user']->img;
 		} else {
 			$path = 'files/img_private/';
@@ -76,7 +76,7 @@ class Menu {
 				}
 				echo '<td>
 				<a href="?userboard='.$i->id.'">
-				<img style="max-width:50px;max-height:35px;" src="'.$path.'thumb_'.$img.'" alt="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'" title="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'">
+				<img style="max-width:50px;max-height:35px;" src="'.$path.'crop_'.$img.'" alt="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'" title="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'">
 				<br>
 				<p style="line-height:1.2;" class="xsmall">
 				'.stripslashes($i->nome).' '.stripslashes($i->cognome).'</a></p></td>';
@@ -97,7 +97,7 @@ class Menu {
 		$mod = new Db();
 		$user = $mod->get_by_id('social_users',$id);
 		if ($user->img) {
-			$path = 'files/img/';
+			$path = 'files/img/crop_';
 			$img = $user->img;
 		} else {
 			$path = 'files/img_private/';
@@ -167,7 +167,7 @@ class Menu {
 				}
 				echo '<td>
 				<a href="?userboard='.$i->id.'">
-				<img style="max-width:50px;max-height:35px;" src="'.$path.'thumb_'.$img.'" alt="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'" title="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'">
+				<img style="max-width:50px;max-height:35px;" src="'.$path.'crop_'.$img.'" alt="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'" title="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'">
 				<br>
 				<p style="line-height:1.2;" class="xsmall">
 				'.stripslashes($i->nome).' '.stripslashes($i->cognome).'</a></p></td>';
@@ -184,7 +184,4 @@ class Menu {
 	}
 	
 }
-
-
-
 ?>

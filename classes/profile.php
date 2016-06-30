@@ -24,32 +24,32 @@ class Profile {
 			);
 		$fields[] = array(
 			'label' => null,
-			'type' => 'text', 
+			'type' => 'hidden', 
 			'name' => 'x'
 			);
 		$fields[] = array(
 			'label' => null,
-			'type' => 'text', 
+			'type' => 'hidden', 
 			'name' => 'y'
 			);
 		$fields[] = array(
 			'label' => null,
-			'type' => 'text', 
+			'type' => 'hidden', 
 			'name' => 'x2'
 			);
 		$fields[] = array(
 			'label' => null,
-			'type' => 'text', 
+			'type' => 'hidden', 
 			'name' => 'y2'
 			);
 		$fields[] = array(
 			'label' => null,
-			'type' => 'text', 
+			'type' => 'hidden', 
 			'name' => 'w'
 			);
 		$fields[] = array(
 			'label' => null,
-			'type' => 'text', 
+			'type' => 'hidden', 
 			'name' => 'h'
 			);
 		$fields[] = array(
@@ -118,7 +118,7 @@ class Profile {
 		//prepare form
 		$output .= '<div id="right_content">';
 		$output .= '<div id="head_under"><img class="fright" src="files/img_private/thumb_profile.png">Il mio profilo</div>';
-		$output .= '<img id="displayImg" src="#" alt="your image" style="width:300px;" />';
+		$output .= '<img id="displayImg" src="#" alt="" />';
 		$output .= Form::doform('formadd', $_SERVER["REQUEST_URI"], $fields, array('Cancella','Modifica'), 'post', 'enctype="multipart/form-data"');
 		$output .= '</div>';
 		echo $output;
@@ -129,12 +129,11 @@ class Profile {
 		$mod = new Db();
 
 		$path = ROOT.'files/img/';
-				
+	
 			//on file insert, upload file
 			$filename = Utils::upload('img', ROOT.'files/');
 			$thumb = Utils::create_resized($path.$filename, $path.'thumb_'.$filename, array(50,50));
-			$crop = Utils::create_crop($path.$filename, $path.'crop_'.$filename, $_POST['x'],$_POST['y'],$_POST['x2'],$_POST['y2'],$_POST['w'],$_POST['h']);
-
+			$crop = Utils::create_crop($path.$filename, $path.'crop_'.$filename, $_POST['x'],$_POST['y'],200,200,$_POST['w'],$_POST['h']);
 			if ($filename === false) {
 				header('Location: '.$_POST['from']);
 				die;

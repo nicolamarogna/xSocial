@@ -45,7 +45,9 @@ $(document).ready(function(){
 					onSelect: showCoords,
 					bgColor:     'black',
 					bgOpacity:   .4,
-					setSelect:   [ 0, 0, 100, 100 ],
+					setSelect:   [ 0, 0, 150, 150 ],
+					boxWidth: 483, 
+				   // boxHeight: 300,
 					aspectRatio: 1
 				});
 			}
@@ -65,14 +67,14 @@ $(document).ready(function(){
 				var reader = new FileReader();
 				reader.onload = function (e) {
 					// get loaded data and render thumbnail.
-					$("#displayImg").attr({src: e.target.result});
+					$("#displayImg").attr({src: e.target.result});					
 					$("#displayImg").fadeIn();
 					startjcrop();
 				};			
 				// read the image file as a data URL.
 				reader.readAsDataURL(this.files[0]);
-
 			});
+			//end jcrop
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////			
@@ -274,7 +276,6 @@ $(document).ready(function(){
 			if (action == 'delete_post') {
 				$('div[id=post'+id+']').toggle(500,"swing").promise().done(function(){
 					$('div[id=post'+id+']').parent().toggle(200,"swing");
-					
 				});
 			}
 			if (action == 'delete_comment') {

@@ -5,7 +5,10 @@ class Board {
 	{
 		//delete message
 		if ((isset($_POST['action'])) && ($_POST['action'] == 'delete_post')) {
-			$this->del_msg($_POST['id'], $_POST['img_status']);
+			$db = new Db();
+			$item = $db->get_by_id('social_status', $_POST['id']);
+			$img = $item->img;
+			$this->del_msg($_POST['id'], $img);
 		}
 		
 		//share
@@ -332,11 +335,11 @@ class Board {
 										AND social_users.xon = 1
 										ORDER BY updated ASC');
 				
-				$the_image = (!$i->img) ? 'img_private/thumb_img_profile_null.jpg' : 'img/thumb_'.$i->img;
+				$the_image = (!$i->img) ? 'img_private/thumb_img_profile_null.jpg' : 'img/crop_'.$i->img;
 				
-				echo '<table><tr><td width="50">
+				echo '<table><tr><td width="40">
 						<a name="'.$i->id_status.'" href="?userboard='.$i->id.'">
-						<img src="files/'.$the_image.'" title="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'">
+						<img style="width:40px;" src="files/'.$the_image.'" title="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'">
 						</a>
 						</td><td><form name="view_posts_'.$i->id_status.'" method="post" action="'.$_SERVER['PHP_SELF'].'#'.$i->id_status.'">
 						<input type="hidden" name="id_status" value="'.$i->id_status.'">
@@ -400,10 +403,10 @@ class Board {
 						echo ($numcomments > 3) ? '<a style="cursor:pointer;" class="loadMore" item="post_comment'.$i->id_status.'" numcomments="'.$numcomments.'">Mostra più vecchi</a>' : '';
 				if ($comments) {
 					foreach ($comments as $c) {
-						echo '<tr id="post_comment'.$i->id_status.'" numcomments="'.$numcomments.'" cid='.$c->id.'><td style="width:50px;">
+						echo '<tr id="post_comment'.$i->id_status.'" numcomments="'.$numcomments.'" cid='.$c->id.'><td style="width:32px;">
 							<form action="'.$_SERVER["REQUEST_URI"].'#'.$i->id.'" method="post" name="form_comments_'.$c->id.'">
 							<a href="?userboard='.$c->id_user.'">
-							<img src="files/img/thumb_'.$c->img.'">
+							<img style="width:32px;" src="files/img/crop_'.$c->img.'">
 							</a>
 							</td><td>
 							<a href="?userboard='.$c->id_user.'"><span class="bold">'.stripslashes($c->nome).' '.stripslashes($c->cognome).'</a></span> <span>'.nl2br(stripslashes($c->comment)).'<br>'.Utils::f_date($c->updated).'</span>
@@ -485,11 +488,11 @@ class Board {
 										AND social_users.xon = 1
 										ORDER BY updated ASC');
 				
-				$the_image = (!$i->img) ? 'img_private/thumb_img_profile_null.jpg' : 'img/thumb_'.$i->img;
+				$the_image = (!$i->img) ? 'img_private/thumb_img_profile_null.jpg' : 'img/crop_'.$i->img;
 				
-				echo '<table><tr><td width="50">
+				echo '<table><tr><td width="40">
 						<a name="'.$i->id_status.'" href="?userboard='.$i->id.'">
-						<img src="files/'.$the_image.'" title="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'">
+						<img style="width:40px;" src="files/'.$the_image.'" title="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'">
 						</a>
 						</td><td><form name="view_posts_'.$i->id_status.'" method="post" action="'.$_SERVER['PHP_SELF'].'?type=all'.'#'.$i->id_status.'">
 						<input type="hidden" name="id_status" value="'.$i->id_status.'">
@@ -560,10 +563,10 @@ class Board {
 						echo ($numcomments > 3) ? '<a style="cursor:pointer;" class="loadMore" item="post_comment'.$i->id_status.'" numcomments="'.$numcomments.'">Mostra più vecchi</a>' : '';
 				if ($comments) {
 					foreach ($comments as $c) {
-						echo '<tr id="post_comment'.$i->id_status.'" numcomments="'.$numcomments.'" cid='.$c->id.'><td style="width:50px;">
+						echo '<tr id="post_comment'.$i->id_status.'" numcomments="'.$numcomments.'" cid='.$c->id.'><td style="width:32px;">
 							<form action="'.$_SERVER["REQUEST_URI"].'#'.$i->id.'" method="post" name="form_comments_'.$c->id.'">
 							<a href="?userboard='.$c->id_user.'">
-							<img src="files/img/thumb_'.$c->img.'">
+							<img style="width:32px;" src="files/img/crop_'.$c->img.'">
 							</a>
 							</td><td>
 							<a href="?userboard='.$c->id_user.'"><span class="bold">'.stripslashes($c->nome).' '.stripslashes($c->cognome).'</a></span> <span>'.nl2br(stripslashes($c->comment)).'<br>'.Utils::f_date($c->updated).'</span>';
@@ -664,11 +667,11 @@ class Board {
 												AND social_users.xon = 1
 												ORDER BY updated ASC');
 
-						$the_image = (!$i->img) ? 'img_private/thumb_img_profile_null.jpg' : 'img/thumb_'.$i->img;
+						$the_image = (!$i->img) ? 'img_private/thumb_img_profile_null.jpg' : 'img/crop_'.$i->img;
 						
-						echo '<table><tr><td width="50">
+						echo '<table><tr><td width="40">
 								<a name='.$i->id_status.' href="?userboard='.$i->id.'">
-								<img src="files/'.$the_image.'" title="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'">
+								<img style="width:40px;" src="files/'.$the_image.'" title="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'">
 								</a>
 								</td><td>
 								<form name="view_posts_'.$i->id_status.'" method="post" action="'.$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING'].'#'.$i->id_status.'">
@@ -735,10 +738,10 @@ class Board {
 								echo ($numcomments > 3) ? '<a style="cursor:pointer;" class="loadMore" item="post_comment'.$i->id_status.'" numcomments="'.$numcomments.'">Mostra più vecchi</a>' : '';
 						if ($comments) {
 							foreach ($comments as $c) {
-						echo '<tr id="post_comment'.$i->id_status.'" numcomments="'.$numcomments.'" cid='.$c->id.'><td style="width:50px;">
+						echo '<tr id="post_comment'.$i->id_status.'" numcomments="'.$numcomments.'" cid='.$c->id.'><td style="width:32px;">
 								<form action="'.$_SERVER["REQUEST_URI"].'#'.$i->id.'" method="post" name="form_comments_'.$c->id.'">
 								<a href="?userboard='.$c->id_user.'">
-								<img src="files/img/thumb_'.$c->img.'">
+								<img style="width:32px;" src="files/img/crop_'.$c->img.'">
 								</a>
 								<td>
 								<a href="?userboard='.$c->id_user.'">
@@ -885,8 +888,10 @@ class Board {
 		
 		//delete img
 		$path = ROOT.'files/img/';
+		
 		Utils::del_file($path, $img);
 		Utils::del_file($path, 'thumb_'.$img);
+		Utils::del_file($path, 'crop_'.$img);
 		//delete msg
 		$msgs = $mod->delete('social_status', $id);
 		//delete comments
