@@ -1,7 +1,8 @@
 <?php
 	$mod = new Birthdays;
 	$db = new Db;
-
+	
+	echo '<div id="right_content">';
 	echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_birthday.png">Compleanni di oggi</div>';
 	echo '<div id="results"><table>';
 	$bday = $mod->birthdays(date('m-d'));
@@ -27,11 +28,11 @@
 			echo 'Nessun compleanno.';
 	}
 	echo '</table>
-		</div>
-		<br>';
+		</div>';
+	echo '</div>';
 	
 
-
+	echo '<div id="right_content">';
 	echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_birthday.png">Compleanni di domani</div>';
 	echo '<div id="results"><table>';
 	$bday = $mod->birthdays(date('m-d', mktime(0,0,0,date('m'), date('d')+1)));
@@ -57,10 +58,11 @@
 			echo 'Nessun compleanno.';
 	}
 	echo '</table>
-		</div>
-		<br>';
+		</div>';
+	echo '</div>';
 		
 		
+	echo '<div id="right_content">';
 	echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_birthday.png">Prossimi compleanni</div>';
 	echo '<div id="results"><table>';
 	$bday = $mod->birthdays('prossimi');
@@ -90,8 +92,7 @@
 			echo 'Nessun compleanno.';
 	}
 	echo '</table>
-		</div>
-		<br>';
-
+		</div>';
+	echo '</div>';
 
 ?>

@@ -34,11 +34,12 @@ class Events {
 				echo 'Nessun evento.';
 		}
 		echo '</table>
-			</div>
-			<br>';
+		</div>';
+		echo '</div>';
 		
 	
 	
+		echo '<div id="right_content">';
 		echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_event.png">Eventi di domani</div>';
 		echo '<div id="results"><table>';
 		$evnt = $this->mini_events(date("Y-m-d",mktime(0,0,0,date("m"),date("d")+1,date("Y"))));
@@ -63,10 +64,11 @@ class Events {
 				echo 'Nessun evento.';
 		}
 		echo '</table>
-			</div>
-			<br>';
+		</div>';
+		echo '</div>';
 			
 			
+		echo '<div id="right_content">';
 		echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_event.png">Prossimi eventi</div>';
 		echo '<div id="results"><table>';
 		$evnt = $this->mini_events('prossimi');
@@ -91,8 +93,8 @@ class Events {
 				echo 'Nessun evento.';
 		}
 		echo '</table>
-			</div>
-			<br></div>';
+		</div>';
+		echo '</div>';
 	}
 	
 	

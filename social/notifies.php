@@ -5,7 +5,7 @@
 	if ($_POST['del_notify']) {
 		$db->delete('social_notify', $_POST['del_notify']);
 	}
-	
+	echo '<div id="right_content">';
 	echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_esclamativo.png">Notifiche</div>';
 		
 	$notifies = $mod->view_notifies_detail();
@@ -178,5 +178,5 @@
 	} else {
 		echo 'Nessuna notifica.';
 	}
-	
+	echo '</div>';
 ?>
