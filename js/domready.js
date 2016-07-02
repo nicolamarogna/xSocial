@@ -16,10 +16,13 @@ $(document).ready(function(){
 						
 			// init fancybox
 			function fancybox() {
-				$(".fancybox").fancybox();
+				$(".fancybox").fancybox({
+					'closeBtn' : false
+				});
 				$('.fancybox-media').fancybox({
 					openEffect  : 'none',
 					closeEffect : 'none',
+					'closeBtn' : false,
 					helpers : {
 						media : {}
 					}
@@ -51,8 +54,9 @@ $(document).ready(function(){
 
 
 			//init jcrop
+			var jcrop_api;
 			function startjcrop() {
-				$('#displayImg').Jcrop({
+				jcrop_api = $('#displayImg').Jcrop({
 					onChange: showCoords,
 					onSelect: showCoords,
 					bgColor:     'black',
@@ -60,7 +64,7 @@ $(document).ready(function(){
 					setSelect:   [ 0, 0, 150, 150 ],
 					boxWidth: 483, 
 				   // boxHeight: 300,
-					aspectRatio: 1
+					aspectRatio: 1,
 				});
 			}
 			function showCoords(c)
@@ -73,13 +77,19 @@ $(document).ready(function(){
 				$('#h').val(c.h);
 			};
 			//display image before upload				
-			$("#displayImg").css('display', 'none');
+			//$("#displayImg").css('display', 'none');
 			
 			$("#img").change(function(){
+
+				$("#displayImg").css('display', 'none');
 				var reader = new FileReader();
 				reader.onload = function (e) {
+					$("#displayImg").attr({src: e.target.result});	
+					$("#displayImg").fadeIn();	
+					
+
+		
 					// get loaded data and render thumbnail.
-					$("#displayImg").attr({src: e.target.result});				
 					$("#displayImg").fadeIn().promise().done(function(){
 						startjcrop();
 					});
