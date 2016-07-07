@@ -55,18 +55,25 @@ $(document).ready(function(){
 
 			//init jcrop
 			var jcrop_api;
+			$("#displayImg").css('display', 'none');
+			
 			function startjcrop() {
-				jcrop_api = $('#displayImg').Jcrop({
+				$('#displayImg').Jcrop({
 					onChange: showCoords,
 					onSelect: showCoords,
 					bgColor:     'black',
 					bgOpacity:   .4,
 					setSelect:   [ 0, 0, 150, 150 ],
+					bgFade: true,
 					boxWidth: 483, 
 				   // boxHeight: 300,
 					aspectRatio: 1,
+					//onRelease: clearInfo
+				},function(){
+				  jcrop_api = this;
 				});
 			}
+			
 			function showCoords(c)
 			{
 				$('#x').val(c.x);
@@ -76,29 +83,44 @@ $(document).ready(function(){
 				$('#w').val(c.w);
 				$('#h').val(c.h);
 			};
-			//display image before upload				
-			//$("#displayImg").css('display', 'none');
 			
 			$("#img").change(function(){
+				$("#displayImg").fadeOut();
+				var oFile = $('#img')[0].files[0];
+				
+				// check for image type (jpg and png are allowed)
+				 var fileExtension = ['jpeg', 'jpg'];
+				if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+					alert('Formato non valido');
+					return false;
+				}
+				
+				// check for file size
+				if (oFile.size > 1000 * 1024) {
+					alert('L\'immagine non deve superare i 1000 Kb');
+					return false;
+				}
 
-				$("#displayImg").css('display', 'none');
-				var reader = new FileReader();
-				reader.onload = function (e) {
-					$("#displayImg").attr({src: e.target.result});	
-					$("#displayImg").fadeIn();	
-					
-
-		
-					// get loaded data and render thumbnail.
-					$("#displayImg").fadeIn().promise().done(function(){
+				var oImage = document.getElementById('displayImg');
+				
+				var oReader = new FileReader();
+				oReader.onload = function (e) {
+					oImage.src = e.target.result;
+					oImage.onload = function () {
+						if (typeof jcrop_api != 'undefined') {
+							jcrop_api.destroy();
+							jcrop_api = null;
+							$('#displayImg').width(oImage.naturalWidth);
+							$('#displayImg').height(oImage.naturalHeight);
+						}
 						startjcrop();
-					});
-				};			
+					}
+				}
+					
 				// read the image file as a data URL.
-				reader.readAsDataURL(this.files[0]);
+				oReader.readAsDataURL(this.files[0]);
 			});
 			//end jcrop
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////			
 

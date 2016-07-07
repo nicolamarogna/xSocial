@@ -48,7 +48,7 @@ class Form {
 					$imgdir = (isset($i['imgdir']) && !empty($i['imgdir'])) ? $i['imgdir'] : $i['name'];
 					$slb = ($imgdir != '') && ($imgdir == 'img') ? ' class="fancybox" ' : ' target="_blank" ';
 					$img = ($imgdir == 'img') ? '<img class="thumb" src="'.BASE_URL.'files/'.$imgdir.'/'.$i['old'].'" alt="thumb" />' : '';
-					$str .= '<p class="xsmall">'.$img.'Valore attuale: <a href="'.BASE_URL.'files/'.$imgdir.'/'.$i['old'].'" title="" '.$slb.'>'.$i['old'].'</a><input type="hidden" name="old_'.$i['name'].'" id="old_'.$i['name'].'" value="'.$i['old'].'" /></p>';
+					$str .= '<p class="xsmall"><a href="'.BASE_URL.'files/'.$imgdir.'/'.$i['old'].'" title="" '.$slb.'>'.$img.'</a>Valore attuale: <a href="'.BASE_URL.'files/'.$imgdir.'/'.$i['old'].'" title="" '.$slb.'>'.$i['old'].'</a><input type="hidden" name="old_'.$i['name'].'" id="old_'.$i['name'].'" value="'.$i['old'].'" /></p>';
 				}
 				if (isset($i['del_img']) && !empty($i['del_img'])) {
 					$str .= '

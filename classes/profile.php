@@ -92,7 +92,7 @@ class Profile {
 			'label' => 'Foto',
 			'type' => 'file',
 			'value' => '',
-			'old' => $_SESSION['user']->img,
+			'old' => 'crop_'.$_SESSION['user']->img,
 			'name' => 'img',
 			);
 		$fields[] = array(
