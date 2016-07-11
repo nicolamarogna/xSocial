@@ -1,8 +1,8 @@
 <?php
 	//delete profile
-	if ((isset($_POST['action'])) && ($_POST['action'] == 'delete_profile')) {
+	if ((isset($_GET['action'])) && ($_GET['action'] == 'delete_profile')) {
 		$db = new Db();
-			$db->query("UPDATE social_users SET email_old = '".$_POST['email']."', email = '', xon = 0  WHERE id = ".$_POST['id']);
+			$db->query("UPDATE social_users SET email_old = '".$_SESSION['user']->email."', email = '', xon = 0  WHERE id = ".$_SESSION['user']->id);
 			Utils::logout();
 		die;
 	}

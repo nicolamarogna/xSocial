@@ -35,8 +35,8 @@ th {background:#567;color:#fff;font-size:1.2em;text-align:center;}
 td.menu {background:#89a;color:#fff;font-weight:bold;text-align:center;font-size:1.1em;}
 td {margin:0 1px;padding: 2px 5px 0 5px;vertical-align: top;}
 
-#container {width:880px;margin:0 auto;padding:0 10px;}
-#container p{margin:0;}
+#content {width:880px;margin:0 auto;padding:0 10px;}
+#content p{margin:0;}
 
 #head {background:#CCC;color:#333;height:150px;font-weight:bold;font-size:16px;margin-bottom:5px;background-image:url(files/img_private/head.jpg);}
 #head_under {font-weight:bold;font-size:20px;margin-bottom:10px;background-color:#3b5f94;padding:5px;color:#fff;}
@@ -237,76 +237,6 @@ input.checked {border:none;background-image:url(../img/chk_on.png);}
 input.unchecked {border:none;background-image:url(../img/chk_off.png);}
 input.selected {border:none;background:url(../img/rdo_on.png);}
 input.unselected {border:none;background:url(../img/rdo_off.png);}
-
-
-/* sexyalertbox */
-#SexyAlertBox-Box {
-  padding-bottom: 24px;
-  background: url('../js/sexyimages/bg-box-bottom.png') bottom left no-repeat !important;
-  background: url('../js/sexyimages/bg-box-bottom.gif') bottom left no-repeat;
-}
-
-#SexyAlertBox-InBox {
-  padding-top: 15px;
-  background: url('../js/sexyimages/bg-box-top.png') top left no-repeat !important;	
-  background: url('../js/sexyimages/bg-box-top.gif') top left no-repeat;	
-}
-
-#SexyAlertBox-BoxContent {
-  background: url('../js/sexyimages/bg-box-body.png') top left repeat-y !important;
-  background: url('../js/sexyimages/bg-box-body.gif') top left repeat-y;
-  padding: 0px 20px;
-}
-
-#SexyAlertBox-BoxContenedor {
-  padding: 0px 0px 5px 55px;
-  text-align: left;
-  font-size:11px;
-  color:#000;
-}
-
-#SexyAlertBox-BoxContenedor h1,#SexyAlertBox-BoxContenedor h2,#SexyAlertBox-BoxContenedor h3,#SexyAlertBox-BoxContenedor b,#SexyAlertBox-BoxContenedor strong{
-  text-align: left;
-  font-family:Verdana;
-  font-size:11px;
-  color:#000;
-  font-weight:bold;
-  margin:0px;
-  padding:0px;
-}
-
-#SexyAlertBox-Buttons{
-  text-align:right;
-}
-
-#SexyAlertBox-Buttons input {
-  margin: 3px 3px;
-}
-
-#SexyAlertBox-BoxContenedor #BoxPromptInput{
-  margin-top:5px;
-}
-
-#SexyAlertBox-Box .BoxAlert {
-  background: url('../js/sexyimages/dialog-warning.png') top left no-repeat;
-}
-
-#SexyAlertBox-Box .BoxConfirm {
-  background: url('../js/sexyimages/dialog-help.png') top left no-repeat;
-}
-
-#SexyAlertBox-Box .BoxPrompt {
-  background: url('../js/sexyimages/dialog-help.png') top left no-repeat;
-}
-
-#SexyAlertBox-Box .BoxInfo {
-  background: url('../js/sexyimages/dialog-information.png') top left no-repeat;
-}
-
-#SexyAlertBox-Box .BoxError {
-  background: url('../js/sexyimages/dialog-error.png') top left no-repeat;
-}
-
 
 
 

@@ -118,7 +118,7 @@ class Album {
 		} else {
 			echo 'Nessuna foto inserita.';
 		}
-		echo '</div></div>';
+		echo '</div>';
 	}
 		
 	public function edit($id = 0) {

@@ -628,7 +628,7 @@ class Utils {
 			return true;	
 		}
 	}
-	
+	/*
 	public static function flipButton($title, $params, $msg = 'Sei sicuro?', $yes = 'Si', $no = 'No') {
 		echo '<div class="btn">
 			<div class="btn-back">
@@ -639,7 +639,7 @@ class Utils {
 			<div class="btn-front"><p>'.$title.'</p></div>
 		</div>';
 	}
-	
+	*/
 	public static function ajaxLink($title, $params, $askConfirm = FALSE) {
 		$askConfirm = ($askConfirm) ? ' askConfirm="true" ' : '';
 		echo '<a class="ajaxsubmit" '.$params.$askConfirm.'>'.$title.'</a>';

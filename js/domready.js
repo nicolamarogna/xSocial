@@ -1,7 +1,6 @@
 $(document).ready(function(){
 	$(window).load(function() {
-    
-												
+							
 			//start hiding all divs with item='hide'
 			$("div[item='hide']").hide();			
 
@@ -28,6 +27,15 @@ $(document).ready(function(){
 					}
 				});
 			}
+
+			$('.alertbox').on("click", function( event ) {
+				$.alert({
+					title: $(this).attr('title'),
+					content: $(this).attr('content'),
+				});
+			});
+			
+			$('.confirmbox').confirm(this.$target);
 			
 			//status post button check
 			$('#publishButton').prop('disabled',true);
@@ -91,13 +99,17 @@ $(document).ready(function(){
 				// check for image type (jpg and png are allowed)
 				 var fileExtension = ['jpeg', 'jpg'];
 				if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-					alert('Formato non valido');
+					$.alert({
+						content: 'Formato non valido',
+					});
 					return false;
 				}
 				
 				// check for file size
 				if (oFile.size > 1000 * 1024) {
-					alert('L\'immagine non deve superare i 1000 Kb');
+					$.alert({
+						content: 'L\'immagine non deve superare i 1000 Kb',
+					});
 					return false;
 				}
 
@@ -262,34 +274,39 @@ $(document).ready(function(){
 
 			//ajax submit
 			$( document ).on("click", ".ajaxsubmit", function( event ) {
-					// Stop form from submitting normally
-					event.preventDefault();
-					// Get some values from elements on the page:
-					var $params = $( this );
-					url = $params.attr( "href" );
-					id = $params.attr( "id" );
-					action = $params.attr( "action" );
-					askConfirm = $params.attr( "askConfirm" );
-					reloadPage = $params.attr( "reloadPage" );
-					//alert(id);
-					if (askConfirm) {
-						if (!confirm("Sei sicuro?")){
-							return false;
+				// Stop form from submitting normally
+				event.preventDefault();
+				// Get some values from elements on the page:
+				var $params = $( this );
+				askConfirm = $params.attr( "askConfirm" );
+				url = $params.attr( "href" );
+				id = $params.attr( "id" );
+				action = $params.attr( "action" );
+				reloadPage = $params.attr( "reloadPage" );
+				if (askConfirm) {
+					$.confirm({
+						confirmButtonClass: 'btn-info',
+    					cancelButtonClass: 'btn-danger',
+						confirm: function(){
+							var posting = $.post( url, { id: id, action: action } );
+							// Put the results in a div
+							posting.done(function( data ) {
+								aftersubmit(data, id, action, reloadPage);
+							})
 						}
-					}	
-					// Send the data using post
-					var posting = $.post( url, { id: id, action: action } );
-					// Put the results in a div
-					posting.done(function( data ) {
-						aftersubmit(data, id, action, reloadPage);
 					});
-					/*
-					posting.always(function() {
-						$( "#live"+id ).slideDown(500,"swing");
-					});
-					*/
+				} else {
+				//alert(id);
+				
+				// Send the data using post
+				var posting = $.post( url, { id: id, action: action } );
+				// Put the results in a div
+				posting.done(function( data ) {
+					aftersubmit(data, id, action, reloadPage);
 				});
-				//end ajax submit
+				}
+			});
+			//end ajax submit
 		
 			//form submit
 			$( document ).on("click", ".formsubmit", function( event ) {
@@ -343,33 +360,7 @@ $(document).ready(function(){
 	
 	
 	
-	function fancyAlert(msg) {
-		jQuery.fancybox({
-			'modal' : true,
-			'content' : "<div style=\"margin:1px;width:240px;\">"+msg+"<div style=\"text-align:right;margin-top:10px;\"><input style=\"margin:3px;padding:0px;\" type=\"button\" onclick=\"jQuery.fancybox.close();\" value=\"Ok\"></div></div>"
-		});
-	}
-	 
-	function fancyConfirm(msg,callback) {
-		var ret;
-		jQuery.fancybox({
-			modal : true,
-			content : "<div style=\"margin:1px;width:240px;\">"+msg+"<div style=\"text-align:right;margin-top:10px;\"><input id=\"fancyConfirm_cancel\" style=\"margin:3px;padding:0px;\" type=\"button\" value=\"Cancel\"><input id=\"fancyConfirm_ok\" style=\"margin:3px;padding:0px;\" type=\"button\" value=\"Ok\"></div></div>",
-			onComplete : function() {
-				jQuery("#fancyConfirm_cancel").click(function() {
-					ret = false; 
-					jQuery.fancybox.close();
-				})
-				jQuery("#fancyConfirm_ok").click(function() {
-					ret = true; 
-					jQuery.fancybox.close();
-				})
-			},
-			onClosed : function() {
-				if (typeof callback == 'function'){ callback.call(this, ret); }
-			}
-		});
-	}
+	
 	
 });
 

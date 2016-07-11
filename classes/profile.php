@@ -164,8 +164,7 @@ class Profile {
 	
 	public function deleteProfile() {
 		echo '<hr>';
-		Utils::flipButton('Elimina il mio profilo', 'href = "?p=profile_actions" action="delete_profile" reloadPage="true" id='.$_SESSION['user']->id);
-		
+		echo '<a class="confirmbox" href="?p=profile_actions&action=delete_profile">Elimina il mio profilo</a>';		
 	}
 	
 }

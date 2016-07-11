@@ -54,18 +54,20 @@
 <head>
 <title><?php echo SITE_TITLE; ?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
 <link href='https://fonts.googleapis.com/css?family=Hind:300,600' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="../js/bootstrap.css">
+
 <link rel="stylesheet" type="text/css" href="homescreen.css" />
-<link rel="stylesheet" type="text/css" href="../js/flipside/style.css" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 <link rel="stylesheet" href="../js/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
 <link rel="stylesheet" href="../js/rating/themes/font-awesome.min.css">
 <link rel="stylesheet" href="../js/rating/themes/fontawesome-stars.css">
 <link rel="stylesheet" href="../js/jcrop/css/jquery.Jcrop.css">
+<link rel="stylesheet" href="../js/jquery-confirm.css">
 
 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
-    <script type="text/javascript" src="../js/flipside/script.js" >//</script>
 	<script type="text/javascript" src="../js/datepicker.js" >//</script>
 	<script type="text/javascript" src="../js/domready.js" >//</script>
     <script type="text/javascript" src="../js/fancybox/lib/jquery.mousewheel-3.0.6.pack.js"></script>
@@ -73,10 +75,12 @@
 	<script type="text/javascript" src="../js/fancybox/source/helpers/jquery.fancybox-media.js?v=2.1.5"></script>
     <script type="text/javascript" src="../js/rating/jquery.barrating.min.js" >//</script>
     <script type="text/javascript" src="../js/jcrop/jquery.Jcrop.min.js" >//</script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.sticky/1.0.3/jquery.sticky.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-confirm.min.js" >//</script>
 
 </head>
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
-<div id="container">
+<div id="content">
 <div id="head">
   <?php
 	if (Utils::logged() != 0) {
@@ -85,7 +89,6 @@
 	}
 ?>
 </div>
-
 <?php
 	if (Utils::logged() == 0) {
 		include('login.php');
