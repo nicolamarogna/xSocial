@@ -34,6 +34,13 @@ class Album {
 					</div><br>';
 		}
 		$albums = $mod->query('SELECT * FROM social_albums WHERE id_user = '.$this->userboard.' ORDER BY updated DESC');
+		
+		echo '<table id="results">';
+		echo '<tr><td style="width:100px;"></td><td>
+		<a class="bold" href="?p=album&userboard='.$_SESSION['user']->id.'&id_detail=mymedia'.$i->id.'">I miei media</a>
+		</td></tr>';
+		echo '</table>';
+		
 		if ($albums) {
 			echo '<table id="results">';
 			foreach ($albums as $i) {
@@ -121,18 +128,65 @@ class Album {
 		echo '</div>';
 	}
 		
+	public function detail_mymedia() {
+		$mod = new Db;
+		echo '<div id="right_content">';
+		echo '<div id="navbar">I miei media</div>';
+		echo '<div id="menu">
+				<table><tr><td class="aright">';
+				echo ' <a class="bold" href="?p=album&userboard='.$this->userboard.'">Torna agli album</a>
+				</td></tr></table>
+				</div><br>';
+		
+		$items = $mod->query('SELECT
+							id,
+							updated,
+							img as upl_img,
+							youtube 
+							FROM social_status
+							WHERE (img != "" OR youtube != "") AND from_user = '.$_SESSION['user']->id.' AND to_user = '.$_SESSION['user']->id.' ORDER BY img, id DESC');
+							//ORDER BY upd DESC');
+		
+		if ($items) {
+			$c=1;
+			echo '<table><tr>';	
+			foreach ($items as $i) {
+				echo '<td>';
+				if ($i->upl_img) {
+					echo '<a rel="gallery" href="files/img/'.$i->upl_img.'" class="fancybox"><img style="max-width:80px;"  class="borded pad_all" src="files/img/thumb_'.$i->upl_img.'"></a><br><span class="xsmall">Immagine</span><img class="fleft padright" src="'.BASE_URL.'files/img_private/thumb_foto.png">';
+				}
+				if ($i->youtube) {
+					echo Utils::youtube($i->youtube);
+				}
+				echo '</td>';
+				if ($c == 4) {
+					echo '</tr><tr>';
+					$c=0;
+				}
+				$c++;
+			}
+			echo '</tr></table>';
+			echo '<div class="clear"></div>';
+		} else {
+			echo 'Nessuna foto inserita.';
+		}
+		echo '</div>';
+	}
+		
 	public function edit($id = 0) {
 		$mod = new Db;
+		
+		$output = '<div id="right_content">';
 		if ($id > 0) {
 			//check permissions
 			$user = $mod->get_by_id('social_albums', $id);
 			if ($user->id_user != $_SESSION['user']->id) {
 				header('Location: ?p=msg&msg=permission_denied');
 			}
-				$output = '<div id="right_content"><div id="head_under"><img class="fright" src="files/img_private/thumb_foto.png">Modifica album</div>';
+				$output .= '<div id="head_under"><img class="fright" src="files/img_private/thumb_foto.png">Modifica album</div>';
 				$album = $mod->get_by_id('social_albums', $id);
 			} else {
-				$output = '<div id="head_under"><img class="fright" src="files/img_private/thumb_foto.png">Crea un album</div>';
+				$output .= '<div id="head_under"><img class="fright" src="files/img_private/thumb_foto.png">Crea un album</div>';
 			}
 		
 		$output .= '<div id="menu">
@@ -176,7 +230,7 @@ class Album {
 		
 		//prepare form
 		$output .= Form::doform('formadd', $_SERVER["REQUEST_URI"], $fields, array('Cancella','Modifica'), 'post', 'enctype="multipart/form-data"');
-		$output .= '</div';
+		$output .= '</div>';
 		echo $output;
 	}
 	

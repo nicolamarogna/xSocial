@@ -19,7 +19,11 @@
 		}
 	} elseif (isset($_GET['id_detail'])) {
 		//detail
-		$mod->detail_album($_GET['id_detail']);
+		if ($_GET['id_detail'] == 'mymedia') {
+			$mod->detail_mymedia();
+		} else {
+			$mod->detail_album($_GET['id_detail']);
+		}
 	} else {
 		//view
 		$mod->list_albums();
