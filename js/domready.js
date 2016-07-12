@@ -1,6 +1,44 @@
 $(document).ready(function(){
 	$(window).load(function() {
-							
+
+		// overlay only in dashboard //
+		if ($("#statusbox").length) {
+			$('#right_content:first').on("click", function( event ) {
+				if (!$("#overlay").length) {
+					var docHeight = $(document).height();
+					
+					$("#right_content:first")
+					  .css({
+						 'position': 'relative',
+						 'z-index': 10000
+					});
+					
+					$("body").append("<div id='overlay'></div>");
+	
+					$("#overlay")
+					.hide()
+					  .height(docHeight)
+					  .css({
+						 'opacity' : 0.7,
+						 'position': 'absolute',
+						 'top': 0,
+						 'left': 0,
+						 'background-color': 'black',
+						 'width': '100%',
+						 'z-index': 5000
+					});
+					$("#overlay").fadeIn();
+				}
+				$('#overlay').on("click", function( event ) {
+					$("#overlay").fadeOut().promise().done(function(){
+						$(this).remove();
+					});
+				});
+			});
+		}
+		// end overlay only in dashboard //
+			
+				
 			//start hiding all divs with item='hide'
 			$("div[item='hide']").hide();			
 
@@ -16,13 +54,21 @@ $(document).ready(function(){
 			// init fancybox
 			function fancybox() {
 				$(".fancybox").fancybox({
-					'closeBtn' : false
+					'closeBtn' : false,
+					helpers: {
+						overlay: {
+						  locked: false
+						}
+					  }
 				});
 				$('.fancybox-media').fancybox({
 					openEffect  : 'none',
 					closeEffect : 'none',
 					'closeBtn' : false,
 					helpers : {
+						overlay: {
+						  locked: false
+						},
 						media : {}
 					}
 				});
