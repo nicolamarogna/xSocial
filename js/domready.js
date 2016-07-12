@@ -36,6 +36,15 @@ $(document).ready(function(){
 				});
 			});
 		}
+		
+		$(document).scroll(function(){
+			if ($("#overlay")) {
+				$("#overlay").fadeOut().promise().done(function(){
+					$(this).remove();
+				});
+			}
+		});
+		
 		// end overlay only in dashboard //
 			
 				
