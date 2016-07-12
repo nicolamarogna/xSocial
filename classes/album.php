@@ -34,9 +34,17 @@ class Album {
 					</div><br>';
 		}
 		$albums = $mod->query('SELECT * FROM social_albums WHERE id_user = '.$this->userboard.' ORDER BY updated DESC');
-		
+		$myphoto = $mod->query('SELECT
+							img
+							FROM social_status
+							WHERE img != "" AND from_user = '.$_SESSION['user']->id.' AND to_user = '.$_SESSION['user']->id.' ORDER BY RAND() LIMIT 1');
+							//ORDER BY upd DESC');
 		echo '<table id="results">';
-		echo '<tr><td style="width:100px;"></td><td>
+		echo '<tr><td style="width:120px;">
+		<a class="bold" href="?p=album&userboard='.$_SESSION['user']->id.'&id_detail=mymedia'.$i->id.'">
+		<img class="fleft img_event crop" src="files/img/thumb_'.$myphoto[0]->img.'">
+		</a>
+		</td><td>
 		<a class="bold" href="?p=album&userboard='.$_SESSION['user']->id.'&id_detail=mymedia'.$i->id.'">I miei media</a>
 		</td></tr>';
 		echo '</table>';
@@ -44,13 +52,13 @@ class Album {
 		if ($albums) {
 			echo '<table id="results">';
 			foreach ($albums as $i) {
-				$items = $mod->query('SELECT img FROM social_albums_items WHERE id_album = '.$i->id.' ORDER BY RAND()');
-				echo '<tr><td style="width:100px;">
+				$items = $mod->query('SELECT img FROM social_albums_items WHERE id_album = '.$i->id.' ORDER BY RAND() LIMIT 1');
+				echo '<tr><td style="width:120px;">
 					<a class="bold" href="?p=album&userboard='.$this->userboard.'&id_detail='.$i->id.'">';
 				if ($items > 0) {
-					echo '<img class="fleft img_event" src="files/img/thumb_'.$items[0]->img.'">';
+					echo '<img class="fleft img_event crop" src="files/img/thumb_'.$items[0]->img.'">';
 				} else {
-					echo '<img class="fleft img_event" src="files/img_private/thumb_img_profile_null.jpg">';
+					echo '<img class="fleft img_event crop" src="files/img_private/thumb_img_profile_null.jpg">';
 				}
 				echo '</a></td><td>
 						<a class="bold" href="?p=album&userboard='.$this->userboard.'&id_detail='.$i->id.'">'.$i->title.'</a>
@@ -103,15 +111,15 @@ class Album {
 			$c=1;
 			echo '<table><tr>';	
 			foreach ($photos as $i) {
-				echo '<td>
+				echo '<td style="padding:0 3px;">
 				<a href="files/img/'.$i->img.'" class="fancybox" rel="gallery" title="'.stripslashes($i->title).'">
-				<img class="img_event" src="files/img/thumb_'.$i->img.'" alt="'.stripslashes($i->title).'" title="'.stripslashes($i->title).'">
+				<img class="crop" src="files/img/thumb_'.$i->img.'" alt="'.stripslashes($i->title).'" title="'.stripslashes($i->title).'">
 				</a>';
 				if ($this->userboard == $_SESSION['user']->id) {
-					echo '<br><span class="acenter">
+					echo '<br><div class="acenter">
 					<a href="?p=album&id_mod='.$i->id.'&id_album='.$album->id.'"><img src="'.BASE_URL.'files/img_private/thumb_edit.png" title="Modifica foto" alt="Modifica foto"></a>
 					<a href="?p=album&id_del='.$i->id.'&id_album='.$album->id.'"><img src="'.BASE_URL.'files/img_private/thumb_delete.png" title="Elimina foto" alt="Elimina foto"></a>
-					</span>';
+					</div>';
 				}
 				echo '</td>';
 				if ($c == 4) {
@@ -144,19 +152,22 @@ class Album {
 							img as upl_img,
 							youtube 
 							FROM social_status
-							WHERE (img != "" OR youtube != "") AND from_user = '.$_SESSION['user']->id.' AND to_user = '.$_SESSION['user']->id.' ORDER BY img, id DESC');
+							WHERE (img != "" OR youtube != "") AND from_user = '.$_SESSION['user']->id.' AND to_user = '.$_SESSION['user']->id.' ORDER BY id DESC');
 							//ORDER BY upd DESC');
 		
 		if ($items) {
 			$c=1;
 			echo '<table><tr>';	
 			foreach ($items as $i) {
-				echo '<td>';
+				echo '<td style="padding:0 3px;">';
 				if ($i->upl_img) {
-					echo '<a rel="gallery" href="files/img/'.$i->upl_img.'" class="fancybox"><img style="max-width:80px;"  class="borded pad_all" src="files/img/thumb_'.$i->upl_img.'"></a><br><span class="xsmall">Immagine</span><img class="fleft padright" src="'.BASE_URL.'files/img_private/thumb_foto.png">';
+					echo '<a rel="gallery" href="files/img/'.$i->upl_img.'" class="fancybox"><img class="crop" src="files/img/thumb_'.$i->upl_img.'">';
+					echo '<div style="position:relative;top:-28px;left:5px;opacity:0.8;"/><img class="fleft padright" src="'.BASE_URL.'files/img_private/thumb_foto.png"></div></a>';
 				}
 				if ($i->youtube) {
-					echo Utils::youtube($i->youtube);
+					preg_match('/[\\?\\&]v=([^\\?\\&]+)/', $i->youtube, $match);
+					echo '<a href="http://www.youtube.com/v/'.$match[1].'?hl=en&autoplay=1&showsearch=0&rel=0&TB_iframe=true&width=430&height=280&background=#000" class="fancybox-media"><img class="crop" src="http://img.youtube.com/vi/'.$match[1].'/1.jpg">';
+					echo '<div style="position:relative;top:-28px;left:5px;opacity:0.8;"/><img class="fleft padright" src="'.BASE_URL.'files/img_private/thumb_youtube.png"></div></a>';
 				}
 				echo '</td>';
 				if ($c == 4) {
