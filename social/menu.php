@@ -24,7 +24,7 @@ class Menu {
 			echo '
 				<div id="menu">
 				<table>
-				<tr><td><a href="index.php" class="bold"><img class="fright" src="files/img_private/thumb_board.png">La mia bacheca</a></td></tr>
+				<tr><td><a href="index.php"><img class="fright" src="files/img_private/thumb_board.png">'.stripslashes($_SESSION['user']->nome).' '.stripslashes($_SESSION['user']->cognome).'</a></td></tr>
 				<tr><td><a href="?type=all"><img class="fright" src="files/img_private/thumb_userboard.png">Bacheca degli amici</a></td></tr>
 				<tr><td><a href="?p=album"><img class="fright" src="files/img_private/thumb_foto.png">Le mie foto</a></td></tr>
 				<tr><td><a href="?p=events"><img class="fright" src="files/img_private/thumb_event.png">I miei eventi</a></td></tr>

@@ -10,7 +10,7 @@ $(document).ready(function(){
 					$("#right_content:first")
 					  .css({
 						 'position': 'relative',
-						 'z-index': 10000
+						 'z-index': 5010
 					});
 					
 					$("body").append("<div id='overlay'></div>");

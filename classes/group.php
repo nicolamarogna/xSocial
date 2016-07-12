@@ -62,6 +62,8 @@ class Group {
 	}
 	
 	public function edit($id) {
+		
+		$output = '<div id="right_content">';
 		if ($id > 0) {
 			$mod = new Db;
 			//check permissions
@@ -69,11 +71,10 @@ class Group {
 			if ($group->group_admin != $_SESSION['user']->id) {
 				header('Location: ?p=msg&msg=permission_denied');
 			}
-			$output = '<div id="right_content">';
 			$output .= '<div id="head_under"><img class="fright" src="files/img_private/thumb_group.png">Modifica gruppo</div>';
 			$event = $mod->get_by_id('social_events', $id);
 		} else {
-			$output = '<div id="head_under"><img class="fright" src="files/img_private/thumb_group.png">Crea un gruppo</div>';
+			$output .= '<div id="head_under"><img class="fright" src="files/img_private/thumb_group.png">Crea un gruppo</div>';
 		}
 		
 		$output .= '<div id="menu">

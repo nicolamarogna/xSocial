@@ -375,7 +375,7 @@ class Board {
 								
 				//echo Delete button ajaxLink($title, $params, $askConfirm = FALSE)
 				if (($i->from_user == $_SESSION['user']->id) || (!isset($_GET['detail']))) {
-					Utils::ajaxButton('Elimina', 'href="'.$_SERVER['PHP_SELF'].'" action="delete_post" id='.$i->id_status, TRUE);
+					Utils::ajaxButton('Elimina', 'href="'.$_SERVER['PHP_SELF'].'" action="delete_post" id='.$i->id_status, TRUE, 'delete');
 				}
 				
 				echo '</div>';

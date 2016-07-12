@@ -24,9 +24,25 @@ p {margin:0;}
 input, textarea, select {border:1px solid #ccc;padding:1px 3px;margin:1px;font-family:inherit;font-size:1em;font-weight:bold;}
 input:focus, textarea:focus, select:focus {border:1px solid #3b5f94;}
 
-button {border:1px solid #ccc;background-color:#3b5f94;font-size:1em;padding:1px 10px;margin:1px;font-family:inherit;color:#FFF;border-radius: 3px;}
+button {border:1px solid #ccc;background-color:#3b5f94;padding:0px 10px;font-family:inherit;color:#FFF;border-radius:3px;font-weight:bold;}
 button[disabled=disabled], button:disabled {opacity:0.4;}
-.buttonGrey {border:1px solid #ccc;background-color:#ddd;color:#666}
+.buttonGrey {border:0px solid #ccc;background-color:#fff;color:#3b5f94;font-weight:bold;}
+.buttons:before
+{
+  float: left;
+  text-align: center;
+  font-size: 1.1em;
+  margin: 0 0.2em 0 -1em;
+  padding: 0 .2em;
+  pointer-events: none;
+  font-weight:normal;
+}
+.add:before    { content: "\271A"; }
+.edit:before   { content: "\270E"; }
+.delete:before { content: "\2718";}
+.save:before   { content: "\2714";}
+.email:before  { content: "\2709";}
+.cross:before  { content: "\2716"; }
 
 textarea {width:98%;height:100px;}
 .editfile {height:500px;}
