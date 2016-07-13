@@ -12,7 +12,7 @@ class Requests {
 		
 		echo '<div id="menu">
 				<table><tr>
-				<td><span class="bold"><img class="fleft padright" src="'.BASE_URL.'files/img_private/thumb_plus.png">Richieste di amicizia</span></td>
+				<td><span class="bold"><i class="fa fa-user-plus" aria-hidden="true"></i> Richieste di amicizia</span></td>
 				</tr></table>
 				</div>';
 		echo '

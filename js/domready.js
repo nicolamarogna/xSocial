@@ -52,7 +52,7 @@ $(document).ready(function(){
 			$("div[item='hide']").hide();			
 
 			//init rating
-			$( "select[id^='rating']" ).barrating('show', {theme: 'fontawesome-stars',});
+			$( "select[id^='rating']" ).barrating('show', {theme: 'fontawesome-stars-o',});
 			
 			//init comments
 			viewcomments();
@@ -112,8 +112,36 @@ $(document).ready(function(){
 				}
 			}
 			
-			
+			if ($("#statusbox").length) {
+				$('#img').on('change', function(){
+					$('#hideField').css('display','none');
+					$('#icon_del_photo').remove();
+					$('#load_photo').append('<img id="displayImg" style="max-width:470px;"><i id="icon_del_photo" class="fa fa-trash-o fa-2x" aria-hidden="true" style="color:#3b5f94;cursor:pointer;" title="Elimina"></i>');
+					readURL(this, function(e) {
+						// use result in callback...
+						$('#displayImg').attr('src',e.target.result);
+						$('#load_photo').slideDown();
+						$('#icon_del_photo').on('click', function() {
+							$("#load_photo").slideUp().promise().done(function(){
+								$('#displayImg').remove();
+								$('#img').val('');							
+								checkIfEmpty();
+							});
+						});
+					});
+				});
+			}
 			//end status post button check
+
+
+			//read url
+			function readURL(input, onLoadCallback) {
+				if (input.files && input.files[0]) {
+					var reader = new FileReader();
+					reader.onload = onLoadCallback;
+					reader.readAsDataURL(input.files[0]);
+				}
+			}
 
 
 			//init jcrop
@@ -147,46 +175,49 @@ $(document).ready(function(){
 				$('#h').val(c.h);
 			};
 			
-			$("#img").change(function(){
-				$("#displayImg").fadeOut();
-				var oFile = $('#img')[0].files[0];
-				
-				// check for image type (jpg and png are allowed)
-				 var fileExtension = ['jpeg', 'jpg'];
-				if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
-					$.alert({
-						content: 'Formato non valido',
-					});
-					return false;
-				}
-				
-				// check for file size
-				if (oFile.size > 1000 * 1024) {
-					$.alert({
-						content: 'L\'immagine non deve superare i 1000 Kb',
-					});
-					return false;
-				}
-
-				var oImage = document.getElementById('displayImg');
-				
-				var oReader = new FileReader();
-				oReader.onload = function (e) {
-					oImage.src = e.target.result;
-					oImage.onload = function () {
-						if (typeof jcrop_api != 'undefined') {
-							jcrop_api.destroy();
-							jcrop_api = null;
-							$('#displayImg').width(oImage.naturalWidth);
-							$('#displayImg').height(oImage.naturalHeight);
-						}
-						startjcrop();
-					}
-				}
+			//not in board page
+			if (!$("#statusbox").length) {
+				$("#img").change(function(){
+					$("#displayImg").fadeOut();
+					var oFile = $('#img')[0].files[0];
 					
-				// read the image file as a data URL.
-				oReader.readAsDataURL(this.files[0]);
-			});
+					// check for image type (jpg and png are allowed)
+					 var fileExtension = ['jpeg', 'jpg'];
+					if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+						$.alert({
+							content: 'Formato non valido',
+						});
+						return false;
+					}
+					
+					// check for file size
+					if (oFile.size > 1000 * 1024) {
+						$.alert({
+							content: 'L\'immagine non deve superare i 1000 Kb',
+						});
+						return false;
+					}
+	
+					var oImage = document.getElementById('displayImg');
+					
+					var oReader = new FileReader();
+					oReader.onload = function (e) {
+						oImage.src = e.target.result;
+						oImage.onload = function () {
+							if (typeof jcrop_api != 'undefined') {
+								jcrop_api.destroy();
+								jcrop_api = null;
+								$('#displayImg').width(oImage.naturalWidth);
+								$('#displayImg').height(oImage.naturalHeight);
+							}
+							startjcrop();
+						}
+					}
+						
+					// read the image file as a data URL.
+					oReader.readAsDataURL(this.files[0]);
+				});
+			}
 			//end jcrop
 
 //////////////////////////////////////////////////////////////////////////////////////////////			
@@ -218,7 +249,7 @@ $(document).ready(function(){
 									$("#right").fadeIn("slow").append(content);
 									viewcomments();							
 									//apply widget rating
-									$( "select[id^='rating']" ).barrating('show', {theme: 'fontawesome-stars',});		
+									$( "select[id^='rating']" ).barrating('show', {theme: 'fontawesome-stars-o',});		
 									pageNumber++;
 									//$('#loading').hide();
 							}
@@ -273,7 +304,6 @@ $(document).ready(function(){
 			}
 		}
 		
-	
 			$(function() {
 				$.datepicker.setDefaults($.datepicker.regional['it']);
 				$(".dashboard_notime").datepicker({
@@ -298,12 +328,19 @@ $(document).ready(function(){
 				});
 			});
 			
+			//open file dialog from button
+			$( document ).on("click", ".openFileDialog", function( event ) {
+				$("#"+$(this).attr('id')).click();
+			});
+			
 			//on click outside div, hide all divs with "item=hide" if open (like Carica foto or Carica Video)
 			$( document ).click(function( event ) {
-				var selector = $("div[item='hide']");
-				if ($(event.target).closest(selector).length === 0)
-				{
-					selector.slideUp().promise().done();
+				if (!$('#overlay')) {
+					var selector = $("div[item='hide']");
+					if ($(event.target).closest(selector).length === 0)
+					{
+						selector.slideUp().promise().done();
+					}
 				}
 			});
 			
@@ -406,7 +443,10 @@ $(document).ready(function(){
 				viewcomments();
 			}
 			if (action == 'share_post') {
-				alert('Post condiviso sulla tua bacheca');
+				$.alert({
+					title: false,
+					content: 'Post condiviso sulla tua bacheca',
+				});
 			}
 		}
 

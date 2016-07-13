@@ -62,7 +62,7 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
 <link rel="stylesheet" href="../js/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
 <link rel="stylesheet" href="../js/rating/themes/font-awesome.min.css">
-<link rel="stylesheet" href="../js/rating/themes/fontawesome-stars.css">
+<link rel="stylesheet" href="../js/rating/themes/fontawesome-stars-o.css">
 <link rel="stylesheet" href="../js/jcrop/css/jquery.Jcrop.css">
 <link rel="stylesheet" href="../js/jquery-confirm.css">
 

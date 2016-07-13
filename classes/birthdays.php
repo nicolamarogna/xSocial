@@ -46,8 +46,8 @@ class Birthdays {
 	public function view_birthdays($array) {
 		echo '<br><div id="menu">
 				<table><tr>
-				<td><span class="bold"><img class="fleft padright" src="'.BASE_URL.'files/img_private/thumb_birthday.png">Compleanni</span></td>
-				<td class="aright"><a class="bold" href="?p=birthdays&type=all">Mostra</a></td>
+				<td><span class="bold"><i class="fa fa-birthday-cake" aria-hidden="true"></i> Compleanni</span></td>
+				<td class="aright"><a href="?p=birthdays&type=all">Mostra</a></td>
 				</tr></table>
 				</div>';
 				

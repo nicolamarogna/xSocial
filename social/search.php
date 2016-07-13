@@ -6,6 +6,7 @@
 		$title = '<img class="fright" src="files/img_private/thumb_group.png">Cerca gruppi';
 		$split = '<a class="bold" href="?p=search&&q='.$_GET['q'].'">Cerca fra gli amici</a>';
 	}
+	echo '<div id="right_content">';
 	echo '<div id="head_under">'.$title.'</div>';
 	echo '<div id="menu">
 				<table><tr><td class="aright">
@@ -62,7 +63,6 @@
 		}
 	
 	
-	
 	} else {
 		
 		
@@ -95,4 +95,6 @@
 			echo 'Nessuna corrispondenza trovata.';
 		}	
 	}
+		echo '</div>';
+
 ?>

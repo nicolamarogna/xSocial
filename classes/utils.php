@@ -645,9 +645,10 @@ class Utils {
 		echo '<a class="ajaxsubmit" '.$params.$askConfirm.'>'.$title.'</a>';
 	}
 	
-	public static function ajaxButton($title, $submit_action, $askConfirm = FALSE, $iconCSS = '') {
+	public static function ajaxButton($title, $submit_action, $askConfirm = FALSE, $iconCSS = FALSE) {
 		$askConfirm = ($askConfirm) ? ' askConfirm="true" ' : '';
-		echo '<button class="ajaxsubmit buttonGrey buttons '.$iconCSS.'" type="submit" style="cursor:pointer;" '.$submit_action.$askConfirm.'>'.$title.'</button>';
+		$icon = ($iconCSS) ? '<i class="'.$iconCSS.'" aria-hidden="true"></i> ' : '';
+		echo '<button class="ajaxsubmit buttonGrey" type="submit" style="cursor:pointer;" '.$submit_action.$askConfirm.'>'.$icon.$title.'</button>';
 	}
 	
 }

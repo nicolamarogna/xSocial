@@ -24,14 +24,14 @@ class Menu {
 			echo '
 				<div id="menu">
 				<table>
-				<tr><td><a href="index.php"><img class="fright" src="files/img_private/thumb_board.png">'.stripslashes($_SESSION['user']->nome).' '.stripslashes($_SESSION['user']->cognome).'</a></td></tr>
-				<tr><td><a href="?type=all"><img class="fright" src="files/img_private/thumb_userboard.png">Bacheca degli amici</a></td></tr>
-				<tr><td><a href="?p=album"><img class="fright" src="files/img_private/thumb_foto.png">Le mie foto</a></td></tr>
-				<tr><td><a href="?p=events"><img class="fright" src="files/img_private/thumb_event.png">I miei eventi</a></td></tr>
-				<tr><td><a href="?p=group"><img class="fright" src="files/img_private/thumb_group.png">I miei gruppi</a></td></tr>
-				<tr><td><a href="?p=calendar"><img class="fright" src="files/img_private/thumb_calendar.png">I miei calendari</a></td></tr>
-				<tr><td><a href="?p=profile"><img class="fright" src="files/img_private/thumb_profile.png">Il mio profilo</a></td></tr>
-				<tr><td><a href="?p=actions"><img class="fright" src="files/img_private/thumb_logout.png">Logout</a></td></tr>
+				<tr><td><a href="index.php">'.stripslashes($_SESSION['user']->nome).' '.stripslashes($_SESSION['user']->cognome).'</a></td></tr>
+				<tr><td><a href="?type=all"><i class="fa fa-users fright" aria-hidden="true"></i>Bacheca degli amici</a></td></tr>
+				<tr><td><a href="?p=album"><i class="fa fa-camera fright" aria-hidden="true"></i>Le mie foto</a></td></tr>
+				<tr><td><a href="?p=events"><i class="fa fa-calendar-check-o fright" aria-hidden="true"></i>I miei eventi</a></td></tr>
+				<tr><td><a href="?p=group"><i class="fa fa-copyright fa-rotate-90 fright" aria-hidden="true"></i>I miei gruppi</a></td></tr>
+				<tr><td><a href="?p=calendar"><i class="fa fa-calendar fright" aria-hidden="true"></i>I miei calendari</a></td></tr>
+				<tr><td><a href="?p=profile"><i class="fa fa-user fright" aria-hidden="true"></i>Il mio profilo</a></td></tr>
+				<tr><td><a href="?p=actions"><i class="fa fa-sign-out fright" aria-hidden="true"></i>Logout</a></td></tr>
 				</table>
 				</div>
 				<br>';
@@ -54,7 +54,7 @@ class Menu {
 		echo '
 			<div id="menu">
 			<table>
-			<tr><td colspan="2" class="bold"><img class="fright" src="files/img_private/thumb_friends.png">Amici</td></tr>
+			<tr><td colspan="2" class="bold"><i class="fa fa-users fright" aria-hidden="true"></i>Amici</td></tr>
 			<tr>
 			<td>'.$numfriends.' amici</td>
 			<td class="aright"><a class="bold" href="?p=friends">Mostra tutti</a></td>
@@ -76,7 +76,7 @@ class Menu {
 				}
 				echo '<td>
 				<a href="?userboard='.$i->id.'">
-				<img style="max-width:50px;max-height:35px;" src="'.$path.'crop_'.$img.'" alt="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'" title="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'">
+				<img style="max-width:55px;" src="'.$path.'crop_'.$img.'" alt="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'" title="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'">
 				<br>
 				<p style="line-height:1.2;" class="xsmall">
 				'.stripslashes($i->nome).' '.stripslashes($i->cognome).'</a></p></td>';
@@ -109,23 +109,23 @@ class Menu {
 		$_SESSION['action'] = 'Utils::logout();';
 
 		if (!Utils::isgroup($id)) {
-			$friends_of_group_title = '<img class="fright" src="files/img_private/thumb_friends.png">Amici di '.stripslashes($user->nome);
+			$friends_of_group_title = '<i class="fa fa-users fright" aria-hidden="true"></i>Amici di '.stripslashes($user->nome);
 			//menu of any user
 			echo '
 			<div id="menu">
 			<table>
-			<tr><td><a href="index.php" class="bold"><img class="fright" src="files/img_private/thumb_board.png">La mia bacheca</a></td></tr>
-			<tr><td><a href="?p=album&userboard='.$id.'"><img class="fright" src="files/img_private/thumb_foto.png">Foto di '.stripslashes($user->nome).'</a></td></tr>
-			<tr><td><a href="?p=calendar&userboard='.$id.'"><img class="fright" src="files/img_private/thumb_calendar.png">Calendari di '.stripslashes($user->nome).'</a></td></tr>
+			<tr><td><a href="index.php" class="bold"><i class="fa fa-user fright" aria-hidden="true"></i>La mia bacheca</a></td></tr>
+			<tr><td><a href="?p=album&userboard='.$id.'"><i class="fa fa-camera fright" aria-hidden="true"></i>Foto di '.stripslashes($user->nome).'</a></td></tr>
+			<tr><td><a href="?p=calendar&userboard='.$id.'"><i class="fa fa-calendar fright" aria-hidden="true"></i>Calendari di '.stripslashes($user->nome).'</a></td></tr>
 			</table>
 			</div><br>';
 		} else {
 			//menu of a group
-			$friends_of_group_title = '<img class="fright" src="files/img_private/thumb_group.png">Persone iscritte al gruppo';
+			$friends_of_group_title = '<i class="fa fa-copyright fa-rotate-90 fright" aria-hidden="true"></i>Persone iscritte al gruppo';
 			echo '
 			<div id="menu">
 			<table>
-			<tr><td><a href="index.php" class="bold"><img class="fright" src="files/img_private/thumb_board.png">La mia bacheca</a></td></tr>
+			<tr><td><a href="index.php" class="bold"><i class="fa fa-user fright" aria-hidden="true"></i>La mia bacheca</a></td></tr>
 			</table>
 			</div><br>';
 		}
@@ -167,7 +167,7 @@ class Menu {
 				}
 				echo '<td>
 				<a href="?userboard='.$i->id.'">
-				<img style="max-width:50px;max-height:35px;" src="'.$path.'crop_'.$img.'" alt="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'" title="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'">
+				<img style="max-width:55px;" src="'.$path.'crop_'.$img.'" alt="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'" title="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'">
 				<br>
 				<p style="line-height:1.2;" class="xsmall">
 				'.stripslashes($i->nome).' '.stripslashes($i->cognome).'</a></p></td>';

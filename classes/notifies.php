@@ -12,8 +12,8 @@ class Notifies {
 		
 		echo '<div id="menu">
 				<table><tr>
-				<td><span class="bold"><img class="fleft padright" src="'.BASE_URL.'files/img_private/thumb_esclamativo.png">Notifiche</span></td>
-				<td class="aright"><a class="bold" href="?p=notifies&type=all">Mostra</a></td>
+				<td><span class="bold"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Notifiche</span></td>
+				<td class="aright"><a href="?p=notifies&type=all">Mostra</a></td>
 				</tr></table>
 				</div>';
 				

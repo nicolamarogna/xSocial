@@ -3,7 +3,7 @@
 	$db = new Db;
 	
 	echo '<div id="right_content">';
-	echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_birthday.png">Compleanni di oggi</div>';
+	echo '<div id="head_under"><i class="fa fa-birthday-cake fright" aria-hidden="true"></i>Compleanni di oggi</div>';
 	echo '<div id="results"><table>';
 	$bday = $mod->birthdays(date('m-d'));
 	if ($bday) {
@@ -33,7 +33,7 @@
 	
 
 	echo '<div id="right_content">';
-	echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_birthday.png">Compleanni di domani</div>';
+	echo '<div id="head_under"><i class="fa fa-birthday-cake fright" aria-hidden="true"></i> Compleanni di domani</div>';
 	echo '<div id="results"><table>';
 	$bday = $mod->birthdays(date('m-d', mktime(0,0,0,date('m'), date('d')+1)));
 	if ($bday) {
@@ -63,7 +63,7 @@
 		
 		
 	echo '<div id="right_content">';
-	echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_birthday.png">Prossimi compleanni</div>';
+	echo '<div id="head_under"><i class="fa fa-birthday-cake fright" aria-hidden="true"></i> Prossimi compleanni</div>';
 	echo '<div id="results"><table>';
 	$bday = $mod->birthdays('prossimi');
 	if ($bday) {

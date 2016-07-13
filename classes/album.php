@@ -25,7 +25,7 @@ class Album {
 		
 		echo '<div id="right_content">';
 		
-		echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_foto.png">Elenco album</div>';
+		echo '<div id="head_under"><i class="fa fa-camera fright" aria-hidden="true"></i> Elenco album</div>';
 		if ($this->userboard == $_SESSION['user']->id) {
 			echo '<div id="menu">
 					<table><tr><td class="aright">
@@ -34,20 +34,24 @@ class Album {
 					</div><br>';
 		}
 		$albums = $mod->query('SELECT * FROM social_albums WHERE id_user = '.$this->userboard.' ORDER BY updated DESC');
-		$myphoto = $mod->query('SELECT
-							img
-							FROM social_status
-							WHERE img != "" AND from_user = '.$_SESSION['user']->id.' AND to_user = '.$_SESSION['user']->id.' ORDER BY RAND() LIMIT 1');
-							//ORDER BY upd DESC');
-		echo '<table id="results">';
-		echo '<tr><td style="width:120px;">
-		<a class="bold" href="?p=album&userboard='.$_SESSION['user']->id.'&id_detail=mymedia'.$i->id.'">
-		<img class="fleft img_event crop" src="files/img/thumb_'.$myphoto[0]->img.'">
-		</a>
-		</td><td>
-		<a class="bold" href="?p=album&userboard='.$_SESSION['user']->id.'&id_detail=mymedia'.$i->id.'">I miei media</a>
-		</td></tr>';
-		echo '</table>';
+		
+		//view only for user
+		if ((!isset($_GET['userboard'])) || ($_GET['userboard'] == $_SESSION['user']->id)){
+			$myphoto = $mod->query('SELECT
+								img
+								FROM social_status
+								WHERE img != "" AND from_user = '.$_SESSION['user']->id.' AND to_user = '.$_SESSION['user']->id.' ORDER BY RAND() LIMIT 1');
+								//ORDER BY upd DESC');
+			echo '<table id="results">';
+			echo '<tr><td style="width:120px;">
+			<a class="bold" href="?p=album&userboard='.$_SESSION['user']->id.'&id_detail=mymedia'.$i->id.'">
+			<img class="fleft img_event crop" src="files/img/thumb_'.$myphoto[0]->img.'">
+			</a>
+			</td><td>
+			<a class="bold" href="?p=album&userboard='.$_SESSION['user']->id.'&id_detail=mymedia'.$i->id.'">I miei media</a>
+			</td></tr>';
+			echo '</table>';
+		}
 		
 		if ($albums) {
 			echo '<table id="results">';
@@ -69,8 +73,8 @@ class Album {
 						</td>
 						<td class="aright">';
 				if ($this->userboard == $_SESSION['user']->id) {
-					echo '<a href="?p=album&id_del='.$i->id.'"><img class="fright" src="'.BASE_URL.'files/img_private/thumb_delete.png" title="Elimina album" alt="Elimina album"></a>
-					<a href="?p=album&id_mod='.$i->id.'"><img class="fright" src="'.BASE_URL.'files/img_private/thumb_edit.png" title="Modifica album" alt="Modifica album"></a>';
+					echo '<a href="?p=album&id_del='.$i->id.'"><i class="fa fa-trash-o fa-lg fright" aria-hidden="true" title="Elimina album"></i></a>
+					<a href="?p=album&id_mod='.$i->id.'"><i class="fa fa-pencil fa-lg fright pad" aria-hidden="true" title="Modifica album"></i></a>';
 					echo '</td></tr>';
 				}
 			}
@@ -117,8 +121,8 @@ class Album {
 				</a>';
 				if ($this->userboard == $_SESSION['user']->id) {
 					echo '<br><div class="acenter">
-					<a href="?p=album&id_mod='.$i->id.'&id_album='.$album->id.'"><img src="'.BASE_URL.'files/img_private/thumb_edit.png" title="Modifica foto" alt="Modifica foto"></a>
-					<a href="?p=album&id_del='.$i->id.'&id_album='.$album->id.'"><img src="'.BASE_URL.'files/img_private/thumb_delete.png" title="Elimina foto" alt="Elimina foto"></a>
+					<a href="?p=album&id_mod='.$i->id.'&id_album='.$album->id.'"><i class="fa fa-pencil fa-lg" aria-hidden="true" title="Modifica foto"></i></a>
+					<a href="?p=album&id_del='.$i->id.'&id_album='.$album->id.'"><i class="fa fa-trash-o fa-lg" aria-hidden="true" title="Elimina foto"></i></a>
 					</div>';
 				}
 				echo '</td>';
@@ -162,12 +166,12 @@ class Album {
 				echo '<td style="padding:0 3px;">';
 				if ($i->upl_img) {
 					echo '<a rel="gallery" href="files/img/'.$i->upl_img.'" class="fancybox"><img class="crop" src="files/img/thumb_'.$i->upl_img.'">';
-					echo '<div style="position:relative;top:-28px;left:5px;opacity:0.8;"/><img class="fleft padright" src="'.BASE_URL.'files/img_private/thumb_foto.png"></div></a>';
+					echo '<div class="watermark"><i class="fa fa-camera fleft pad" aria-hidden="true"></i></div></a>';
 				}
 				if ($i->youtube) {
 					preg_match('/[\\?\\&]v=([^\\?\\&]+)/', $i->youtube, $match);
 					echo '<a href="http://www.youtube.com/v/'.$match[1].'?hl=en&autoplay=1&showsearch=0&rel=0&TB_iframe=true&width=430&height=280&background=#000" class="fancybox-media"><img class="crop" src="http://img.youtube.com/vi/'.$match[1].'/1.jpg">';
-					echo '<div style="position:relative;top:-28px;left:5px;opacity:0.8;"/><img class="fleft padright" src="'.BASE_URL.'files/img_private/thumb_youtube.png"></div></a>';
+					echo '<div class="watermark"><i class="fa fa-youtube-play fleft pad" aria-hidden="true"></i></div></a>';
 				}
 				echo '</td>';
 				if ($c == 4) {

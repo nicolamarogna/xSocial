@@ -122,11 +122,11 @@ class Board {
 							ORDER BY updated DESC LIMIT 1');
 		
 		if (Utils::isgroup($_SESSION['user']->id)) {
-			echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_group.png">'.stripslashes($_SESSION['user']->group);
+			echo '<div id="head_under"><i class="fa fa-copyright fa-rotate-90 fright" aria-hidden="true"></i> '.stripslashes($_SESSION['user']->group);
 		} elseif ((isset($_GET['type'])) && ($_GET['type'] == 'all')) {
-			echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_userboard.png">Notizie';
+			echo '<div id="head_under"><i class="fa fa-users fright" aria-hidden="true"></i> Notizie';
 		} else {
-			echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_board.png">'.stripslashes($_SESSION['user']->nome).' '.stripslashes($_SESSION['user']->cognome);
+			echo '<div id="head_under"><i class="fa fa-user fright" aria-hidden="true"></i> '.stripslashes($_SESSION['user']->nome).' '.stripslashes($_SESSION['user']->cognome);
 		}
 		
 		if (isset($_GET['type']) && ($msg && $_GET['type'] != 'all')) {
@@ -152,10 +152,10 @@ class Board {
 		
 		
 		if (Utils::isgroup($id)) {
-			echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_group.png">'.stripslashes($user->group);
+			echo '<div id="head_under"><i class="fa fa-copyright fa-rotate-90 fright" aria-hidden="true"></i>'.stripslashes($user->group);
 			echo '<div id="foot_status">Amministratore: <a class="bold" href="?userboard='.$admin->id.'">'.stripslashes($admin->nome).' '.stripslashes($admin->cognome).'</a></div>';
 		} else {
-			echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_userboard.png">'.stripslashes($user->nome).' '.stripslashes($user->cognome);
+			echo '<div id="head_under"><i class="fa fa-user fright" aria-hidden="true"></i>'.stripslashes($user->nome).' '.stripslashes($user->cognome);
 		}
 		
 		if ($friend == 1) {
@@ -168,6 +168,12 @@ class Board {
 	}
 	
 	public function statusbox() {
+		if ((!isset($_GET['userboard'])) || ($_GET['userboard'] == $_SESSION['user']->id)){
+			$placeholder = 'A cosa stai pensando '.$_SESSION['user']->nome.'?';
+		} else {
+			$placeholder = 'Scrivi qualcosa...';
+		}
+		
 		$fields = array();
 		$fields[] = array(
 			'label' => null,
@@ -186,14 +192,14 @@ class Board {
 			'type' => 'textarea',
 			'value' => '',
 			'name' => 'statusbox',
-			'extra' => 'class="statusbox checkIfEmpty"',
+			'extra' => 'class="statusbox checkIfEmpty" placeholder="'.$placeholder.'"',
 			);
 		$fields[] = array(
 			'label' => null,
 			'type' => 'file_u_pop', 
 			'value' => '',
 			'name' => 'img',
-			'extra' => 'class="swing buttonGrey"',
+			'extra' => 'class="buttonGrey openFileDialog" id="img"',
 			);
 		$fields[] = array(
 			'label' => null,
@@ -225,14 +231,9 @@ class Board {
 		
 		if ($friend == 1) {
 			//prepare form
-			$output = '<div id="status_msg"><p class="bold">';
-			if ((!isset($_GET['userboard'])) || ($_GET['userboard'] == $_SESSION['user']->id)){
-				$output .= 'A cosa pensi?';
-			} else {
-				$output .= 'Scrivi qualcosa...';
-			}
-			$output .= '</p>';			
-			$output .= Form::doform('formadd', $_SERVER["REQUEST_URI"], $fields, array(NULL,'Pubblica'), 'post', 'enctype="multipart/form-data" ', 'id="publishButton"');
+			$output = '<div id="status_msg">';
+	
+			$output .= Form::doform('formadd', $_SERVER["REQUEST_URI"], $fields, array(NULL,'<i class="fa fa-flag" aria-hidden="true"></i> Pubblica'), 'post', 'enctype="multipart/form-data" ', 'id="publishButton" ');
 			$output .= '</div>';
 			
 			echo $output;
@@ -362,7 +363,7 @@ class Board {
 				
 				echo '<ul>';
 				if ($i->upl_img) {
-					echo '<li><a href="files/img/'.$i->upl_img.'" class="fancybox"><img class="borded pad_all" src="files/img/thumb_'.$i->upl_img.'"></a><br><span class="xsmall">Immagine</span><img class="fleft padright" src="'.BASE_URL.'files/img_private/thumb_foto.png"></li>';
+					echo '<li><a href="files/img/'.$i->upl_img.'" class="fancybox"><img class="borded pad_all" src="files/img/thumb_'.$i->upl_img.'"></a><br><i class="fa fa-camera fleft pad watermark" aria-hidden="true"></i></li>';
 				}
 				
 				if ($i->youtube) {
@@ -375,7 +376,7 @@ class Board {
 								
 				//echo Delete button ajaxLink($title, $params, $askConfirm = FALSE)
 				if (($i->from_user == $_SESSION['user']->id) || (!isset($_GET['detail']))) {
-					Utils::ajaxButton('Elimina', 'href="'.$_SERVER['PHP_SELF'].'" action="delete_post" id='.$i->id_status, TRUE, 'delete');
+					Utils::ajaxButton('Elimina', 'href="'.$_SERVER['PHP_SELF'].'" action="delete_post" id='.$i->id_status, TRUE, 'fa fa-trash-o');
 				}
 				
 				echo '</div>';
@@ -427,7 +428,7 @@ class Board {
 						<span class="xsmall">Scrivi un commento...<textarea class="textarea_comment" name="comment"></textarea></span>
 						<input type="hidden" name="to_user" value="'.$i->id.'">
 						<input type="hidden" name="id_comment" value="'.$i->id_status.'">
-						<button class="button_comments formsubmit" idform="submit_comment'.$i->id_status.'">Commenta</button>
+						<button class="button_comments formsubmit" idform="submit_comment'.$i->id_status.'"><i class="fa fa-comment-o" aria-hidden="true"></i> Commenta</button>
 						</div>
 						</form>
 						</td>
@@ -519,7 +520,7 @@ class Board {
 						
 				echo '<ul>';
 				if ($i->upl_img) {
-					echo '<li><a href="files/img/'.$i->upl_img.'" class="fancybox"><img class="borded pad_all" src="files/img/thumb_'.$i->upl_img.'"></a><br><span class="xsmall">Immagine</span><img class="fleft padright" src="'.BASE_URL.'files/img_private/thumb_foto.png"></li>';
+					echo '<li><a href="files/img/'.$i->upl_img.'" class="fancybox"><img class="borded pad_all" src="files/img/thumb_'.$i->upl_img.'"></a><br><i class="fa fa-camera fleft pad watermark" aria-hidden="true"></i></li>';
 				}
 				
 				if ($i->youtube) {
@@ -531,12 +532,12 @@ class Board {
 				echo '<div id="buttons_actions" class="tbox sbox bold box_up_down">';
 				
 				if ($i->id != $_SESSION['user']->id) {
-					Utils::ajaxButton('Condividi', 'href="?action=share&id='.$i->id_status.'" action="share_post"', TRUE);
+					Utils::ajaxButton('Condividi', 'href="?action=share&id='.$i->id_status.'" action="share_post"', TRUE, 'fa fa-share');
 				}
 				
 				//echo Delete button ajaxLink($title, $params, $askConfirm = FALSE)
 				if ($i->id == $_SESSION['user']->id) {
-					Utils::ajaxButton('Elimina', 'href="'.$_SERVER['PHP_SELF'].'" action="delete_post" id='.$i->id_status, TRUE);
+					Utils::ajaxButton('Elimina', 'href="'.$_SERVER['PHP_SELF'].'" action="delete_post" id='.$i->id_status, TRUE, 'fa fa-trash-o');
 				}
 				
 				echo '</div>';
@@ -586,7 +587,7 @@ class Board {
 						<span class="xsmall">Scrivi un commento...<textarea class="textarea_comment" name="comment"></textarea></span>
 						<input type="hidden" name="to_user" value="'.$i->id.'">
 						<input type="hidden" name="id_comment" value="'.$i->id_status.'">
-						<button class="button_comments formsubmit" idform="submit_comment'.$i->id_status.'">Commenta</button>
+						<button class="button_comments formsubmit" idform="submit_comment'.$i->id_status.'"><i class="fa fa-comment-o" aria-hidden="true"></i> Commenta</button>
 						</div>
 						</form>
 						</td>
@@ -693,7 +694,7 @@ class Board {
 								
 						echo '<ul>';
 						if ($i->upl_img) {
-							echo '<li><a href="files/img/'.$i->upl_img.'" class="fancybox"><img class="borded pad_all" src="files/img/thumb_'.$i->upl_img.'"></a><br><span class="xsmall">Immagine</span><img class="fleft padright" src="'.BASE_URL.'files/img_private/thumb_foto.png"></li>';
+							echo '<li><a href="files/img/'.$i->upl_img.'" class="fancybox"><img class="borded pad_all" src="files/img/thumb_'.$i->upl_img.'"></a><br><i class="fa fa-camera fleft pad watermark" aria-hidden="true"></i></li>';
 						}
 						
 						if ($i->youtube) {
@@ -705,12 +706,12 @@ class Board {
 						echo '<div id="buttons_actions" class="tbox sbox bold box_up_down">';
 		
 						if ($i->id != $_SESSION['user']->id) {
-							Utils::ajaxButton('Condividi', 'href="?action=share&id='.$i->id_status.'" action="share_post"', TRUE);
+							Utils::ajaxButton('Condividi', 'href="?action=share&id='.$i->id_status.'" action="share_post"', TRUE, 'fa fa-share');
 						}
 						
 						//echo Delete button ajaxLink($title, $params, $askConfirm = FALSE)
 						if (($_SESSION['user']->id == $i->id) || ($is_admin == 1)) {
-							Utils::ajaxButton('Elimina', 'href="'.$_SERVER['PHP_SELF'].'" action="delete_post" id='.$i->id_status, TRUE);
+							Utils::ajaxButton('Elimina', 'href="'.$_SERVER['PHP_SELF'].'" action="delete_post" id='.$i->id_status, TRUE, 'fa fa-trash-o');
 						}
 							
 						echo '</div>';
@@ -769,7 +770,7 @@ class Board {
 								<input type="hidden" name="to_user" value="'.$i->id.'">
 								<input type="hidden" name="in_board_of" value="'.$id.'">
 								<input type="hidden" name="id_comment" value="'.$i->id_status.'">
-								<button class="button_comments formsubmit" idform="submit_comment'.$i->id_status.'">Commenta</button>
+								<button class="button_comments formsubmit" idform="submit_comment'.$i->id_status.'"><i class="fa fa-comment-o" aria-hidden="true"></i> Commenta</button>
 								</div>
 								</form>
 								</td>
@@ -924,7 +925,7 @@ class Board {
 
 			if ((!$already_voted) || ($already_voted[0]->id_user != $_SESSION['user']->id)) {
 				// rating element
-				echo '<span class="fleft xsmall" style="margin-right:5px;color:#2348a0;"><b>Vota questo elemento</b></span>
+				echo '<span class="fleft" style="margin-right:5px;color:#2348a0;">Vota questo post</span>
 						  <select id="rating'.$id_status.'">
 						  <option value=""></option>
 						  <option value="1">'.$id_status.'</option>

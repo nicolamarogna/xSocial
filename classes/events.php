@@ -10,7 +10,7 @@ class Events {
 		$db = new Db;
 	
 		echo '<div id="right_content">';
-		echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_event.png">Eventi di oggi</div>';
+		echo '<div id="head_under"><i class="fa fa-calendar-check-o fright" aria-hidden="true"></i> Eventi di oggi</div>';
 		echo '<div id="results"><table>';
 		$evnt = $this->mini_events(date('Y-m-d'));
 		if ($evnt) {
@@ -40,7 +40,7 @@ class Events {
 	
 	
 		echo '<div id="right_content">';
-		echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_event.png">Eventi di domani</div>';
+		echo '<div id="head_under"><i class="fa fa-calendar-check-o fright" aria-hidden="true"></i> Eventi di domani</div>';
 		echo '<div id="results"><table>';
 		$evnt = $this->mini_events(date("Y-m-d",mktime(0,0,0,date("m"),date("d")+1,date("Y"))));
 		if ($evnt) {
@@ -69,7 +69,7 @@ class Events {
 			
 			
 		echo '<div id="right_content">';
-		echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_event.png">Prossimi eventi</div>';
+		echo '<div id="head_under"><i class="fa fa-calendar-check-o fright" aria-hidden="true"></i> Prossimi eventi</div>';
 		echo '<div id="results"><table>';
 		$evnt = $this->mini_events('prossimi');
 		if ($evnt) {
@@ -102,7 +102,7 @@ class Events {
 		$mod = new Db;
 
 		echo '<div id="right_content">';
-		echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_event.png">Elenco eventi</div>';
+		echo '<div id="head_under"><i class="fa fa-calendar-check-o fright" aria-hidden="true"></i> Elenco eventi</div>';
 		echo '<div id="menu">
 				<table><tr><td class="aright">
 				<a class="bold" href="?p=events&id_mod=0">Crea un nuovo evento.</a>
@@ -122,11 +122,11 @@ class Events {
 						<span class="xsmall">'.Utils::f_date($i->date).'</span>
 						</td>
 						<td class="aright">';
-				echo '<a class="bold" href="?p=friends&type=notify&id_event='.$i->id.'">Invita amici</a><br>';
-				echo '<a href="?p=events&id_del='.$i->id.'"><img class="fright" src="'.BASE_URL.'files/img_private/thumb_delete.png" title="Elimina"></a>
-					<a href="?p=events&id_mod='.$i->id.'&action=clone"><img class="fright padright" src="'.BASE_URL.'files/img_private/thumb_duplicate.png" title="Duplica evento"></a>
-					<a href="?p=events&id_mod='.$i->id.'"><img class="fright padright" src="'.BASE_URL.'files/img_private/thumb_edit.png" title="Modifica"></a>
+				echo '<a href="?p=events&id_del='.$i->id.'"><i class="fa fa-trash fa-border fa-lg fright" aria-hidden="true" title="Elimina"></i></a> 
+					<a href="?p=events&id_mod='.$i->id.'&action=clone"><i class="fa fa-clone fa-lg fa-border fright" aria-hidden="true" title="Duplica evento"></i></a> 
+					<a href="?p=events&id_mod='.$i->id.'"><i class="fa fa-pencil fa-border fa-lg fright" aria-hidden="true" title="Modifica"></i></a>
 						';
+				echo '<br><a class="box_up_down bold" href="?p=friends&type=notify&id_event='.$i->id.'">Invita amici</a><br>';
 				echo '</td></tr>';
 			}
 			echo '</table>';
@@ -332,7 +332,7 @@ class Events {
 			$output .= '<div id="head_under"><img class="fright" src="files/img_private/thumb_event.png">Modifica evento</div>';
 			$event = $mod->get_by_id('social_events', $id);
 		} else {
-			$output .= '<div id="head_under"><img class="fright" src="files/img_private/thumb_event.png">Crea un evento</div>';
+			$output .= '<div id="head_under"><i class="fa fa-calendar-check-o fright" aria-hidden="true"></i> Crea un evento</div>';
 		}
 		
 		$output .= '<div id="menu">
@@ -531,7 +531,7 @@ class Events {
 		
 		//navbar for insert
 		echo '<div id="right_content">';
-		echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_event.png">Stai per eliminare un evento</div>';
+		echo '<div id="head_under"><i class="fa fa-calendar-check-o fright" aria-hidden="true"></i> Stai per eliminare un evento</div>';
 		
 		echo '<p class="acenter">Eliminare l\'evento \'<span class="bold">'.stripslashes($event->title).'</span>\' ?</p>';
 		
@@ -618,8 +618,8 @@ class Events {
 	public function view_mini_events($array) {
 		echo '<div id="menu">
 				<table><tr>
-				<td><span class="bold"><img class="fleft padright" src="'.BASE_URL.'files/img_private/thumb_event.png">Eventi</span></td>
-				<td class="aright"><a class="bold" href="?p=events&type=all">Mostra</a></td>
+				<td><span class="bold"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Eventi</span></td>
+				<td class="aright"><a href="?p=events&type=all">Mostra</a></td>
 				</tr></table>
 				</div>';
 		

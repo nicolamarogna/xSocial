@@ -6,7 +6,7 @@
 		$db->delete('social_notify', $_POST['del_notify']);
 	}
 	echo '<div id="right_content">';
-	echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_esclamativo.png">Notifiche</div>';
+	echo '<div id="head_under"><i class="fa fa-exclamation-circle fright" aria-hidden="true"></i>Notifiche</div>';
 		
 	$notifies = $mod->view_notifies_detail();
 
@@ -23,37 +23,37 @@
 			switch ($i->what) {
 				case 'msg':
 				case 'msg_group':
-					echo '<img class="fleft padright" src="'.BASE_URL.'files/img_private/thumb_message.png">';
+					echo '<i class="fa fa-flag" aria-hidden="true"></i> ';
 				break;
 				case 'comment':
 				case 'comment_group':
-					echo '<img class="fleft padright" src="'.BASE_URL.'files/img_private/thumb_comment.png">';
+					echo '<i class="fa fa-comment" aria-hidden="true"></i> ';
 				break;
 				case 'comment_answer':
 				case 'comment_answer_group':
-					echo '<img class="fleft padright" src="'.BASE_URL.'files/img_private/thumb_comment_answer.png">';
+					echo '<i class="fa fa-comment" aria-hidden="true"></i> ';
 				break;
 				case 'friend_accepted':
-					echo '<img class="fleft padright" src="'.BASE_URL.'files/img_private/thumb_friends.png">';
+					echo '<i class="fa fa-user-plus" aria-hidden="true"></i> ';
 				break;
 				case 'album_created':
 				case 'album_updated':
 				case 'album_updated':
 				case 'photo_added':
 				case 'photo_updated':
-					echo '<img class="fleft padright" src="'.BASE_URL.'files/img_private/thumb_foto.png">';
+					echo '<i class="fa fa-camera" aria-hidden="true"></i> ';
 				break;
 				case 'event':
-					echo '<img class="fleft padright" src="'.BASE_URL.'files/img_private/thumb_event.png">';
+					echo '<i class="fa fa-calendar-check-o" aria-hidden="true"></i> ';
 				break;
 				case 'calendar_created':
 				case 'calendar_added':
 				case 'calendar_updated':
-					echo '<img class="fleft padright" src="'.BASE_URL.'files/img_private/thumb_calendar.png">';
+					echo '<i class="fa fa-calendar" aria-hidden="true"></i> ';
 				break;
 				case 'group_created':
 				case 'group_accepted':
-					echo '<img class="fleft padright" src="'.BASE_URL.'files/img_private/thumb_group.png">';
+					echo '<i class="fa fa-copyright fa-rotate-90" aria-hidden="true"></i> ';
 				break;
 			}
 			
@@ -167,7 +167,7 @@
 					</td>
 					<td class="aright"><span>';
 			if ($i->what != 'event') {
-				echo '<a href="#" onclick="if (confirm(\'Vuoi eliminare questo elemento?\')) {document.forms.form_'.$i->id_notify.'.submit(); return true;}"><img class="fright" src="'.BASE_URL.'files/img_private/thumb_delete.png" title="Elimina notifica" alt="Elimina album"></a>';
+				echo '<a href="#" onclick="if (confirm(\'Vuoi eliminare questo elemento?\')) {document.forms.form_'.$i->id_notify.'.submit(); return true;}"><i class="fa fa-trash" aria-hidden="true"></i></a>';
 			}
 			echo '</span>
 					</td>

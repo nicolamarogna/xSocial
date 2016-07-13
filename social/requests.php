@@ -1,7 +1,7 @@
 <?php
 	$mod = new Requests;
 	
-	echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_plus.png">Richieste di amicizia</div>';
+	echo '<div id="head_under"><i class="fa fa-user-plus fright" aria-hidden="true"></i>Richieste di amicizia</div>';
 	//accept friend
 	if ($_POST['accept_friend']) {
 		$post = array(
