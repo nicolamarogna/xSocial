@@ -52,7 +52,6 @@ class Form {
 				}
 				if (isset($i['del_img']) && !empty($i['del_img'])) {
 					$str .= '
-					
 					<p class="xsmall">
 					<input type="checkbox" name="del_img" id="del_img" value="1" />
 					Elimina immagine
@@ -96,6 +95,38 @@ class Form {
 				$str .= '
 				<textarea cols="" rows="" name="'.$i['name'].'" id="'.$i['name'].'" '.$textra.'>'.$i['value'].'</textarea>';
 				break;
+			case 'textarea_liveurl':
+				$textra = (isset($i['extra'])) ? $i['extra'] : '';
+				$str .= '
+				<textarea cols="" rows="" name="'.$i['name'].'" id="'.$i['name'].'" '.$textra.'>'.$i['value'].'</textarea>';
+				$str .= '<div class="liveurl-loader"></div>
+					<div class="liveurl">
+						<div class="close" title="Chiudi"></div>
+						<div class="inner">
+							<div class="image"> </div>
+							<div class="details">
+								<div class="info">
+									<div class="title"> </div>
+									<div class="description"> </div> 
+									<div class="url"> </div>
+								</div>
+			
+								<div class="thumbnail">
+									<div class="pictures">
+										<div class="controls">
+											<div class="prev button inactive"></div>
+											<div class="next button inactive"></div>
+											<div class="count">
+												<span class="current">0</span><span> di </span><span class="max">0</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="video"></div>
+							</div>
+						</div>
+					</div>';
+				break;
 			case 'select':
 				if (isset($i['multiple']))
 					$str .= '
@@ -138,7 +169,7 @@ class Form {
 		if (!is_null($buttons[1])) $submit = (empty($submit_action)) ? '<button name="'.strrev($name).'" type="submit">'.$buttons[1].'</button>' : '<button name="'.strrev($name).'" type="submit" '.$submit_action.'>'.$buttons[1].'</button>';
 					
 		$str .= '<div class="clear">'.$u_pops.'</div>';
-		$str .= '<div class="clear"></div><div class="fleft" style="width:auto;">'.$reset.$submit.'</div><div class="fright">'.$str_u_pop.'</div>';
+		$str .= '<div class="clear"></div><div class="fright" style="width:auto;">'.$reset.$submit.'</div><div class="fleft">'.$str_u_pop.'</div>';
 		$str. '</fieldset>
 			</form>';
 		return $str;

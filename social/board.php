@@ -189,10 +189,16 @@ class Board {
 			);
 		$fields[] = array(
 			'label' => NULL,
-			'type' => 'textarea',
+			'type' => 'textarea_liveurl',
 			'value' => '',
 			'name' => 'statusbox',
 			'extra' => 'class="statusbox checkIfEmpty" placeholder="'.$placeholder.'"',
+			);
+		$fields[] = array(
+			'label' => NULL,
+			'type' => 'hidden',
+			'value' => '',
+			'name' => 'statusbox_extra',
 			);
 		$fields[] = array(
 			'label' => null,
@@ -201,6 +207,7 @@ class Board {
 			'name' => 'img',
 			'extra' => 'class="buttonGrey openFileDialog" id="img"',
 			);
+		/*
 		$fields[] = array(
 			'label' => null,
 			'type' => 'youtube_u_pop', 
@@ -208,9 +215,9 @@ class Board {
 			'name' => 'youtube',
 			'extra' => 'class="swing buttonGrey"',
 			);
-
+		*/
 		//on submit
-		if ((isset($_POST['statusbox']) && !empty($_POST['statusbox'])) || (isset($_FILES['img']['name'])) || (isset($_POST['youtube']))) {
+		if ((isset($_POST['statusbox']) && !empty($_POST['statusbox'])) || (isset($_FILES['img']['name']))) {
 		$e = Form::validation($fields);
 			if ($e) {
 				$this->store_statusbox($_POST);
@@ -232,7 +239,6 @@ class Board {
 		if ($friend == 1) {
 			//prepare form
 			$output = '<div id="status_msg">';
-	
 			$output .= Form::doform('formadd', $_SERVER["REQUEST_URI"], $fields, array(NULL,'<i class="fa fa-flag" aria-hidden="true"></i> Pubblica'), 'post', 'enctype="multipart/form-data" ', 'id="publishButton" ');
 			$output .= '</div>';
 			
@@ -255,7 +261,8 @@ class Board {
 		$post[] = array(
 					'from_user' => $_SESSION['user']->id,
 					'to_user' => $to_user,
-					'status' => $_POST['statusbox'],
+					'status' => Utils::textToLink($_POST['statusbox']),
+					'status_extra' => $_POST['statusbox_extra'],
 					'img' => $filename,
 					'youtube' => $_POST['youtube'],
 					);
@@ -297,6 +304,7 @@ class Board {
 		
 		$msgs = $mod->query('SELECT
 							social_status.status,
+							social_status.status_extra,
 							social_status.id as id_status,
 							social_status.updated as upd,
 							social_status.img as upl_img,
@@ -359,7 +367,7 @@ class Board {
 							</span>';	
 				}
 				
-				echo '<br>'.stripslashes(nl2br($i->status));
+				echo '<br>'.stripslashes(nl2br($i->status)).'<br>'.stripslashes(nl2br($i->status_extra));
 				
 				echo '<ul>';
 				if ($i->upl_img) {
@@ -449,6 +457,7 @@ class Board {
 		$mod = new Db();
 		$msgs = $mod->query('SELECT
 							social_status.status,
+							social_status.status_extra,
 							social_status.id as id_status,
 							social_status.updated as upd,
 							social_status.img as upl_img,
@@ -516,7 +525,7 @@ class Board {
 								</span>';	
 					}
 						
-						echo '<br>'.stripslashes(nl2br($i->status));
+						echo '<br>'.stripslashes(nl2br($i->status)).'<br>'.stripslashes(nl2br($i->status_extra));
 						
 				echo '<ul>';
 				if ($i->upl_img) {
@@ -641,6 +650,7 @@ class Board {
 				}
 				$msgs = $mod->query('SELECT
 									social_status.status,
+									social_status.status_extra,
 									social_status.id as id_status,
 									social_status.updated as upd,
 									social_status.img as upl_img,
@@ -690,7 +700,7 @@ class Board {
 									</span>';	
 						}
 						
-						echo '<br>'.stripslashes(nl2br($i->status));
+						echo '<br>'.stripslashes(nl2br($i->status)).'<br>'.stripslashes(nl2br($i->status_extra));
 								
 						echo '<ul>';
 						if ($i->upl_img) {

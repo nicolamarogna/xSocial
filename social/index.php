@@ -26,7 +26,7 @@
 	define('BASE_URL', 'http://'.$_SERVER['HTTP_HOST'].INIT_DIR);
 
 	//items for pagination
-	define('PP', 5);
+	define('PP', 20);
 	
 	//enable ratings YES/NO
 	define('ENABLE_RATING', 'YES');
@@ -65,6 +65,7 @@
 <link rel="stylesheet" href="../js/rating/themes/fontawesome-stars-o.css">
 <link rel="stylesheet" href="../js/jcrop/css/jquery.Jcrop.css">
 <link rel="stylesheet" href="../js/jquery-confirm.css">
+<link rel="stylesheet" href="../js/jquery.liveurl.css">
 
 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
@@ -77,6 +78,7 @@
     <script type="text/javascript" src="../js/jcrop/jquery.Jcrop.min.js" >//</script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.sticky/1.0.3/jquery.sticky.min.js"></script>
     <script type="text/javascript" src="../js/jquery-confirm.min.js" >//</script>
+    <script type="text/javascript" src="../js/jquery.liveurl.js" >//</script>
 
 </head>
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
