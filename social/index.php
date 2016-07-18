@@ -1,5 +1,8 @@
 <?php
-	ob_start();
+/*
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+*/
 	!ini_get('session.auto_start') ? session_start() : '';
 	$SID = session_id();
 	$root = str_replace('\\','/', getcwd());
@@ -40,12 +43,13 @@
 	define('MAX_W', 2000);
 	define('MAX_H', 2000);
 	define('NL', "\n");
-
+	
 	//autoload classes
 	function __autoload($class_name) {
-    	$a = require_once('../classes/'.$class_name.'.php');
+   	
+	$a = require_once('../classes/'.strtolower($class_name).'.php');
 		if (!$a) {
-			require_once($class_name.'.php');
+			require_once(strtolower($class_name).'.php');
 		}
 	}
 ?>
@@ -66,6 +70,7 @@
 <link rel="stylesheet" href="../js/jcrop/css/jquery.Jcrop.css">
 <link rel="stylesheet" href="../js/jquery-confirm.css">
 <link rel="stylesheet" href="../js/jquery.liveurl.css">
+<link rel="stylesheet" href="../js/pace.css">
 
 	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
@@ -79,9 +84,11 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.sticky/1.0.3/jquery.sticky.min.js"></script>
     <script type="text/javascript" src="../js/jquery-confirm.min.js" >//</script>
     <script type="text/javascript" src="../js/jquery.liveurl.js" >//</script>
+    <script type="text/javascript" src="../js/pace.min.js" >//</script>
 
 </head>
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
 <div id="content">
 <div id="head">
   <?php

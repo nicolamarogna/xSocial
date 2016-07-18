@@ -2,10 +2,10 @@
 class Db {
 		
 		public function __construct() {
-			if (!defined('DATABASE')) define('DATABASE', 'social'); //define('DATABASE', 'Sql326497_1');
-			if (!defined('HOST'))define('HOST', 'localhost'); //define('HOST', '62.149.150.110');
-			if (!defined('DB_USER'))define('DB_USER', 'root'); //define('DB_USER', 'Sql326497');
-			if (!defined('DB_PASS'))define('DB_PASS', ''); //define('DB_PASS', '5aab3ff5');
+			if (!defined('DATABASE')) define('DATABASE', 'hapasion_social'); //define('DATABASE', 'social');
+			if (!defined('HOST'))define('HOST', '185.81.0.69'); //define('HOST', '62.149.150.110');
+			if (!defined('DB_USER'))define('DB_USER', 'hapasion'); //define('DB_USER', 'Sql326497');
+			if (!defined('DB_PASS'))define('DB_PASS', 'atetVadifdict3'); //define('DB_PASS', '5aab3ff5');
 			$conn = mysql_connect(HOST, DB_USER, DB_PASS) or die("Errore nella connessione a MySql: " . mysql_error());
 			mysql_select_db(DATABASE,$conn) or die("Errore nella selezione del db: " . mysql_error());
 			mysql_query("SET NAMES 'utf8'") or die("Errore nella query: " . mysql_error());

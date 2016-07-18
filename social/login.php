@@ -46,7 +46,6 @@ class Login {
 		
 		//prepare form
 		echo Form::doform('formadd', $_SERVER["REQUEST_URI"], $fields, array('Cancella', 'Invia'), 'post', 'enctype="multipart/form-data"');
-
 	}
 	
 	// login

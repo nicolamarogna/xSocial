@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	$(window).load(function() {
-
+		
 		// youtube and live url //
 		var curImages = new Array();
 		
@@ -227,6 +227,8 @@ $(document).ready(function(){
 			
 			$('.confirmbox').confirm(this.$target);
 			
+			
+			
 			//status post button check
 			$('#publishButton').prop('disabled',true);
 			//textboxDisabled('statusbox','publishButton');
@@ -249,6 +251,15 @@ $(document).ready(function(){
 					$('#hideField').css('display','none');
 					$('#icon_del_photo').remove();
 					$('#load_photo').append('<img id="displayImg" style="max-width:470px;"><i id="icon_del_photo" class="fa fa-trash-o fa-2x" aria-hidden="true" style="color:#3b5f94;cursor:pointer;" title="Elimina"></i>');
+					
+					var fileExtension = ['jpeg', 'jpg', 'mp3', 'mp4'];
+					if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+						$.alert({
+							content: 'Formato non valido',
+						});
+						return false;
+					}
+					
 					readURL(this, function(e) {
 						// use result in callback...
 						$('#displayImg').attr('src',e.target.result);
@@ -269,11 +280,12 @@ $(document).ready(function(){
 			//read url
 			function readURL(input, onLoadCallback) {
 				if (input.files && input.files[0]) {
+					Pace.restart();
 					var reader = new FileReader();
 					reader.onload = onLoadCallback;
 					reader.readAsDataURL(input.files[0]);
-				}
 			}
+				}
 
 
 			//init jcrop
@@ -314,7 +326,7 @@ $(document).ready(function(){
 					var oFile = $('#img')[0].files[0];
 					
 					// check for image type (jpg and png are allowed)
-					 var fileExtension = ['jpeg', 'jpg'];
+					var fileExtension = ['jpeg', 'jpg'];
 					if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
 						$.alert({
 							content: 'Formato non valido',
@@ -333,6 +345,7 @@ $(document).ready(function(){
 					var oImage = document.getElementById('displayImg');
 					
 					var oReader = new FileReader();
+					Pace.restart();
 					oReader.onload = function (e) {
 						oImage.src = e.target.result;
 						oImage.onload = function () {
