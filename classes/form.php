@@ -170,7 +170,7 @@ class Form {
 					
 		$str .= '<div class="clear">'.$u_pops.'</div>';
 		$str .= '<div class="clear"></div><div class="fright" style="width:auto;">'.$reset.$submit.'</div><div class="fleft">'.$str_u_pop.'</div>';
-		$str. '</fieldset>
+		$str .= '</fieldset>
 			</form>';
 		return $str;
 	}

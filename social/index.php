@@ -3,6 +3,8 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 */
+	
+	ob_start();
 	!ini_get('session.auto_start') ? session_start() : '';
 	$SID = session_id();
 	$root = str_replace('\\','/', getcwd());
@@ -37,7 +39,7 @@ ini_set('display_errors', 1);
 	define('EXT', '.php');		// file extension
 
 	//Dimensione massima immagini in KB
-	define('MAX_IMG', 2048); //img max 2MB
+	define('MAX_IMG', 10240); //img max 2MB
 	define('MAX_DOC', 5120); //doc max 5MB
 	//Dimensione massima immagini in pixel
 	define('MAX_W', 2000);
@@ -85,10 +87,9 @@ ini_set('display_errors', 1);
     <script type="text/javascript" src="../js/jquery-confirm.min.js" >//</script>
     <script type="text/javascript" src="../js/jquery.liveurl.js" >//</script>
     <script type="text/javascript" src="../js/pace.min.js" >//</script>
-
+    
 </head>
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
-
 <div id="content">
 <div id="head">
   <?php

@@ -239,7 +239,7 @@ class Board {
 		if ($friend == 1) {
 			//prepare form
 			$output = '<div id="status_msg">';
-			$output .= Form::doform('formadd', $_SERVER["REQUEST_URI"], $fields, array(NULL,'<i class="fa fa-flag" aria-hidden="true"></i> Pubblica'), 'post', 'enctype="multipart/form-data" ', 'id="publishButton" ');
+			$output .= Form::doform('ajaxform', $_SERVER["REQUEST_URI"], $fields, array(NULL,'<i class="fa fa-flag" aria-hidden="true"></i> Pubblica'), 'post', 'enctype="multipart/form-data" ', 'id="publishButton" ');
 			$output .= '</div>';
 			
 			echo $output;
@@ -371,7 +371,13 @@ class Board {
 				
 				echo '<ul>';
 				if ($i->upl_img) {
-					echo '<li><a href="files/img/'.$i->upl_img.'" class="fancybox"><img class="borded pad_all" src="files/img/thumb_'.$i->upl_img.'"></a><br><i class="fa fa-camera fleft pad watermark" aria-hidden="true"></i></li>';
+					if ((Utils::get_type($i->upl_img) == 0)) {
+						//is image uploaded
+						echo '<li><a href="files/img/'.$i->upl_img.'" class="fancybox"><img class="borded pad_all" src="files/img/thumb_'.$i->upl_img.'"></a><br><i class="fa fa-camera fleft pad watermark" aria-hidden="true"></i></li>';
+					} else {
+						//is video uploaded
+						echo '<li><a href="files/img/'.$i->upl_img.'" class="youtube iframe"><i class="fa fa-youtube-play fa-4x fleft pad" aria-hidden="true"></i></a></li>';						
+					}
 				}
 				
 				if ($i->youtube) {
@@ -529,7 +535,13 @@ class Board {
 						
 				echo '<ul>';
 				if ($i->upl_img) {
-					echo '<li><a href="files/img/'.$i->upl_img.'" class="fancybox"><img class="borded pad_all" src="files/img/thumb_'.$i->upl_img.'"></a><br><i class="fa fa-camera fleft pad watermark" aria-hidden="true"></i></li>';
+					if ((Utils::get_type($i->upl_img) == 0)) {
+						//is image uploaded
+						echo '<li><a href="files/img/'.$i->upl_img.'" class="fancybox"><img class="borded pad_all" src="files/img/thumb_'.$i->upl_img.'"></a><br><i class="fa fa-camera fleft pad watermark" aria-hidden="true"></i></li>';
+					} else {
+						//is video uploaded
+						echo '<li><a href="files/img/'.$i->upl_img.'" class="youtube iframe"><i class="fa fa-youtube-play fa-4x fleft pad" aria-hidden="true"></i></a></li>';						
+					}
 				}
 				
 				if ($i->youtube) {
@@ -704,7 +716,13 @@ class Board {
 								
 						echo '<ul>';
 						if ($i->upl_img) {
-							echo '<li><a href="files/img/'.$i->upl_img.'" class="fancybox"><img class="borded pad_all" src="files/img/thumb_'.$i->upl_img.'"></a><br><i class="fa fa-camera fleft pad watermark" aria-hidden="true"></i></li>';
+							if ((Utils::get_type($i->upl_img) == 0)) {
+								//is image uploaded
+								echo '<li><a href="files/img/'.$i->upl_img.'" class="fancybox"><img class="borded pad_all" src="files/img/thumb_'.$i->upl_img.'"></a><br><i class="fa fa-camera fleft pad watermark" aria-hidden="true"></i></li>';
+							} else {
+								//is video uploaded
+								echo '<li><a href="files/img/'.$i->upl_img.'" class="youtube iframe"><i class="fa fa-youtube-play fa-4x fleft pad" aria-hidden="true"></i></a></li>';						
+							}
 						}
 						
 						if ($i->youtube) {

@@ -205,6 +205,7 @@ class Utils {
 			case '.rm':
 			case '.wmv':
 			case '.mov':
+			case '.mp4':
 				return 2;
 				break;
 			case '.htm':
@@ -326,7 +327,8 @@ class Utils {
 		if (is_uploaded_file($_FILES[$file]['tmp_name'])) {
 			//print_r($_FILES[$file]);die;
 			$mime = array();
-			$mime['img'] = array('image/jpeg', 'image/pjpeg', 'image/gif', 'image/png');
+			$mime['img'] = array('image/jpeg', 'image/pjpeg', 'image/gif', 'image/png', 'video/mp4');
+			//$mime['video'] = array('video/mp4');
 			//$mime['media'] = array('video/quicktime', 'application/vnd.rn-realmedia', 'audio/x-pn-realaudio', 'application/x-shockwave-flash', 'video/x-ms-wmv');
 			//$mime['docs'] = array('text/html', 'application/pdf', 'application/zip', 'text/plain', 'application/msword', 'application/vnd.ms-excel', 'audio/mpeg');
 
@@ -335,7 +337,6 @@ class Utils {
 			foreach($mime as $k => $v) {
 				if (in_array($_FILES[$file]['type'], $v)) $type = $k;
 			}
-
 			if ($type == 'img' && $path == ROOT.'files/') {
 				// too big
 				if ($_FILES[$file]['size'] > (MAX_IMG*1024)) { 
@@ -353,7 +354,7 @@ class Utils {
 				header('Location: '.BASE_URL.'?p=msg&msg=file_not_supported');
 				die;
 			}
-			
+
 			// file name
 			$tmpname = Utils::unspace(strtolower($prefix.$_FILES[$file]['name']));
 			// exists?
@@ -361,7 +362,6 @@ class Utils {
 			
 			// copy
 			$check = Utils::copy_file($path.$type.'/', $name, $_FILES[$file]['tmp_name']);
-			
 			//print_r($path.$type);die;
 			
 			if ($check)	
@@ -468,8 +468,8 @@ class Utils {
 					$nw = $nh*$ratio;
 				}
 			}
-			
 			$tn = imagecreatetruecolor($nw, $nh);
+
 			switch ($image_type)
 			{
 				case 1: $image = imagecreatefromgif($src_img); break;
@@ -479,16 +479,16 @@ class Utils {
 			}
 			
 			if ($image) {
-				
 				imagecopyresampled($tn, $image, 0, 0, 0, 0, $nw, $nh, $w, $h);
 				if (function_exists('imagefilter')) imagefilter($tn, IMG_FILTER_CONTRAST, -10);
 				switch ($image_type)
 				{
 					case 1: imagegif($tn, $new_img, 100); break;
 					case 2: imagejpeg($tn, $new_img, 100);  break;
-					case 3: imagepng($tn, $new_img, 100); break;
+					case 3: imagepng($tn, $new_img); break;
 					//default:  trigger_error('Failed resize image!', E_USER_WARNING);  break;
 				}
+				
 				return file_exists($new_img);
 			}
 			else return 0;

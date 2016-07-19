@@ -1,5 +1,12 @@
+window.document.addEventListener("readystatechange", function(){
+	//alert(document.readyState);
+	if(document.readyState == "loading"){
+		
+	}
+}, false);
+
 $(document).ready(function(){
-	$(window).load(function() {
+	$(window).load(function() {		
 		
 		// youtube and live url //
 		var curImages = new Array();
@@ -231,6 +238,11 @@ $(document).ready(function(){
 			
 			//status post button check
 			$('#publishButton').prop('disabled',true);
+			/*
+			$('#publishButton').on("click", function( event ) {
+				event.preventDefault()();
+			});
+			*/
 			//textboxDisabled('statusbox','publishButton');
 			$('#statusbox.checkIfEmpty').on("change keyup input", function( event ) {
 				$('#publishButton').prop('disabled', this.value == "" ? checkIfEmpty() : false);
@@ -252,7 +264,7 @@ $(document).ready(function(){
 					$('#icon_del_photo').remove();
 					$('#load_photo').append('<img id="displayImg" style="max-width:470px;"><i id="icon_del_photo" class="fa fa-trash-o fa-2x" aria-hidden="true" style="color:#3b5f94;cursor:pointer;" title="Elimina"></i>');
 					
-					var fileExtension = ['jpeg', 'jpg', 'mp3', 'mp4'];
+					var fileExtension = ['jpeg', 'jpg', 'png', 'mp3', 'mp4'];
 					if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
 						$.alert({
 							content: 'Formato non valido',
@@ -552,8 +564,9 @@ $(document).ready(function(){
 					// Get some values from elements on the page
 					var $params = $( this );
 					var idform = $params.attr( "idform" );
-					var id = idform.replace('submit_comment', '');
-					var url = $('#'+idform).attr( "action" );
+						var id = idform.replace('submit_comment', '');
+						var url = $('#'+idform).attr( "action" );
+
 						$.ajax({
 						   type: "POST",
 						   url: url,
@@ -567,6 +580,33 @@ $(document).ready(function(){
 				});
 				//end ajax submit
 
+
+			//form submit
+			$( '#ajaxform' ).on("submit", function( event ) {
+				// Stop form from submitting normally
+				event.preventDefault();
+				// Get some values from elements on the page
+				var $params = $( this );
+				var url = $params.attr( "action" );
+				var formData = new FormData($(this)[0]);
+				$.ajax({
+				   type: "POST",
+				   url: url,
+				   cache: false,
+				   contentType: false,
+				   processData: false,
+				   data: formData,
+				   success: function(data)
+				   {
+					   aftersubmit(data, false, false, true);
+				   }
+				 });
+			});
+			$(document).ajaxStart(function(){
+				Pace.restart;
+			});
+			//end ajax submit
+			
 
 		function aftersubmit(data, id, action, reloadPage) {
 			if (reloadPage) {
@@ -596,7 +636,6 @@ $(document).ready(function(){
 		}
 
 	});	
-	
 	
 	
 	
