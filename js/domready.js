@@ -202,7 +202,7 @@ $(document).ready(function(){
 			//init fancybox
 			fancybox();
 						
-			// init fancybox
+			// init fancybox photo, media and videos
 			function fancybox() {
 				$(".fancybox").fancybox({
 					'closeBtn' : false,
@@ -224,8 +224,95 @@ $(document).ready(function(){
 					}
 				});
 			}
-
-			$('.alertbox').on("click", function( event ) {
+			// Detecting IE more effectively : http://msdn.microsoft.com/en-us/library/ms537509.aspx
+			function getInternetExplorerVersion() {
+				// Returns the version of Internet Explorer or -1 (other browser)
+				var rv = -1; // Return value assumes failure.
+				if (navigator.appName == 'Microsoft Internet Explorer') {
+					var ua = navigator.userAgent;
+					var re = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+					if (re.exec(ua) != null)
+						rv = parseFloat(RegExp.$1);
+				};
+				return rv;
+			};
+			// set some general variables
+			var $video_player, _videoHref, _videoPoster, _videoWidth, _videoHeight, _dataCaption, _player, _isPlaying = false, _verIE = getInternetExplorerVersion();
+			$(".fancy_video")
+				.prepend("<span class=\"playbutton\"/>") //cosmetic : append a play button image
+				.fancybox({
+					// set type of content (remember, we are building the HTML5 <video> tag as content)
+					type       : "html",
+					// other API options
+					scrolling  : "no",
+					padding    : 0,
+					nextEffect : "fade",
+					prevEffect : "fade",
+					nextSpeed  : 0,
+					prevSpeed  : 0,
+					fitToView  : false,
+					autoSize   : false,
+					//modal      : true, // hide default close and navigation buttons
+					helpers    : {
+						overlay: {
+						  locked: false
+						},
+						title  : {
+							type : "over"
+						},
+						buttons: {} // use buttons helpers so navigation button won't overlap video controls
+					},
+					beforeLoad : function () {
+						// if video is playing and we navigate to next/prev element of a fancyBox gallery
+						// safely remove Flash objects in IE
+						if (_isPlaying && (_verIE > -1)) {
+							// video is playing AND we are using IE
+							_verIE < 9.0 ? _player.remove() : $video_player.remove(); // remove player instance for IE
+							_isPlaying = false; // reinitialize flag
+						};
+						// build the HTML5 video structure for fancyBox content with specific parameters
+						_videoHref   = this.href;
+						// validates if data values were passed otherwise set defaults
+						_videoPoster = typeof this.element.data("poster")  !== "undefined" ? this.element.data("poster")  :  "";
+						_videoWidth  = typeof this.element.data("width")   !== "undefined" ? this.element.data("width")   : 360;
+						_videoHeight = typeof this.element.data("height")  !== "undefined" ? this.element.data("height")  : 360;
+						_dataCaption = typeof this.element.data("caption") !== "undefined" ? this.element.data("caption") :  "";
+						// construct fancyBox title (optional)
+						this.title = _dataCaption ? _dataCaption : (this.title ? this.title : "");
+						// set fancyBox content and pass parameters
+						this.content = "<video id='video_player' src='" + _videoHref + "'  poster='" + _videoPoster + "' width='" + _videoWidth + "' height='" + _videoHeight + "'  controls='controls' preload='none' ></video>";
+						// set fancyBox dimensions
+						this.width = _videoWidth;
+						this.height = _videoHeight;
+					},
+					afterShow : function () {
+						// initialize MEJS player
+						var $video_player = new MediaElementPlayer('#video_player', {
+								defaultVideoWidth : this.width,
+								defaultVideoHeight : this.height,
+								success : function (mediaElement, domObject) {
+									_player = mediaElement; // override the "mediaElement" instance to be used outside the success setting
+									_player.load(); // fixes webkit firing any method before player is ready
+									_player.play(); // autoplay video (optional)
+									_player.addEventListener('playing', function () {
+										_isPlaying = true;
+									}, false);
+								} // success
+							});
+					},
+					beforeClose : function () {
+						// if video is playing and we close fancyBox
+						// safely remove Flash objects in IE
+						if (_isPlaying && (_verIE > -1)) {
+							// video is playing AND we are using IE
+							_verIE < 9.0 ? _player.remove() : $video_player.remove(); // remove player instance for IE
+							_isPlaying = false; // reinitialize flag
+						};
+					}
+				});
+			// end fancybox photo, media and videos
+		
+		$('.alertbox').on("click", function( event ) {
 				$.alert({
 					title: $(this).attr('title'),
 					content: $(this).attr('content'),
@@ -262,24 +349,33 @@ $(document).ready(function(){
 				$('#img').on('change', function(){
 					$('#hideField').css('display','none');
 					$('#icon_del_photo').remove();
-					$('#load_photo').append('<img id="displayImg" style="max-width:470px;"><i id="icon_del_photo" class="fa fa-trash-o fa-2x" aria-hidden="true" style="color:#3b5f94;cursor:pointer;" title="Elimina"></i>');
+					$('#icon_youtube').remove();
+					$('#displayImg').remove();
 					
 					var fileExtension = ['jpeg', 'jpg', 'png', 'mp3', 'mp4'];
-					if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+					var filetype = $.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension);
+					if (filetype == -1) {
 						$.alert({
 							content: 'Formato non valido',
 						});
 						return false;
 					}
 					
+					//$('#load_photo').append('<video id="my-video" class="borded pad_all" style="max-width:132px;"><source id="displayImg" src="" type="video/mp4"></video>');
+
 					readURL(this, function(e) {
 						// use result in callback...
-						$('#displayImg').attr('src',e.target.result);
+						if (filetype == 4) { //case mp4
+							$('#load_photo').append('<i id="icon_youtube" class="fa fa-youtube-play fa-4x" aria-hidden="true" style="color:#3b5f94;"></i><i id="icon_del_photo" class="fa fa-trash-o fa-2x" aria-hidden="true" style="color:#3b5f94;cursor:pointer;" title="Elimina"></i>');
+						} else {
+							$('#load_photo').append('<img id="displayImg" style="max-width:470px;"><i id="icon_del_photo" class="fa fa-trash-o fa-2x" aria-hidden="true" style="color:#3b5f94;cursor:pointer;" title="Elimina"></i>');
+							$('#displayImg').attr('src',e.target.result);
+						}
 						$('#load_photo').slideDown();
 						$('#icon_del_photo').on('click', function() {
 							$("#load_photo").slideUp().promise().done(function(){
 								$('#displayImg').remove();
-								$('#img').val('');							
+								$('#img').val('');
 								checkIfEmpty();
 							});
 						});

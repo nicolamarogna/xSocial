@@ -376,7 +376,7 @@ class Board {
 						echo '<li><a href="files/img/'.$i->upl_img.'" class="fancybox"><img class="borded pad_all" src="files/img/thumb_'.$i->upl_img.'"></a><br><i class="fa fa-camera fleft pad watermark" aria-hidden="true"></i></li>';
 					} else {
 						//is video uploaded
-						echo '<li><a href="files/img/'.$i->upl_img.'" class="youtube iframe"><i class="fa fa-youtube-play fa-4x fleft pad" aria-hidden="true"></i></a></li>';						
+						echo '<li><a href="files/img/'.$i->upl_img.'" class="fancy_video"><video id="my-video" class="borded pad_all" style="max-width:132px;"><source src="files/img/'.$i->upl_img.'" type="video/mp4"></video></a><br><i class="fa fa-youtube-play fleft pad watermark" aria-hidden="true"></i></li>';	
 					}
 				}
 				
@@ -540,7 +540,7 @@ class Board {
 						echo '<li><a href="files/img/'.$i->upl_img.'" class="fancybox"><img class="borded pad_all" src="files/img/thumb_'.$i->upl_img.'"></a><br><i class="fa fa-camera fleft pad watermark" aria-hidden="true"></i></li>';
 					} else {
 						//is video uploaded
-						echo '<li><a href="files/img/'.$i->upl_img.'" class="youtube iframe"><i class="fa fa-youtube-play fa-4x fleft pad" aria-hidden="true"></i></a></li>';						
+						echo '<li><a href="files/img/'.$i->upl_img.'" class="fancy_video"><video id="my-video" class="borded pad_all" style="max-width:132px;"><source src="files/img/'.$i->upl_img.'" type="video/mp4"></video></a><br><i class="fa fa-youtube-play fleft pad watermark" aria-hidden="true"></i></li>';	
 					}
 				}
 				
@@ -721,7 +721,7 @@ class Board {
 								echo '<li><a href="files/img/'.$i->upl_img.'" class="fancybox"><img class="borded pad_all" src="files/img/thumb_'.$i->upl_img.'"></a><br><i class="fa fa-camera fleft pad watermark" aria-hidden="true"></i></li>';
 							} else {
 								//is video uploaded
-								echo '<li><a href="files/img/'.$i->upl_img.'" class="youtube iframe"><i class="fa fa-youtube-play fa-4x fleft pad" aria-hidden="true"></i></a></li>';						
+								echo '<li><a href="files/img/'.$i->upl_img.'" class="fancy_video"><video id="my-video" class="borded pad_all" style="max-width:132px;"><source src="files/img/'.$i->upl_img.'" type="video/mp4"></video></a><br><i class="fa fa-youtube-play fleft pad watermark" aria-hidden="true"></i></li>';	
 							}
 						}
 						

@@ -39,7 +39,7 @@ ini_set('display_errors', 1);
 	define('EXT', '.php');		// file extension
 
 	//Dimensione massima immagini in KB
-	define('MAX_IMG', 10240); //img max 2MB
+	define('MAX_IMG', 51200); //img max 2MB
 	define('MAX_DOC', 5120); //doc max 5MB
 	//Dimensione massima immagini in pixel
 	define('MAX_W', 2000);
@@ -69,6 +69,7 @@ ini_set('display_errors', 1);
 <link rel="stylesheet" href="../js/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
 <link rel="stylesheet" href="../js/rating/themes/font-awesome.min.css">
 <link rel="stylesheet" href="../js/rating/themes/fontawesome-stars-o.css">
+<link rel="stylesheet" href="../js/mediaelementplayer.css">
 <link rel="stylesheet" href="../js/jcrop/css/jquery.Jcrop.css">
 <link rel="stylesheet" href="../js/jquery-confirm.css">
 <link rel="stylesheet" href="../js/jquery.liveurl.css">
@@ -81,6 +82,8 @@ ini_set('display_errors', 1);
     <script type="text/javascript" src="../js/fancybox/lib/jquery.mousewheel-3.0.6.pack.js"></script>
 	<script type="text/javascript" src="../js/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 	<script type="text/javascript" src="../js/fancybox/source/helpers/jquery.fancybox-media.js?v=2.1.5"></script>
+	<script type="text/javascript" src="../js/capture-video-frame.js" >//</script>
+    <script type="text/javascript" src="../js/mediaelement-and-player.min.js" >//</script>
     <script type="text/javascript" src="../js/rating/jquery.barrating.min.js" >//</script>
     <script type="text/javascript" src="../js/jcrop/jquery.Jcrop.min.js" >//</script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.sticky/1.0.3/jquery.sticky.min.js"></script>

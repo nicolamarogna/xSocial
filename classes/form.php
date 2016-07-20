@@ -61,7 +61,7 @@ class Form {
 				break;
 			case 'file_u_pop':
 				$iextra = (isset($i['extra'])) ? $i['extra'] : '';
-				$str_u_pop = '<button type="button" '.$iextra.' item="load_photo" style="cursor:pointer;"><i class="fa fa-camera" aria-hidden="true"></i> Carica foto</button>';
+				$str_u_pop = '<button type="button" '.$iextra.' item="load_photo" style="cursor:pointer;"><i class="fa fa-camera" aria-hidden="true"></i> Carica foto/video</button>';
 				$u_pops = '<div id="load_photo" item="hide" class="checkIfEmpty">
 				<div id="hideField"><span class="bold">Immagine:</span> <input type="file" name="'.$i['name'].'" id="'.$i['name'].'" value="'.$i['value'].'" /></div>';
 				if (isset($i['old']) && !empty($i['old'])) {
