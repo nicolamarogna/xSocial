@@ -115,10 +115,17 @@ class Album {
 			$c=1;
 			echo '<table><tr>';	
 			foreach ($photos as $i) {
-				echo '<td style="padding:0 3px;">
-				<a href="files/img/'.$i->img.'" class="fancybox" rel="gallery" title="'.stripslashes($i->title).'">
-				<img class="crop" src="files/img/thumb_'.$i->img.'" alt="'.stripslashes($i->title).'" title="'.stripslashes($i->title).'">
-				</a>';
+				echo '<td style="padding:0 3px;">';
+				if ((Utils::get_type($i->img) == 0)) {
+					//is image uploaded
+					echo '<a href="files/img/'.$i->img.'" class="fancybox" rel="gallery" title="'.stripslashes($i->title).'">
+						<img class="crop" src="files/img/thumb_'.$i->img.'" alt="'.stripslashes($i->title).'" title="'.stripslashes($i->title).'">
+						</a>';
+				} else {
+					//is video uploaded
+					echo '<a href="files/img/'.$i->img.'" class="fancy_video"><video id="my-video" class="cropvideo"><source src="files/img/'.$i->img.'" type="video/mp4"></video></a><br><i class="fa fa-youtube-play fleft pad watermark" aria-hidden="true"></i>';	
+				}
+				
 				if ($this->userboard == $_SESSION['user']->id) {
 					echo '<br><div class="acenter">
 					<a href="?p=album&id_mod='.$i->id.'&id_album='.$album->id.'"><i class="fa fa-pencil fa-lg" aria-hidden="true" title="Modifica foto"></i></a>

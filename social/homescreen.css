@@ -132,6 +132,7 @@ p .xsmall, li .xsmall, td .xsmall {color:#999;}
 .border_bottom {border-bottom:1px solid #ddd;}
 .thumb {max-width:80px;margin:5px;vertical-align:middle;}
 .crop {width:115px;height:115px;object-fit:cover;}
+.cropvideo {width:115px;height:115px;object-fit:contain;}
 .evodd {background:#ddd;font-weight:bold;}
 .pad {padding:0 5px;}
 .pad_all {padding:5px;}

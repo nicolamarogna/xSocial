@@ -239,7 +239,7 @@ class Board {
 		if ($friend == 1) {
 			//prepare form
 			$output = '<div id="status_msg">';
-			$output .= Form::doform('ajaxform', $_SERVER["REQUEST_URI"], $fields, array(NULL,'<i class="fa fa-flag" aria-hidden="true"></i> Pubblica'), 'post', 'enctype="multipart/form-data" ', 'id="publishButton" ');
+			$output .= Form::doform('ajaxform', $_SERVER["REQUEST_URI"], $fields, array(NULL,'<i class="fa fa-flag" aria-hidden="true"></i> Pubblica'), 'post', 'enctype="multipart/form-data" reloadpage="true"', 'id="publishButton" ');
 			$output .= '</div>';
 			
 			echo $output;
@@ -364,7 +364,7 @@ class Board {
 					$share_user = $mod->get_by_id('social_users', $i->share);
 						echo ' tramite <span class="bold">
 							<a href="?userboard='.$i->share.'">'.stripslashes($share_user->nome).' '.stripslashes($share_user->cognome).'</a>
-							</span>';	
+							</span>';
 				}
 				
 				echo '<br>'.stripslashes(nl2br($i->status)).'<br>'.stripslashes(nl2br($i->status_extra));

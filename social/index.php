@@ -42,8 +42,8 @@ ini_set('display_errors', 1);
 	define('MAX_IMG', 51200); //img max 2MB
 	define('MAX_DOC', 5120); //doc max 5MB
 	//Dimensione massima immagini in pixel
-	define('MAX_W', 2000);
-	define('MAX_H', 2000);
+	define('MAX_W', 3000);
+	define('MAX_H', 3000);
 	define('NL', "\n");
 	
 	//autoload classes

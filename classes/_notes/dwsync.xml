@@ -46,6 +46,8 @@
 <file name="utils.php" server="ftp.stemurasolutions.com/stemurasolutions.com/social/" local="129393811036193852" remote="129393808800000000" Dst="-1" />
 <file name="db.php" server="ftp.stemurasolutions.com/stemurasolutions.com/" local="129470811891626578" remote="129470811600000000" Dst="-1" />
 <file name="album.php" server="pasiontanguera.com" local="131128967962226421" remote="131133258600000000" Dst="2" />
-<file name="utils.php" server="pasiontanguera.com//public_html/social/xSocial/" local="131134141663536339" remote="131134138800000000" Dst="2" />
+<file name="utils.php" server="pasiontanguera.com//public_html/social/xSocial/" local="131135053598854891" remote="131135050800000000" Dst="2" />
 <file name="form.php" server="pasiontanguera.com//public_html/social/xSocial/" local="131134847058253042" remote="131134844400000000" Dst="2" />
+<file name="album.php" server="pasiontanguera.com//public_html/social/xSocial/" local="131134999308533042" remote="131134996800000000" Dst="2" />
+<file name="events.php" server="pasiontanguera.com//public_html/social/xSocial/" local="131135076363691147" remote="131135073600000000" Dst="2" />
 </dwsync>

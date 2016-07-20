@@ -84,19 +84,20 @@ $(document).ready(function(){
 					//output.find('.thumbnail').show();
 					output.find('.image').show();
 					jqImage.addClass('active');
+					
+					//niku implement
+					var linkImg = $('#status_msg').find('.liveurl .image > *').attr('src');
+					var linkTitle = $('#status_msg').find('.liveurl .title').html();
+					var linkDescription = $('#status_msg').find('.liveurl .description').html();
+					var linkUrl = $('#status_msg').find('.liveurl .url').html();
+					$('#statusbox_extra').val($('#statusbox_extra').val() + '<div class=\'padtop\'><a href=\''+linkUrl+'\' target=\'blank\'><img class=\'fleft thumb\' src=\''+linkImg+'\'><b>'+linkTitle+'</b></a></br><span class=\'xsmall\'>'+linkDescription+'<br>'+linkUrl+'</div>');
+					//end niku implement	
 				}
 
 				if (curImages.length == 2) {
 					output.find('.controls .next').removeClass('inactive');
 				}
 				
-				//niku implement
-				var linkImg = $('#status_msg').find('.liveurl .image > *').attr('src');
-				var linkTitle = $('#status_msg').find('.liveurl .title').html();
-				var linkDescription = $('#status_msg').find('.liveurl .description').html();
-				var linkUrl = $('#status_msg').find('.liveurl .url').html();
-				$('#statusbox_extra').val($('#statusbox_extra').val() + '<div class=\'padtop\'><a href=\''+linkUrl+'\' target=\'blank\'><img class=\'fleft thumb\' src=\''+linkImg+'\'><b>'+linkTitle+'</b></a></br><span class=\'xsmall\'>'+linkDescription+'<br>'+linkUrl+'</div>');
-				//end niku implement	
 				
 				output.find('.thumbnail .max').text(curImages.length);
 			}
@@ -244,6 +245,7 @@ $(document).ready(function(){
 					// set type of content (remember, we are building the HTML5 <video> tag as content)
 					type       : "html",
 					// other API options
+					'closeBtn' : false,
 					scrolling  : "no",
 					padding    : 0,
 					nextEffect : "fade",
@@ -352,7 +354,7 @@ $(document).ready(function(){
 					$('#icon_youtube').remove();
 					$('#displayImg').remove();
 					
-					var fileExtension = ['jpeg', 'jpg', 'png', 'mp3', 'mp4'];
+					var fileExtension = ['jpeg', 'jpg', 'png', 'mp4'];
 					var filetype = $.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension);
 					if (filetype == -1) {
 						$.alert({
@@ -361,8 +363,6 @@ $(document).ready(function(){
 						return false;
 					}
 					
-					//$('#load_photo').append('<video id="my-video" class="borded pad_all" style="max-width:132px;"><source id="displayImg" src="" type="video/mp4"></video>');
-
 					readURL(this, function(e) {
 						// use result in callback...
 						if (filetype == 4) { //case mp4
@@ -434,7 +434,7 @@ $(document).ready(function(){
 					var oFile = $('#img')[0].files[0];
 					
 					// check for image type (jpg and png are allowed)
-					var fileExtension = ['jpeg', 'jpg'];
+					var fileExtension = ['jpeg', 'jpg', 'png', 'mp4'];
 					if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
 						$.alert({
 							content: 'Formato non valido',
@@ -443,9 +443,9 @@ $(document).ready(function(){
 					}
 					
 					// check for file size
-					if (oFile.size > 1000 * 1024) {
+					if (oFile.size > 50000 * 1024) {
 						$.alert({
-							content: 'L\'immagine non deve superare i 1000 Kb',
+							content: 'L\'immagine non deve superare i 50 Mb',
 						});
 						return false;
 					}
@@ -562,7 +562,7 @@ $(document).ready(function(){
 				$(".dashboard_notime").datepicker({
 				inline:true,      
 				//disabled: true,      
-				dateFormat: 'dd-mm-yy',
+				dateFormat: 'yy-mm-dd',
 				//defaultDate: "+1w",
 				changeMonth: true,
 				changeYear: true,
@@ -685,6 +685,8 @@ $(document).ready(function(){
 				var $params = $( this );
 				var url = $params.attr( "action" );
 				var formData = new FormData($(this)[0]);
+				var reloadPage = $params.attr( "reloadpage" );
+
 				$.ajax({
 				   type: "POST",
 				   url: url,
@@ -694,7 +696,7 @@ $(document).ready(function(){
 				   data: formData,
 				   success: function(data)
 				   {
-					   aftersubmit(data, false, false, true);
+					   aftersubmit(data, false, false, reloadPage);
 				   }
 				 });
 			});
@@ -731,11 +733,7 @@ $(document).ready(function(){
 			}
 		}
 
-	});	
-	
-	
-	
-	
+	});
 	
 });
 

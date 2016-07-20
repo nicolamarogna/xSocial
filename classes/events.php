@@ -381,7 +381,7 @@ class Events {
 			'value' => $event->date,
 			'name' => 'datetime',
 			'rule' => 'required',
-			'extra' => 'class="dashboard"',
+			'extra' => 'class="dashboard_notime"',
 			);
 		$fields[] = array(
 			'label' => 'Immagine',
@@ -425,7 +425,7 @@ class Events {
 		}
 		
 		//prepare form
-		$output .= Form::doform('formadd', $_SERVER["REQUEST_URI"], $fields, array('Cancella','Modifica'), 'post', 'enctype="multipart/form-data"');
+		$output .= Form::doform('ajaxform', $_SERVER["REQUEST_URI"], $fields, array('Cancella','Modifica'), 'post', 'enctype="multipart/form-data" reloadpage="true" ');
 		$output .= '</div>';
 		echo $output;
 	}
@@ -463,7 +463,6 @@ class Events {
 						
 			//on file insert, upload file
 			$filename = @Utils::upload('img', ROOT.'files/');
-			
 			$thumb = @Utils::create_resized($path.$filename, $path.'thumb_'.$filename, array(60,60));
 
 			if ($filename === false) {
@@ -562,7 +561,7 @@ class Events {
 		}
 		
 		//prepare form
-		echo Form::doform('formadd', $_SERVER["REQUEST_URI"], $fields, array('No', 'Si'), 'post', '', '', 'onclick="javascript:history.back();"');
+		echo Form::doform('ajaxform', $_SERVER["REQUEST_URI"], $fields, array('No', 'Si'), 'post', ' reloadpage="true" ', '', 'onclick="javascript:history.back();"');
 		echo '</div>';
 	}
 
