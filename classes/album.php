@@ -251,7 +251,7 @@ class Album {
 		}
 		
 		//prepare form
-		$output .= Form::doform('formadd', $_SERVER["REQUEST_URI"], $fields, array('Cancella','Modifica'), 'post', 'enctype="multipart/form-data"');
+		$output .= Form::doform('formadd', $_SERVER["REQUEST_URI"], $fields, array(NULL,'Salva'), 'post', 'enctype="multipart/form-data"');
 		$output .= '</div>';
 		echo $output;
 	}
@@ -332,7 +332,7 @@ class Album {
 		}
 		
 		//prepare form
-		$output .= Form::doform('formadd', $_SERVER["REQUEST_URI"], $fields, array('Cancella','Modifica'), 'post', 'enctype="multipart/form-data"');
+		$output .= Form::doform('formadd', $_SERVER["REQUEST_URI"], $fields, array(NULL,'Salva'), 'post', 'enctype="multipart/form-data"');
 		$output .= '</div>';
 		echo $output;
 	}

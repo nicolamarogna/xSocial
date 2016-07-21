@@ -575,11 +575,20 @@ class Utils {
 	}
 	
 	//format the date
-	public static function f_date($date)
+	public static function f_date($date, $ext = false)
 	{
 		$date = explode(' ',$date);
 		$newdate = explode('-',$date[0]);
-		return $newdate[2].'-'.$newdate[1].'-'.$newdate[0].' '.$date[1];
+		$mesi = array('', 'gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio',  'agosto', 'settembre', 'ottobre', 'novembre','dicembre');
+		
+		if ($ext) {
+			if (substr($newdate[1],0,1) == '0') {
+				$newdate[1] = str_replace('0', '', $newdate[1]);
+			}
+			return $newdate[2].' '.$mesi[$newdate[1]].' '.$newdate[0];
+		} else {
+			return $newdate[2].'-'.$newdate[1].'-'.$newdate[0].' '.$date[1];	
+		}
 	}
 	
 	public static function date_it($date)

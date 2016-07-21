@@ -24,7 +24,7 @@ p {margin:0;}
 input, textarea, select {border:1px solid #ccc;padding:1px 3px;margin:1px;font-family:inherit;font-size:1em;resize: none;}
 input:focus, textarea:focus, select:focus {border:1px solid #3b5f94;}
 
-button {border:1px solid #ccc;background-color:#3b5f94;padding:0px 10px;font-family:inherit;color:#FFF;border-radius:3px;font-weight:bold;}
+button {border:1px solid #ccc;background-color:#3b5f94;padding:0px 10px;font-family:inherit;color:#FFF;border-radius:3px;font-weight:bold;height:30px;}
 button[disabled=disabled], button:disabled {opacity:0.4;}
 .buttonGrey {border:0px solid #ccc;background-color:#fff;color:#3b5f94;font-weight:bold;}
 
@@ -72,7 +72,8 @@ td {margin:0 1px;padding: 2px 5px 0 5px;vertical-align: top;}
 #right_info {float:right;width:195px;}
 
 #results {background-color:#F9F9F9;}
-#results tr {border-bottom:solid #FFF 1px;}
+#results tr {margin-bottom:3px;}
+#results td {padding-bottom:5px;}
 #results tr:hover {background:#F0F0F0;}
 
 #form { background:#D9ECFF; }
@@ -81,16 +82,18 @@ td {margin:0 1px;padding: 2px 5px 0 5px;vertical-align: top;}
 /* select all elements that start with text 'post_comment' */
 tr[id^="post_comment"] {
 	display:none;
+    background-color: #f6f7f9;
+   /*
     padding: 10px;
+    margin-bottom: 5px;
     border-width: 0 1px 1px 0;
     border-style: solid;
     border-color: #fff;
     box-shadow: 0 1px 1px #ccc;
-    margin-bottom: 5px;
-    background-color: #f1f1f1;
+	*/
 }
-.button_comments {margin:0 0 10px 0; font-size:13px;color:#999;background-color:#fff;float:right;}
-.textarea_comment {height:25px;}
+.button_comments {margin:0 0 10px 0; font-size:13px;color:#3b5f94;background-color:#f2f2f2;float:right;}
+.textarea_comment {height:40px;}
 
 #msg, #ajaxmsg {background:#06C;color:#fff;}
 #msg div, #ajaxmsg div {margin:0 auto;padding-bottom:5px;width:900px;}

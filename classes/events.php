@@ -378,7 +378,7 @@ class Events {
 		$fields[] = array(
 			'label' => 'Data',
 			'type' => 'text',
-			'value' => $event->date,
+			'value' => Utils::date_it($event->date),
 			'name' => 'datetime',
 			'rule' => 'required',
 			'extra' => 'class="dashboard_notime"',
@@ -425,7 +425,7 @@ class Events {
 		}
 		
 		//prepare form
-		$output .= Form::doform('ajaxform', $_SERVER["REQUEST_URI"], $fields, array('Cancella','Modifica'), 'post', 'enctype="multipart/form-data" reloadpage="true" ');
+		$output .= Form::doform('ajaxform', $_SERVER["REQUEST_URI"], $fields, array(NULL,'Salva'), 'post', 'enctype="multipart/form-data" reloadpage="true" ');
 		$output .= '</div>';
 		echo $output;
 	}
@@ -487,7 +487,7 @@ class Events {
 					'title' => $_POST['title'],
 					'location' => $_POST['location'],
 					'description' => $_POST['description'],
-					'date' => $_POST['datetime'],
+					'date' => Utils::f_date($_POST['datetime']),
 					'img' => $filename,
 					'from_user' => $_POST['from_user'],
 					);

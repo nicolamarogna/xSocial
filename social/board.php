@@ -358,7 +358,13 @@ class Board {
 						<div id="status_msg">
 						<span class="bold">
 						<a href="?userboard='.$i->id.'">'.stripslashes($i->nome).' '.stripslashes($i->cognome).'</a>
-						</span>';
+						</span>
+						<span class="xsmall fright pad" style="display:block;background-color:#f2f2f2;">'.Utils::f_date($i->upd, true).'</span>';
+				// rating section
+				if (ENABLE_RATING == 'YES') {
+					echo '<div class="clear"></div>';
+					echo $this->ratings($i->id_status, $i->rating_numbers, $i->rating_average);
+				}
 				
 				if ($i->share > 0) {
 					$share_user = $mod->get_by_id('social_users', $i->share);
@@ -366,8 +372,8 @@ class Board {
 							<a href="?userboard='.$i->share.'">'.stripslashes($share_user->nome).' '.stripslashes($share_user->cognome).'</a>
 							</span>';
 				}
-				
-				echo '<br>'.stripslashes(nl2br($i->status)).'<br>'.stripslashes(nl2br($i->status_extra));
+
+				echo stripslashes(nl2br($i->status)).'<br>'.stripslashes(nl2br($i->status_extra));
 				
 				echo '<ul>';
 				if ($i->upl_img) {
@@ -384,9 +390,9 @@ class Board {
 					echo '<li>'.Utils::youtube($i->youtube).'</li>';
 				}
 				echo '</ul>';
-				
-				echo '<div id="foot_status" class="clear" style="text-align:right;">Creato il '.Utils::f_date($i->upd).'</div>';
-				echo '<div id="buttons_actions" class="tbox sbox bold box_up_down">';
+				echo '</div>
+				</form></td></tr></table>';
+				echo '<div class="clear"></div><div id="buttons_actions" class="tbox bold">';
 								
 				//echo Delete button ajaxLink($title, $params, $askConfirm = FALSE)
 				if (($i->from_user == $_SESSION['user']->id) || (!isset($_GET['detail']))) {
@@ -394,26 +400,20 @@ class Board {
 				}
 				
 				echo '</div>';
-				// rating section
-				if (ENABLE_RATING == 'YES') {
-					echo '<div class="clear"></div>';
-					$this->ratings($i->id_status, $i->rating_numbers, $i->rating_average);
-				}
 				
-				echo '</div>
-				</form></td></tr></table>';
+				
 				
 				//comments area
 				$row_comments = ($comments) ? 'comments_full' : 'xsmall';
-				echo '<div class="ibox"><table><tr>
-				<td id="comments_table">';
+				echo '<div class="tbox"><table><tr>
+				<td id="comments_table" style="background-color:#f6f7f9;">';
 				$numcomments = ($comments == NULL) ? 0 : sizeof($comments);
 				if (isset($_GET['detail'])) {
 					echo '<span class="fright '.$row_comments.'">Commenti ('.$numcomments.')</span><br>';
 				} else {
 					//echo '<a class="innerbox fright '.$row_comments.' swing" href="#" title="" item="comments'.$i->id_status.'">Commenti ('.$numcomments.')</a>';
 				}
-				echo '<span><table><tr><td width="50"></td>
+				echo '<span><table><tr>
 						<td>
 						<div id="comments'.$i->id_status.'">
 						<table id="results">';
@@ -517,12 +517,20 @@ class Board {
 						<input type="hidden" name="img_status" value="'.$i->upl_img.'">
 						<div id="status_msg">
 						<span class="bold">
-						<a href="?userboard='.$i->id.'">'.stripslashes($i->nome).' '.stripslashes($i->cognome).'</a></span>';
+						<a href="?userboard='.$i->id.'">'.stripslashes($i->nome).' '.stripslashes($i->cognome).'</a>
+						</span>
+						<span class="xsmall fright">'.Utils::f_date($i->upd, true).'</span>';
 						
 						if ($i->from_user != $i->to_user) {
 							$to = $mod->get_by_id('social_users', $i->to_user);
 							echo '<span> >> </span><a class="bold" href="?userboard='.$i->to_user.'">'.stripslashes($to->nome).' '.stripslashes($to->cognome).'</a>';
 						}
+				// rating section
+				if (ENABLE_RATING == 'YES') {
+					echo '<div class="clear"></div>';
+					echo $this->ratings($i->id_status, $i->rating_numbers, $i->rating_average);
+				}
+
 						
 						if ($i->share > 0) {
 						$share_user = $mod->get_by_id('social_users', $i->share);
@@ -531,7 +539,7 @@ class Board {
 								</span>';	
 					}
 						
-						echo '<br>'.stripslashes(nl2br($i->status)).'<br>'.stripslashes(nl2br($i->status_extra));
+						echo stripslashes(nl2br($i->status)).'<br>'.stripslashes(nl2br($i->status_extra));
 						
 				echo '<ul>';
 				if ($i->upl_img) {
@@ -548,9 +556,10 @@ class Board {
 					echo '<li>'.Utils::youtube($i->youtube).'</li>';
 				}
 				echo '</ul>';
+				echo '</div>
+				</form></td></tr></table>';
 				
-				echo '<div id="foot_status" class="clear" style="text-align:right;">Creato il '.Utils::f_date($i->upd).'</div>';
-				echo '<div id="buttons_actions" class="tbox sbox bold box_up_down">';
+				echo '<div class="clear"></div><div id="buttons_actions" class="tbox bold">';
 				
 				if ($i->id != $_SESSION['user']->id) {
 					Utils::ajaxButton('Condividi', 'href="?action=share&id='.$i->id_status.'" action="share_post"', TRUE, 'fa fa-share');
@@ -563,25 +572,18 @@ class Board {
 				
 				echo '</div>';
 				
-				// rating section
-				if (ENABLE_RATING == 'YES') {
-					echo '<div class="clear"></div>';
-					$this->ratings($i->id_status, $i->rating_numbers, $i->rating_average);
-				}
 				
-				echo '</div>
-				</form></td></tr></table>';
 				
 				//comments area
 				$row_comments = ($comments) ? 'comments_full' : 'xsmall';
 				$numcomments = ($comments == NULL) ? 0 : sizeof($comments);
-				echo '<div class="ibox"><table><tr><td id="comments_table">';
+				echo '<div class="tbox"><table><tr>
+				<td id="comments_table" style="background-color:#f6f7f9;">';
 				//echo '<a class="innerbox fright '.$row_comments.' swing" href="#" title="" item="comments'.$i->id_status.'">Commenti ('.$numcomments.')</a>';
 				
 				echo '<span>';
 				
-				echo '<table><tr><td width="50"></td>
-						<td>
+				echo '<table><tr>
 						<div id="comments'.$i->id_status.'">
 						<table id="results">';
 						echo ($numcomments > 3) ? '<a style="cursor:pointer;" class="loadMore" item="post_comment'.$i->id_status.'" numcomments="'.$numcomments.'">Mostra più vecchi</a>' : '';
@@ -703,8 +705,17 @@ class Board {
 								<input type="hidden" name="id_status" value="'.$i->id_status.'">
 								<input type="hidden" name="img_status" value="'.$i->upl_img.'">
 								<div id="status_msg">
-								<span class="bold txt_red"><a href="?userboard='.$i->id.'">'.stripslashes($i->nome).' '.stripslashes($i->cognome).'</a></span>';
+								<span class="bold txt_red"><a href="?userboard='.$i->id.'">'.stripslashes($i->nome).' '.stripslashes($i->cognome).'</a>
+								</span>
+								<span class="xsmall fright">'.Utils::f_date($i->upd, true).'</span>';
 								
+					// rating section
+					if (ENABLE_RATING == 'YES') {
+						echo '<div class="clear"></div>';
+						echo $this->ratings($i->id_status, $i->rating_numbers, $i->rating_average);
+					}
+
+						
 						if ($i->share > 0) {
 							$share_user = $mod->get_by_id('social_users', $i->share);
 								echo ' tramite <span class="bold">
@@ -712,7 +723,7 @@ class Board {
 									</span>';	
 						}
 						
-						echo '<br>'.stripslashes(nl2br($i->status)).'<br>'.stripslashes(nl2br($i->status_extra));
+						echo stripslashes(nl2br($i->status)).'<br>'.stripslashes(nl2br($i->status_extra));
 								
 						echo '<ul>';
 						if ($i->upl_img) {
@@ -729,9 +740,10 @@ class Board {
 							echo '<li>'.Utils::youtube($i->youtube).'</li>';
 						}
 						echo '</ul>';
+						echo '</div>
+						</form></td></tr></table>';
 						
-						echo '<div id="foot_status" class="clear" style="text-align:right;">Creato il '.Utils::f_date($i->upd).'</div>';
-						echo '<div id="buttons_actions" class="tbox sbox bold box_up_down">';
+						echo '<div class="clear"></div><div id="buttons_actions" class="tbox bold">';
 		
 						if ($i->id != $_SESSION['user']->id) {
 							Utils::ajaxButton('Condividi', 'href="?action=share&id='.$i->id_status.'" action="share_post"', TRUE, 'fa fa-share');
@@ -743,27 +755,20 @@ class Board {
 						}
 							
 						echo '</div>';
-													
-						// rating section
-						if (ENABLE_RATING == 'YES') {
-							echo '<div class="clear"></div>';
-							$this->ratings($i->id_status, $i->rating_numbers, $i->rating_average);
-						}
+																			
 						
-						echo '</div>
-						</form></td></tr></table>';
 					
 						//comments area
 						$row_comments = ($comments) ? 'comments_full' : 'xsmall';
 						$numcomments = ($comments == NULL) ? 0 : sizeof($comments);
-						echo '<div class="ibox"><table><tr><td id="comments_table">';
+						echo '<div class="tbox"><table><tr>
+						<td id="comments_table" style="background-color:#f6f7f9;">';
 						
 						//echo '<a class="innerbox fright '.$row_comments.' swing" href="#" title="" item="comments'.$i->id_status.'">Commenti ('.$numcomments.')</a>';
 						
 						echo '<span>';
 						
-						echo '<table><tr><td width="50"></td>
-								<td>
+						echo '<table><tr>
 								<div id="comments'.$i->id_status.'">
 								<table id="results">';
 								echo ($numcomments > 3) ? '<a style="cursor:pointer;" class="loadMore" item="post_comment'.$i->id_status.'" numcomments="'.$numcomments.'">Mostra più vecchi</a>' : '';
@@ -948,12 +953,12 @@ class Board {
 	public function ratings($id_status, $rating_numbers, $rating_average) {
 		$mod = new Db();
 		// rating section
-		echo '<div id="rating_result'.$id_status.'">';
+		echo '<div id="rating_result'.$id_status.'" style="margin-bottom:10px;">';
 		$already_voted = $mod->query('SELECT * FROM social_ratings WHERE id_user = '.$_SESSION['user']->id.' AND id_status = '.$id_status);
 
 			if ((!$already_voted) || ($already_voted[0]->id_user != $_SESSION['user']->id)) {
 				// rating element
-				echo '<span class="fleft" style="margin-right:5px;color:#2348a0;">Vota questo post</span>
+				echo '<span class="fleft xsmall" style="margin-right:5px;color:#2348a0;">Vota questo post</span>
 						  <select id="rating'.$id_status.'">
 						  <option value=""></option>
 						  <option value="1">'.$id_status.'</option>
@@ -964,7 +969,7 @@ class Board {
 						   </select>
 						   ';
 		} else {
-			echo '<span>Voto medio: '.str_replace('.',',',$rating_average).' di '.$rating_numbers.' utenti</span>';
+			echo '<span class="xsmall">Voto medio: '.str_replace('.',',',$rating_average).' di '.$rating_numbers.' utenti</span>';
 		}
 		echo '</div>';
 	}

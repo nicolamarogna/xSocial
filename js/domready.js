@@ -1,10 +1,3 @@
-window.document.addEventListener("readystatechange", function(){
-	//alert(document.readyState);
-	if(document.readyState == "loading"){
-		
-	}
-}, false);
-
 $(document).ready(function(){
 	$(window).load(function() {		
 		
@@ -327,11 +320,6 @@ $(document).ready(function(){
 			
 			//status post button check
 			$('#publishButton').prop('disabled',true);
-			/*
-			$('#publishButton').on("click", function( event ) {
-				event.preventDefault()();
-			});
-			*/
 			//textboxDisabled('statusbox','publishButton');
 			$('#statusbox.checkIfEmpty').on("change keyup input", function( event ) {
 				$('#publishButton').prop('disabled', this.value == "" ? checkIfEmpty() : false);
@@ -434,7 +422,12 @@ $(document).ready(function(){
 					var oFile = $('#img')[0].files[0];
 					
 					// check for image type (jpg and png are allowed)
-					var fileExtension = ['jpeg', 'jpg', 'png', 'mp4'];
+					if (getParameterByName('p') == 'profile') {
+						var fileExtension = ['jpeg', 'jpg', 'png'];
+					} else {
+						var fileExtension = ['jpeg', 'jpg', 'png', 'mp4'];
+					} 
+					
 					if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
 						$.alert({
 							content: 'Formato non valido',
@@ -537,18 +530,17 @@ $(document).ready(function(){
 			});
 			//end rating
 		
-		/*
-		$.urlParam = function(name){
-			var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-			if (results==null){
-			   return null;
-			}
-			else{
-			   return results[1] || 0;
-			}
+		function getParameterByName( name ){
+			var regexS = "[\\?&]"+name+"=([^&#]*)", 
+		  regex = new RegExp( regexS ),
+		  results = regex.exec( window.location.search );
+		  if( results == null ){
+			return "";
+		  } else{
+			return decodeURIComponent(results[1].replace(/\+/g, " "));
+		  }
 		}
-		console.log(decodeURIComponent($.urlParam('userboard'))); 
-		*/
+		
 		function getQuerystring() {
 			if (document.URL.split('?')[1]) {
 				return document.URL.split('?')[1];
@@ -562,7 +554,7 @@ $(document).ready(function(){
 				$(".dashboard_notime").datepicker({
 				inline:true,      
 				//disabled: true,      
-				dateFormat: 'yy-mm-dd',
+				dateFormat: 'dd-mm-yy',
 				//defaultDate: "+1w",
 				changeMonth: true,
 				changeYear: true,

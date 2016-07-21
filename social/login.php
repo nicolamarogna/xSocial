@@ -54,7 +54,7 @@ class Login {
 		if (!empty($_POST['user']) && !empty($_POST['pass'])) {
 			
 			$mod = new Db;
-			$user = $mod->query('SELECT *, DATE_FORMAT(birthday,"%d/%m/%Y") as birthday FROM social_users WHERE user = "'.$_POST['user'].'" AND password = "'.$_POST['pass'].'" AND xon != 0');
+			$user = $mod->query('SELECT *, DATE_FORMAT(birthday,"%d-%m-%Y") as birthday FROM social_users WHERE user = "'.$_POST['user'].'" AND password = "'.$_POST['pass'].'" AND xon != 0');
 
 			($user) ? $_SESSION['user'] = true : $_SESSION['user'] = false;
 
