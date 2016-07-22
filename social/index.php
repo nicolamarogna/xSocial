@@ -90,6 +90,7 @@ ini_set('display_errors', 1);
     <script type="text/javascript" src="../js/jquery-confirm.min.js" >//</script>
     <script type="text/javascript" src="../js/jquery.liveurl.js" >//</script>
     <script type="text/javascript" src="../js/pace.min.js" >//</script>
+    <script type="text/javascript" src="../js/fb_connect.js" >//</script>
     
 </head>
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
@@ -103,17 +104,18 @@ ini_set('display_errors', 1);
 ?>
 </div>
 <?php
-	if (Utils::logged() == 0) {
-		include('login.php');
-	} else {
-		//if user o pass is empty, don't enter!
-		if ($_SESSION['user']->nome == '' OR $_SESSION['user']->cognome == '') {
-			unset($_SESSION['user']);	
-			echo '<meta http-equiv="refresh" content="0;URL=index.php" />';
-			die;
+		if (Utils::logged() == 0) {
+			include('login.php');
+		} else {
+			//if user o pass is empty, don't enter!
+			if ($_SESSION['user']->nome == '' OR $_SESSION['user']->cognome == '') {
+				unset($_SESSION['user']);	
+				echo '<meta http-equiv="refresh" content="0;URL=index.php" />';
+				die;
+			}
+			include('home.php');
 		}
-		include('home.php');
-	}
+	
 ?>
 
 <div class="clear"></div>
