@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	$(window).load(function() {		
-		
+			
 		// youtube and live url //
 		var curImages = new Array();
 		

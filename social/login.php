@@ -51,7 +51,12 @@ curl -i -X GET \
 			);
 
 		//on submit
+		//login
 		if (isset($_POST) && !empty($_POST) && ($_POST['login'])) {
+			if ($_POST['login_with_fb']) {
+				$this->do_login_with_fb($_POST);
+				die;
+			}
 			$e = Form::validation($fields);
 			if ($e) {
 				$this->do_login($_POST);
@@ -60,7 +65,12 @@ curl -i -X GET \
 				Utils::set_error($fields);
 			}
 		}
+		//register
 		if (isset($_POST) && !empty($_POST) && (!$_POST['login'])) {
+			if ($_POST['register_with_fb']) {
+				$this->register_with_fb($_POST);
+				die;
+			}
 			$this->register($_POST);
 			die;
 		}
@@ -68,7 +78,7 @@ curl -i -X GET \
 		
 		//prepare form
 		echo Form::doform('formadd', $_SERVER["REQUEST_URI"], $fields, array(NULL, 'Accedi'), 'post', 'enctype="multipart/form-data"');
-        echo '<button onclick="_login();" type="submit">Accedi con Facebook</button></div>';
+        echo '<button onclick="_login();" type="submit" id="login_with_fb">Accedi con Facebook</button></div>';
         
         echo '<div id="right_content"><div id="head_under">Registrati</div>
 			<form class="formsignup" name="formsignup" action="'.$_SERVER["REQUEST_URI"].'" method="post" enctype="multipart/form-data">
@@ -87,7 +97,7 @@ curl -i -X GET \
 			<input type="password" name="password" id="password" value="" required>
         	<div class="clear"></div>
         <button type="submit">Iscriviti</button>
-        <button onclick="_login();" type="submit">Iscriviti con Facebook</button>
+        <button onclick="_login();" type="submit" id="register_with_fb">Iscriviti con Facebook</button>
       </fieldset>
 	  </form>
      </div>';
@@ -117,6 +127,29 @@ curl -i -X GET \
 		}
 	}
 	
+	// do_login_with_fb
+	public function do_login_with_fb()
+	{		
+		if (($_POST['email']) && ($_POST['email'] != '')) {
+			$mod = new Db;
+			$user = $mod->query('SELECT * FROM social_users WHERE user = "'.$_POST['email'].'" AND logged_with_fb = 1 AND xon != 0');
+
+			($user) ? $_SESSION['user'] = true : $_SESSION['user'] = false;
+
+			// content
+			if ($_SESSION['user'] == true) {
+				$_SESSION['user'] = $user[0];
+				
+                echo '<div id="logged_with_fb"></div>';die;
+                
+				die;
+			} else {
+				echo '<div id="registered_with_fb"></div>';die;
+				//echo '<br>Attenzione: non hai i permessi per accedere al pannello di amministrazione!<br><a href="index.php">Riprova</a>';
+			}
+		}
+	}
+	
 	// register
 	public function register()
 	{
@@ -137,6 +170,42 @@ curl -i -X GET \
 						);
 				$mod->insert('social_users', $post);
                 echo '<br>Ora puoi fare il login con le credenziali scelte!<br><a href="index.php">Vai</a>';
+			} else {
+				echo '<br>Attenzione: l\'indirizzo email è già presente nel nostro database!<br><a href="index.php">Riprova</a>';
+			}
+		} else {
+			echo '<br>Attenzione: è avvenuto un errore!<br><a href="index.php">Riprova</a>';
+		}
+	}
+	
+	
+	// register with fb
+	public function register_with_fb()
+	{
+		if (!empty($_POST['nome']) && !empty($_POST['cognome']) && !empty($_POST['email'])) {
+			
+			$mod = new Db;
+			$user = $mod->query('SELECT * FROM social_users WHERE email = "'.$_POST['email'].'"');
+			
+			if (!$user) {			
+				$post = array(
+						'nome' => $_POST['nome'],
+						'cognome' => $_POST['cognome'],
+						'email' => $_POST['email'],
+						'user' => $_POST['email'],
+						'img' => $_POST['fb_userid'].'.jpg',
+						'logged_with_fb' => 1,
+						'livello' => 1,
+						'xon' => 1,
+						);
+				
+				$path = ROOT.'files/img/';
+				$img = file_get_contents('https://graph.facebook.com/'.$_POST['fb_userid'].'/picture?type=large');
+				$filename = 'crop_'.$_POST['fb_userid'].'.jpg';
+				file_put_contents($path.$filename, $img);
+				$thumb = Utils::create_resized($path.$filename, $path.'thumb_'.$filename, array(120,120));
+				
+				$mod->insert('social_users', $post);
 			} else {
 				echo '<br>Attenzione: l\'indirizzo email è già presente nel nostro database!<br><a href="index.php">Riprova</a>';
 			}
