@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	$(window).load(function() {		
-			
+	
 		// youtube and live url //
 		var curImages = new Array();
 		
@@ -189,7 +189,8 @@ $(document).ready(function(){
 
 			//init rating
 			$( "select[id^='rating']" ).barrating('show', {theme: 'fontawesome-stars-o',});
-			
+			view_rating_result();
+
 			//init comments
 			viewcomments();
 			
@@ -497,6 +498,7 @@ $(document).ready(function(){
 									//apply widget rating
 									$( "select[id^='rating']" ).barrating('show', {theme: 'fontawesome-stars-o',});		
 									pageNumber++;
+									view_rating_result();
 									//$('#loading').hide();
 							}
 						})
@@ -526,9 +528,26 @@ $(document).ready(function(){
 							.done(function( data ) {
 								var content = $(data).find("#rating_result"+id_status).html();
 								$("#rating_result"+id_status).html( content );
+								view_rating_result();
 							});
 			});
 			//end rating
+			
+		
+		//view rating result
+		function view_rating_result() {
+			$.each($("select[id^='single_rating_result_']"), function( i, val ) {
+				var currentRating = $(this).data('current-rating');
+	
+				$(this).barrating({
+					theme: 'fontawesome-stars-o',
+					showSelectedRating: false,
+					initialRating: currentRating,
+					readonly: true,
+				});
+			});
+		}
+		//end view rating result
 		
 		function getParameterByName( name ){
 			var regexS = "[\\?&]"+name+"=([^&#]*)", 

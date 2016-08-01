@@ -958,7 +958,7 @@ class Board {
 
 			if ((!$already_voted) || ($already_voted[0]->id_user != $_SESSION['user']->id)) {
 				// rating element
-				echo '<span class="fleft xsmall" style="margin-right:5px;color:#2348a0;">Vota questo post</span>
+				echo '<span class="xsmall" style="margin-right:5px;color:#2348a0;">Vota questo post</span>
 						  <select id="rating'.$id_status.'">
 						  <option value=""></option>
 						  <option value="1">'.$id_status.'</option>
@@ -969,7 +969,15 @@ class Board {
 						   </select>
 						   ';
 		} else {
-			echo '<span class="xsmall">Voto medio: '.str_replace('.',',',$rating_average).' di '.$rating_numbers.' utenti</span>';
+			echo '<span class="xsmall" style="margin-right:5px;color:#2348a0;">Voto medio: '.str_replace('.',',',$rating_average).' di '.$rating_numbers.' utenti</span>';
+			echo '<select id="single_rating_result_'.$id_status.'" data-current-rating="'.$rating_average.'">
+                  <option value=""></option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>';
 		}
 		echo '</div>';
 	}
