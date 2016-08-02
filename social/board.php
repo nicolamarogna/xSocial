@@ -951,7 +951,7 @@ class Board {
 	public function ratings($id_status, $rating_numbers, $rating_average) {
 		$mod = new Db();
 		// rating section
-		echo '<div id="rating_result'.$id_status.'" style="margin-bottom:10px;">';
+		echo '<div id="rating_result'.$id_status.'" style="margin-bottom:10px;display:none;">';
 		$already_voted = $mod->query('SELECT * FROM social_ratings WHERE id_user = '.$_SESSION['user']->id.' AND id_status = '.$id_status);
 
 			if ((!$already_voted) || ($already_voted[0]->id_user != $_SESSION['user']->id)) {

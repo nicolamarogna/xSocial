@@ -1,6 +1,55 @@
 $(document).ready(function(){
 	$(window).on('load', function() {		
-	
+
+		//gradient images overlay
+		$( "img.gradient" ).each(
+			function( intIndex ){
+				var jImg = $( this );
+				var jParent = null;
+				var jDiv = null;
+				var intStep = 0;
+				// Get the parent
+				jParent = jImg.parent();
+				// Make sure the parent is position
+				// relatively so that the graident steps
+				// can be positioned absolutely within it.
+				jParent
+					.css( "position", "relative" )
+					.width( jImg.width() )
+					.height( jImg.height() )
+				;
+				// Create the gradient elements. Here, we
+				// are hard-coding the number of steps,
+				// but this could be abstracted out.
+				for (
+					intStep = 0 ;
+					intStep <= 40 ;
+					intStep++
+					){
+					// Create a fade level.
+					jDiv = $( "<div></div>" );
+					// Set the properties on the fade level.
+					jDiv
+						.css (
+							{
+								backgroundColor: "#000",
+								opacity: (intStep * 1 / 100),
+								bottom: ((47 - (intStep * 1) ) + "px"),
+								left: "0px",
+								position: "absolute",
+							}
+							)
+						.width( jImg.width() )
+						.height( 2 )
+					;
+					// Add the fade level to the
+					// containing parent.
+					jParent.append( jDiv );
+				}
+			}
+		);
+		//end gradient images overlay
+
 		// youtube and live url //
 		var curImages = new Array();
 		
@@ -187,6 +236,7 @@ $(document).ready(function(){
 
 			//init rating
 			$( "select[id^='rating']" ).barrating('show', {theme: 'fontawesome-stars-o',});
+			$( "div[id^='rating_result']" ).slideDown('fast');
 			view_rating_result();
 
 			//init comments
@@ -314,8 +364,7 @@ $(document).ready(function(){
 			});
 			
 			$('.confirmbox').confirm(this.$target);
-			
-			
+
 			
 			//status post button check
 			$('#publishButton').prop('disabled',true);
@@ -466,70 +515,75 @@ $(document).ready(function(){
 			//end jcrop
 
 //////////////////////////////////////////////////////////////////////////////////////////////			
+//////////////////////////////////////////////////////////////////////////////////////////////			
+//////////////////////////////////////////////////////////////////////////////////////////////			
+//////////////////////////////////////////////////////////////////////////////////////////////			
+//////////////////////////////////////////////////////////////////////////////////////////////			
+//////////////////////////////////////////////////////////////////////////////////////////////			
 
-			//infinite scroll
-			var win = $(window);
-			var pageNumber = 1;
-			var totalPages = parseInt($("#lastPage").attr('val'));
-			win.scroll(function() {
-				// End of the document reached?
-				if ($(document).height() - win.height() == win.scrollTop()) {
-					//$('#loading').show();
-					if ((totalPages) && (pageNumber != totalPages)) {
-						if (getQuerystring()) {
-							url = '?page='+pageNumber+'&'+getQuerystring();
-						} else {
-							url = '?page='+pageNumber;
-						}
-						$.ajax({
-							url: url,
-							dataType: 'html',
-							success: function(data) {
-									//find div with new posts
-									var content = $( data ).find("#right_content:not(:first)");
-									//set custom attribute "inpage" to query correct page
-									content.find("select[id^='rating']").attr('inpage',pageNumber);
-									content.find("div[id^='post']").attr('inpage',pageNumber);
-									//view more posts
-									$("#right").fadeIn("slow").append(content);
-									viewcomments();							
-									//apply widget rating
-									$( "select[id^='rating']" ).barrating('show', {theme: 'fontawesome-stars-o',});		
-									pageNumber++;
-									view_rating_result();
-									//$('#loading').hide();
-							}
-						})
-						.done(function(data){
-							//nothing to do for now
-						});
+		//infinite scroll
+		var win = $(window);
+		var pageNumber = 1;
+		var totalPages = parseInt($("#lastPage").attr('val'));
+		win.scroll(function() {
+			// End of the document reached?
+			if ($(document).height() - win.height() == win.scrollTop()) {
+				//$('#loading').show();
+				if ((totalPages) && (pageNumber != totalPages)) {
+					if (getQuerystring()) {
+						url = '?page='+pageNumber+'&'+getQuerystring();
+					} else {
+						url = '?page='+pageNumber;
 					}
-				}
-			});
-			//end infinite scroll
-	
-			//rating  
-			$(document).on("change", "select[id^='rating']", function( event ) {
-				var value = $(this).val();
-				var id_status = $(this).find("option:selected").text();
-				var page = $(this).attr('inpage');
-				if (getQuerystring()) {
-					url = '?page='+page+'&'+getQuerystring();
-				} else {
-					url = '?page='+page;
-				}
-				$.post( url , {
-								id_status: id_status,
-								rating: value,
-								action:'store_rating'
-							})
-							.done(function( data ) {
-								var content = $(data).find("#rating_result"+id_status).html();
-								$("#rating_result"+id_status).html( content );
+					$.ajax({
+						url: url,
+						dataType: 'html',
+						success: function(data) {
+								//find div with new posts
+								var content = $( data ).find("#right_content:not(:first)");
+								//set custom attribute "inpage" to query correct page
+								content.find("select[id^='rating']").attr('inpage',pageNumber);
+								content.find("div[id^='post']").attr('inpage',pageNumber);
+								//view more posts
+								$("#right").fadeIn("slow").append(content);
+								viewcomments();							
+								//apply widget rating
+								$( "select[id^='rating']" ).barrating('show', {theme: 'fontawesome-stars-o',});		
+								pageNumber++;
 								view_rating_result();
-							});
-			});
-			//end rating
+								//$('#loading').hide();
+						}
+					})
+					.done(function(data){
+						//nothing to do for now
+					});
+				}
+			}
+		});
+		//end infinite scroll
+
+		//rating  
+		$(document).on("change", "select[id^='rating']", function( event ) {
+			var value = $(this).val();
+			var id_status = $(this).find("option:selected").text();
+			var page = $(this).attr('inpage');
+			if (getQuerystring()) {
+				url = '?page='+page+'&'+getQuerystring();
+			} else {
+				url = '?page='+page;
+			}
+			$.post( url , {
+							id_status: id_status,
+							rating: value,
+							action:'store_rating'
+						})
+						.done(function( data ) {
+							var content = $(data).find("#rating_result"+id_status).html();
+							$("#rating_result"+id_status).html( content );
+							view_rating_result();
+						});
+		});
+		//end rating
 			
 		
 		//view rating result

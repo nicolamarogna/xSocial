@@ -76,10 +76,9 @@ class Menu {
 				}
 				echo '<td>
 				<a href="?userboard='.$i->id.'">
-				<img style="max-width:55px;" src="'.$path.'crop_'.$img.'" alt="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'" title="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'">
-				<br>
-				<p style="line-height:1.2;" class="xsmall">
-				'.stripslashes($i->nome).' '.stripslashes($i->cognome).'</a></p></td>';
+				<img class="gradient" style="max-width:65px;" src="'.$path.'crop_'.$img.'" alt="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'" title="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'"><br>
+				<p class="watermark_text xsmall" style="line-height:1;">
+				'.stripslashes($i->nome).'<br>'.stripslashes($i->cognome).'</a></p></td>';
 				if ($c == 3) {
 					echo '</tr><tr>';
 					$c=1;
@@ -167,10 +166,9 @@ class Menu {
 				}
 				echo '<td>
 				<a href="?userboard='.$i->id.'">
-				<img style="max-width:55px;" src="'.$path.'crop_'.$img.'" alt="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'" title="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'">
-				<br>
-				<p style="line-height:1.2;" class="xsmall">
-				'.stripslashes($i->nome).' '.stripslashes($i->cognome).'</a></p></td>';
+				<img class="gradient" style="max-width:65px;" src="'.$path.'crop_'.$img.'" alt="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'" title="'.stripslashes($i->nome).' '.stripslashes($i->cognome).'"><br>
+				<p class="watermark_text xsmall" style="line-height:1;">
+				'.stripslashes($i->nome).'<br>'.stripslashes($i->cognome).'</a></p></td>';
 				if ($c == 3) {
 					echo '</tr><tr>';
 					$c=1;
