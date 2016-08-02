@@ -666,27 +666,24 @@ $(document).ready(function(){
 		
 			//form submit
 			$( document ).on("click", ".formsubmit", function( event ) {
-					// Stop form from submitting normally
-					event.preventDefault();
-					// Get some values from elements on the page
-					var $params = $( this );
-					var idform = $params.attr( "idform" );
-						var id = idform.replace('submit_comment', '');
-						var url = $('#'+idform).attr( "action" );
-
-						$.ajax({
-						   type: "POST",
-						   url: url,
-						   data: $('#'+idform).serialize(),
-						   success: function(data)
-						   {
-							   aftersubmit(data, id, 'post_comment'); // show response from the php script.
-						   }
-						 });
-					
+				// Stop form from submitting normally
+				event.preventDefault();
+				// Get some values from elements on the page
+				var $params = $( this );
+				var idform = $params.attr( "idform" );
+				var id = idform.replace('submit_comment', '');
+				var url = $('#'+idform).attr( "action" );
+				$.ajax({
+				   type: "POST",
+				   url: url,
+				   data: $('#'+idform).serialize(),
+				   success: function(data)
+				   {
+					aftersubmit(data, id, 'post_comment'); // show response from the php script.
+				   }
 				});
-				//end ajax submit
-
+			});
+			//end ajax submit
 
 			//form submit
 			$( '#ajaxform' ).on("submit", function( event ) {

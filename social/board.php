@@ -401,8 +401,6 @@ class Board {
 				
 				echo '</div>';
 				
-				
-				
 				//comments area
 				$row_comments = ($comments) ? 'comments_full' : 'xsmall';
 				echo '<div class="tbox"><table><tr>
@@ -576,14 +574,13 @@ class Board {
 				
 				//comments area
 				$row_comments = ($comments) ? 'comments_full' : 'xsmall';
-				$numcomments = ($comments == NULL) ? 0 : sizeof($comments);
 				echo '<div class="tbox"><table><tr>
 				<td id="comments_table" style="background-color:#f6f7f9;">';
+				$numcomments = ($comments == NULL) ? 0 : sizeof($comments);
 				//echo '<a class="innerbox fright '.$row_comments.' swing" href="#" title="" item="comments'.$i->id_status.'">Commenti ('.$numcomments.')</a>';
 				
-				echo '<span>';
-				
-				echo '<table><tr>
+				echo '<span><table><tr>
+						<td>
 						<div id="comments'.$i->id_status.'">
 						<table id="results">';
 						echo ($numcomments > 3) ? '<a style="cursor:pointer;" class="loadMore" item="post_comment'.$i->id_status.'" numcomments="'.$numcomments.'">Mostra più vecchi</a>' : '';
@@ -769,6 +766,7 @@ class Board {
 						echo '<span>';
 						
 						echo '<table><tr>
+								<td>
 								<div id="comments'.$i->id_status.'">
 								<table id="results">';
 								echo ($numcomments > 3) ? '<a style="cursor:pointer;" class="loadMore" item="post_comment'.$i->id_status.'" numcomments="'.$numcomments.'">Mostra più vecchi</a>' : '';
