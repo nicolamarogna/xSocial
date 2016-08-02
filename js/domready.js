@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$(window).load(function() {		
+	$(window).on('load', function() {		
 	
 		// youtube and live url //
 		var curImages = new Array();
@@ -131,12 +131,11 @@ $(document).ready(function(){
 					   self.prev().addClass('inactive');
 				else   self.next().addClass('inactive');
 		   }
-		   
+
 		});
 		// end youtube and live url //
 
 	
-
 		// overlay only in dashboard //
 		if ($("#statusbox").length) {
 			$('#right_content:first').on("click", function( event ) {
@@ -180,12 +179,11 @@ $(document).ready(function(){
 				});
 			}
 		});
-		
 		// end overlay only in dashboard //
 			
 				
 			//start hiding all divs with item='hide'
-			$("div[item='hide']").hide();			
+			//$("div[item='hide']").hide();			
 
 			//init rating
 			$( "select[id^='rating']" ).barrating('show', {theme: 'fontawesome-stars-o',});

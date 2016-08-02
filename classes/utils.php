@@ -193,22 +193,23 @@ class Utils {
 	public static function get_type($filename) {
 		//$images = array('.jpg', '.jpeg', '.gif', '.png');
 		//$media = array('.swf');
-		$ext = strstr($filename, '.');	// TODO: use a preg_replace 
-		switch($ext) {
-			case '.jpg':
-			case '.jpeg':
-			case '.gif':
-			case '.png':
+		$path_parts = pathinfo($filename);
+
+		switch($path_parts['extension']) {
+			case 'jpg':
+			case 'jpeg':
+			case 'gif':
+			case 'png':
 				return 0;
 				break;
-			case '.swf':
-			case '.rm':
-			case '.wmv':
-			case '.mov':
-			case '.mp4':
+			case 'swf':
+			case 'rm':
+			case 'wmv':
+			case 'mov':
+			case 'mp4':
 				return 2;
 				break;
-			case '.htm':
+			case 'htm':
 				return 3;
 				break;
 			default:
@@ -479,7 +480,13 @@ class Utils {
 			}
 			
 			if ($image) {
+				        
+				imagecolortransparent($tn, imagecolorallocatealpha($tn, 0, 0, 0, 127));
+				imagealphablending($tn, false);
+				imagesavealpha($tn, true);
+				
 				imagecopyresampled($tn, $image, 0, 0, 0, 0, $nw, $nh, $w, $h);
+				
 				if (function_exists('imagefilter')) imagefilter($tn, IMG_FILTER_CONTRAST, -10);
 				switch ($image_type)
 				{
