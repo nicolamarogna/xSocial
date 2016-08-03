@@ -1,10 +1,9 @@
 <?php
-	echo '<div id="navbar">Messaggio</div><br>';
+	echo '<div id="right_content"><div id="head_under">Avviso</div>';
 	switch ($_GET['msg']) {
 		case 'filesize_too_big':
 			echo 'L\'immagine supera i kb consentiti.';
 		break;
-		
 		case 'image_size_too_big':
 			echo 'Le dimensioni dell\'immagine sono troppo grandi.';
 		break;
@@ -27,6 +26,12 @@
 		case 'error':
 			echo 'Si è verificato un errore.';
 		break;
+		case 'friend_not_accepted':
+			echo 'Questo utente non ha ancora accettato la tua amicizia.';
+		break;
+		case 'not_accepted_by_admin':
+			echo 'L\'amministratore del gruppo non ha ancora accettato la tua richiesta.';
+		break;
 	}
-	echo '<br><br><a href="'.$_SERVER['HTTP_REFERER'].'">Torna indietro</a>';
+	echo '<br><br><a href="'.$_SERVER['HTTP_REFERER'].'">Torna indietro</a></div>';
 ?>

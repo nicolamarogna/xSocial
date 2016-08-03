@@ -23,7 +23,7 @@ class Calendar {
 		$mod = new Db;
 
 		echo '<div id="right_content">';
-		echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_calendar.png">Elenco calendari</div>';
+		echo '<div id="head_under"><i class="fa fa-calendar fright" aria-hidden="true"></i>Elenco calendari</div>';
 		if ($this->userboard == $_SESSION['user']->id) {
 			echo '<div id="menu">
 					<table><tr><td class="aright">';
@@ -97,7 +97,7 @@ class Calendar {
 					if ($this->userboard == $_SESSION['user']->id) {
 						echo '<a class="bold" href="?p=calendar&id_mod=0&id_calendar='.$id.'">Aggiungi riga</a>'.SEP;
 					}
-					echo ' <a class="bold" href="?p=calendar&userboard='.$this->userboard.'">Torna ai calendari</a>
+					echo ' <a class="bold" href="?p=calendar&userboard='.$this->userboard.'"><i class="fa fa-chevron-left" aria-hidden="true"></i>Torna ai calendari</a>
 					</td></tr></table>
 					</div><br>';
 			if ($items) {
@@ -150,15 +150,15 @@ class Calendar {
 			if ($user->id_user != $_SESSION['user']->id) {
 				header('Location: ?p=msg&msg=permission_denied');
 			}
-			$output .= '<div id="head_under"><img class="fright" src="files/img_private/thumb_calendar.png">Modifica calendario</div>';
+			$output .= '<div id="head_under"><i class="fa fa-calendar fright" aria-hidden="true"></i>Modifica calendario</div>';
 			$calendar = $mod->get_by_id('social_calendar', $id);
 		} else {
-			$output .= '<div id="head_under"><img class="fright" src="files/img_private/thumb_calendar.png">Crea un calendario</div>';
+			$output .= '<div id="head_under"><i class="fa fa-calendar fright" aria-hidden="true"></i>Crea un calendario</div>';
 		}
 		
 		$output.= '<div id="menu">
 					<table><tr><td class="aright">
-					<a class="bold" href="?p=calendar&userboard='.$this->userboard.'">Torna ai calendari</a>
+					<a class="bold" href="?p=calendar&userboard='.$this->userboard.'"><i class="fa fa-chevron-left" aria-hidden="true"></i>Torna ai calendari</a>
 					</td></tr></table>
 					</div>';
 		
@@ -215,7 +215,7 @@ class Calendar {
 		}
 		
 		//prepare form
-		$output .= Form::doform('formadd', $_SERVER["REQUEST_URI"], $fields, array('Cancella','Modifica'), 'post', 'enctype="multipart/form-data"');
+		$output .= Form::doform('formadd', $_SERVER["REQUEST_URI"], $fields, array(NULL,'Salva'), 'post', 'enctype="multipart/form-data"');
 		$output .= '</div>';
 		echo $output;
 	}
@@ -232,10 +232,10 @@ class Calendar {
 				header('Location: ?p=msg&msg=permission_denied');
 			}
 			$output = '<div id="right_content">';
-			$output .= '<div id="head_under"><img class="fright" src="files/img_private/thumb_calendar.png">Modifica riga</div>';
+			$output .= '<div id="head_under"><i class="fa fa-calendar fright" aria-hidden="true"></i>Modifica riga</div>';
 			$item = $mod->get_by_id('social_calendar_items', $id);
 		} else {
-			$output .= '<div id="head_under"><img class="fright" src="files/img_private/thumb_calendar.png">Aggiungi una riga</div>';
+			$output .= '<div id="head_under"><i class="fa fa-calendar fright" aria-hidden="true"></i>Aggiungi una riga</div>';
 		}
 		
 		$output.= '<div id="menu">
@@ -293,7 +293,7 @@ class Calendar {
 		}
 		
 		//prepare form
-		$output .= Form::doform('formadd', $_SERVER["REQUEST_URI"], $fields, array('Cancella','Modifica'), 'post', 'enctype="multipart/form-data"');
+		$output .= Form::doform('formadd', $_SERVER["REQUEST_URI"], $fields, array(NULL,'Salva'), 'post', 'enctype="multipart/form-data"');
 		$output .= '</div>';
 		echo $output;
 	}
@@ -394,7 +394,7 @@ class Calendar {
 		
 		echo '<div id="right_content">';
 		//navbar for insert
-		echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_calendar.png">Stai per eliminare un calendario</div>';
+		echo '<div id="head_under"><i class="fa fa-calendar fright" aria-hidden="true"></i>Stai per eliminare un calendario</div>';
 		
 		echo '<p class="acenter">Eliminare il calendario \'<span class="bold">'.stripslashes($calendar->title).'</span>\' ?</p>';
 		
@@ -443,7 +443,7 @@ class Calendar {
 		
 		echo '<div id="right_content">';
 		//navbar for insert
-		echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_calendar.png">Stai per eliminare una riga</div>';
+		echo '<div id="head_under"><i class="fa fa-calendar fright" aria-hidden="true"></i>Stai per eliminare una riga</div>';
 		
 		echo '<p class="acenter">Procedere con l\'eliminazione della riga?</p>';
 		

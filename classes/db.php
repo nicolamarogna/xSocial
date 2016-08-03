@@ -125,7 +125,11 @@ class Db {
 	public function escape($value)
 	{
 		$convert_quotes = str_replace ( '"', '&quot;', $value );
-		$escaped_string = '"'.mysql_real_escape_string($convert_quotes).'"';
+		if (strpos($value, 'nostriptag') !== false) {
+			$escaped_string = '"'.mysql_real_escape_string($convert_quotes).'"';
+		} else {
+			$escaped_string = '"'.strip_tags(mysql_real_escape_string($convert_quotes), '<a>').'"';
+		}
 		return $escaped_string;
 	}	
 	

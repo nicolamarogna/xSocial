@@ -117,9 +117,9 @@ class Profile {
 		
 		//prepare form
 		$output .= '<div id="right_content">';
-		$output .= '<div id="head_under"><img class="fright" src="files/img_private/thumb_profile.png">Il mio profilo</div>';
-		$output .= '<img id="displayImg" src="#" alt="" />';
-		$output .= Form::doform('formadd', $_SERVER["REQUEST_URI"], $fields, array('Cancella','Modifica'), 'post', 'enctype="multipart/form-data"');
+		$output .= '<div id="head_under"><i class="fa fa-user fright" aria-hidden="true"></i>Il mio profilo</div>';
+		$output .= '<img id="displayImg" style="display:none;" src="#" alt="" />';
+		$output .= Form::doform('formadd', $_SERVER["REQUEST_URI"], $fields, array(NULL,'Salva'), 'post', 'enctype="multipart/form-data"');
 		$output .= '</div>';
 		echo $output;
 

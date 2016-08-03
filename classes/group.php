@@ -8,7 +8,7 @@ class Group {
 	public function view() {
 		$mod = new Db;
 		echo '<div id="right_content">';
-		echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_group.png">I miei gruppi</div>';
+		echo '<div id="head_under"><i class="fa fa-copyright fa-rotate-90 fright" aria-hidden="true"></i>I miei gruppi</div>';
 		echo '<div id="menu">
 				<table><tr><td class="aright">
 				<a class="bold" href="?p=group&id_mod=0">Crea un nuovo gruppo.</a>
@@ -38,7 +38,7 @@ class Group {
 		}
 		
 		
-		echo '<br><div id="head_under"><img class="fright" src="files/img_private/thumb_group.png">Gruppi ai quali sei iscritto</div>';
+		echo '<br><div id="head_under"><i class="fa fa-copyright fa-rotate-90 fright" aria-hidden="true"></i>Gruppi ai quali sei iscritto</div>';
 		$groups = $mod->query('SELECT social_users.id, social_users.group FROM social_users
 							 	INNER JOIN social_isfriend ON social_isfriend.id_group = social_users.id
 							 	WHERE social_isfriend.confirmed = 1
@@ -71,15 +71,15 @@ class Group {
 			if ($group->group_admin != $_SESSION['user']->id) {
 				header('Location: ?p=msg&msg=permission_denied');
 			}
-			$output .= '<div id="head_under"><img class="fright" src="files/img_private/thumb_group.png">Modifica gruppo</div>';
+			$output .= '<div id="head_under"><i class="fa fa-copyright fa-rotate-90 fright" aria-hidden="true"></i>Modifica gruppo</div>';
 			$event = $mod->get_by_id('social_events', $id);
 		} else {
-			$output .= '<div id="head_under"><img class="fright" src="files/img_private/thumb_group.png">Crea un gruppo</div>';
+			$output .= '<div id="head_under"><i class="fa fa-copyright fa-rotate-90 fright" aria-hidden="true"></i>Crea un gruppo</div>';
 		}
 		
 		$output .= '<div id="menu">
 					<table><tr><td class="aright">
-					<a class="bold" href="javascript:history.back();">Annulla</a>
+					<a class="bold" href="javascript:history.back();"><i class="fa fa-chevron-left" aria-hidden="true"></i>Torna indietro</a>
 					</td></tr></table>
 					</div>';
 		
@@ -123,7 +123,7 @@ class Group {
 		}
 		
 		//prepare form
-		$output .= Form::doform('formadd', $_SERVER["REQUEST_URI"], $fields, array('Cancella','Modifica'), 'post', 'enctype="multipart/form-data"');
+		$output .= Form::doform('formadd', $_SERVER["REQUEST_URI"], $fields, array(NULL,'Salva'), 'post', 'enctype="multipart/form-data"');
 		$output .= '</div>';
 		echo $output;
 
@@ -188,7 +188,7 @@ class Group {
 		
 		echo '<div id="right_content">';
 		//navbar for insert
-		echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_group.png">Stai per eliminare un gruppo</div>';
+		echo '<div id="head_under"><i class="fa fa-copyright fa-rotate-90 fright" aria-hidden="true"></i>Stai per eliminare un gruppo</div>';
 		
 		echo '<p class="acenter">Eliminare il gruppo \'<span class="bold">'.stripslashes($group->group).'</span>\' ?</p>';
 		

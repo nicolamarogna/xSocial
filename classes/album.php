@@ -42,21 +42,23 @@ class Album {
 								FROM social_status
 								WHERE img != "" AND from_user = '.$_SESSION['user']->id.' AND to_user = '.$_SESSION['user']->id.' ORDER BY RAND() LIMIT 1');
 								//ORDER BY upd DESC');
-			echo '<table id="results">';
-			echo '<tr><td style="width:120px;">
-			<a class="bold" href="?p=album&userboard='.$_SESSION['user']->id.'&id_detail=mymedia'.$i->id.'">
-			<img class="fleft img_event crop" src="files/img/thumb_'.$myphoto[0]->img.'">
-			</a>
-			</td><td>
-			<a class="bold" href="?p=album&userboard='.$_SESSION['user']->id.'&id_detail=mymedia'.$i->id.'">I miei media</a>
-			</td></tr>';
-			echo '</table>';
+			if ($myphoto) {
+				echo '<table id="results">';
+				echo '<tr><td style="width:120px;">
+				<a class="bold" href="?p=album&userboard='.$_SESSION['user']->id.'&id_detail=mymedia'.$i->id.'">
+				<img class="fleft img_event crop" src="files/img/thumb_'.$myphoto[0]->img.'">
+				</a>
+				</td><td>
+				<a class="bold" href="?p=album&userboard='.$_SESSION['user']->id.'&id_detail=mymedia'.$i->id.'">I miei media</a>
+				</td></tr>';
+				echo '</table>';
+			}
 		}
 		
 		if ($albums) {
 			echo '<table id="results">';
 			foreach ($albums as $i) {
-				$items = $mod->query('SELECT img FROM social_albums_items WHERE id_album = '.$i->id.' ORDER BY RAND() LIMIT 1');
+				$items = $mod->query('SELECT img FROM social_albums_items WHERE substring_index(img,".",-1) = "jpg" AND id_album = '.$i->id.' ORDER BY RAND() LIMIT 1');
 				echo '<tr><td style="width:120px;">
 					<a class="bold" href="?p=album&userboard='.$this->userboard.'&id_detail='.$i->id.'">';
 				if ($items > 0) {
@@ -106,9 +108,9 @@ class Album {
 		echo '<div id="menu">
 				<table><tr><td class="aright">';
 				if ($this->userboard == $_SESSION['user']->id) {
-					echo '<a class="bold" href="?p=album&id_mod=0&id_album='.$id.'">Aggiungi foto</a>'.SEP;
+					echo '<a class="bold" href="?p=album&id_mod=0&id_album='.$id.'"><i class="fa fa-camera" aria-hidden="true"></i> Aggiungi foto</a>';
 				}
-				echo ' <a class="bold" href="?p=album&userboard='.$this->userboard.'">Torna agli album</a>
+				echo ' <a class="bold" href="?p=album&userboard='.$this->userboard.'"><i class="fa fa-chevron-left" aria-hidden="true"></i>Torna agli album</a>
 				</td></tr></table>
 				</div><br>';
 		if ($photos) {
@@ -205,15 +207,15 @@ class Album {
 			if ($user->id_user != $_SESSION['user']->id) {
 				header('Location: ?p=msg&msg=permission_denied');
 			}
-				$output .= '<div id="head_under"><img class="fright" src="files/img_private/thumb_foto.png">Modifica album</div>';
+				$output .= '<div id="head_under"><i class="fa fa-camera fright" aria-hidden="true"></i>Modifica album</div>';
 				$album = $mod->get_by_id('social_albums', $id);
 			} else {
-				$output .= '<div id="head_under"><img class="fright" src="files/img_private/thumb_foto.png">Crea un album</div>';
+				$output .= '<div id="head_under"><i class="fa fa-camera fright" aria-hidden="true"></i>Crea un album</div>';
 			}
 		
 		$output .= '<div id="menu">
 					<table><tr><td class="aright">
-					<a class="bold" href="javascript:history.back();">Annulla</a>
+					<a class="bold" href="javascript:history.back();"><i class="fa fa-chevron-left" aria-hidden="true"></i>Torna indietro</a>
 					</td></tr></table>
 					</div>';
 		
@@ -267,15 +269,15 @@ class Album {
 			if ($user->id_user != $_SESSION['user']->id) {
 				header('Location: ?p=msg&msg=permission_denied');
 			}
-			$output .= '<div id="head_under"><img class="fright" src="files/img_private/thumb_foto.png">Modifica foto</div>';
+			$output .= '<div id="head_under"><i class="fa fa-camera fright" aria-hidden="true"></i>Modifica foto</div>';
 			$photo = $mod->get_by_id('social_albums_items', $id);
 		} else {
-			$output .= '<div id="head_under"><img class="fright" src="files/img_private/thumb_foto.png">Aggiungi una foto</div>';
+			$output .= '<div id="head_under"><i class="fa fa-camera fright" aria-hidden="true"></i>Aggiungi una foto</div>';
 		}
 		
 		$output .= '<div id="menu">
 			<table><tr><td class="aright">
-			<a class="bold" href="javascript:history.back();">Annulla</a>
+			<a class="bold" href="javascript:history.back();"><i class="fa fa-chevron-left" aria-hidden="true"></i>Torna indietro</a>
 			</td></tr></table>
 			</div>';
 		
@@ -449,7 +451,7 @@ class Album {
 		
 		//navbar for insert
 		echo '<div id="right_content">';
-		echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_foto.png">Stai per eliminare un album</div>';
+		echo '<div id="head_under"><i class="fa fa-camera fright" aria-hidden="true"></i>Stai per eliminare un album</div>';
 		
 		echo '<p class="acenter">Eliminare l\'album \'<span class="bold">'.stripslashes($album->title).'</span>\' ?<br>
 		Attenzione: verranno eliminate anche tutte le immagini contenute in quest\'album!</p>';
@@ -499,7 +501,7 @@ class Album {
 		
 		//navbar for insert
 		echo '<div id="right_content">';
-		echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_foto.png">Stai per eliminare una foto</div>';
+		echo '<div id="head_under"><i class="fa fa-camera fright" aria-hidden="true"></i>Stai per eliminare una foto</div>';
 		
 		echo '<p class="acenter">Eliminare la foto \'<span class="bold">'.stripslashes($photo->title).'</span>\' ?</p>';
 		

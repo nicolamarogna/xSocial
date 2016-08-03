@@ -360,6 +360,7 @@ class Board {
 						<a href="?userboard='.$i->id.'">'.stripslashes($i->nome).' '.stripslashes($i->cognome).'</a>
 						</span>
 						<span class="xsmall fright pad" style="display:block;background-color:#f2f2f2;">'.Utils::f_date($i->upd, true).'</span>';
+				
 				// rating section
 				if (ENABLE_RATING == 'YES') {
 					echo '<div class="clear"></div>';
@@ -822,12 +823,13 @@ class Board {
 			case 0:
 				$mod = new Db();
 				$user = $mod->get_by_id('social_users', $id);
-				
+				echo '<div id="right_content">';
 				if (Utils::isgroup($id)) {
-					echo 'L\'amministratore del gruppo non ha ancora accettato la tua richiesta.';
+					header('Location: '.BASE_URL.'?p=msg&msg=not_accepted_by_admin');
 				} else {
-					echo '<span class="bold">'.stripslashes($user->nome).'</span> non ha ancora accettato la tua amicizia.';
+					header('Location: '.BASE_URL.'?p=msg&msg=friend_not_accepted');
 				}
+				echo '</div>';
 				break;
 			//not friends
 			case 2:

@@ -337,7 +337,7 @@ class Events {
 		
 		$output .= '<div id="menu">
 					<table><tr><td class="aright">
-					<a class="bold" href="javascript:history.back();">Annulla</a>
+					<a class="bold" href="javascript:history.back();"><i class="fa fa-chevron-left" aria-hidden="true"></i>Torna indietro</a>
 					</td></tr></table>
 					</div>';
 					

@@ -43,7 +43,7 @@ function checkAll(form,state,identifier){
 	}
 
 	echo '<div id="right_content">';
-	echo '<div id="head_under"><img class="fright" src="files/img_private/thumb_friends.png">Elenco amici</div>';
+	echo '<div id="head_under"><i class="fa fa-users fright" aria-hidden="true"></i>Elenco amici</div>';
 
 	//check if I am or is another user
 	$user_id = ($_GET['userboard']) ? $_GET['userboard'] : $_SESSION['user']->id;
@@ -148,7 +148,7 @@ function checkAll(form,state,identifier){
 				
 				if (($user_id == $_SESSION['user']->id) || ($mod->get_by_id('social_users', $user_id)->group_admin == $_SESSION['user']->id)) {
 					echo '<td class="aright">
-				<a href="#" onclick="if (confirm(\'Sicuro di voler eliminare questo amico?\')) {location.href=\'?p=friends&del_friend='.$i->id.'\'; return true;}"><img class="fright" src="'.BASE_URL.'files/img_private/thumb_delete.png" title="Elimina amico" alt="Elimina amico"></a>
+				<a href="#" onclick="if (confirm(\'Sicuro di voler eliminare questo amico?\')) {location.href=\'?p=friends&del_friend='.$i->id.'\'; return true;}"><i class="fa fa-trash-o fa-lg fright" aria-hidden="true" alt="Elimina amico" title="Elimina amico"></i></a>
 				</td>';
 				
 				}

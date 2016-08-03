@@ -50,12 +50,14 @@
 <file name="home.php" server="C:/xampp5/htdocs/social/" local="131109702070529800" remote="131109702070000000" Dst="2" />
 <file name="index.php" server="C:/xampp5/htdocs/social/" local="131105666757207444" remote="131105666750000000" Dst="2" />
 <file name="index.php" server="pasiontanguera.com" local="131133267445659184" remote="131133264600000000" Dst="2" />
-<file name="index.php" server="pasiontanguera.com//public_html/social/xSocial/" local="131142605562061721" remote="131142603000000000" Dst="2" />
+<file name="index.php" server="pasiontanguera.com//public_html/social/xSocial/" local="131146844350215964" remote="131146841400000000" Dst="2" />
 <file name="home.php" server="pasiontanguera.com//public_html/social/xSocial/" local="131127901392002059" remote="131133274800000000" Dst="2" />
-<file name="board.php" server="pasiontanguera.com//public_html/social/xSocial/" local="131146101857904600" remote="131146099200000000" Dst="2" />
+<file name="board.php" server="pasiontanguera.com//public_html/social/xSocial/" local="131146968205290233" remote="131146965000000000" Dst="2" />
 <file name="homescreen.css" server="pasiontanguera.com//public_html/social/xSocial/" local="131146193749292882" remote="131146191000000000" Dst="2" />
 <file name="events.php" server="pasiontanguera.com//public_html/social/xSocial/" local="131135058544059362" remote="131135055600000000" Dst="2" />
 <file name="login.php" server="pasiontanguera.com//public_html/social/xSocial/" local="131142602952811721" remote="131142600000000000" Dst="2" />
 <file name="logout.php" server="pasiontanguera.com//public_html/social/xSocial/" local="131141895402385843" remote="131141892600000000" Dst="2" />
 <file name="menu.php" server="pasiontanguera.com//public_html/social/xSocial/" local="131146181901939228" remote="131146179000000000" Dst="2" />
+<file name="friends.php" server="pasiontanguera.com//public_html/social/xSocial/" local="131146887483308842" remote="131146884600000000" Dst="2" />
+<file name="msg.php" server="pasiontanguera.com//public_html/social/xSocial/" local="131146865490719803" remote="131146862400000000" Dst="2" />
 </dwsync>

@@ -50,8 +50,10 @@ $(document).ready(function(){
 		);
 		//end gradient images overlay
 
+
 		// youtube and live url //
 		var curImages = new Array();
+		
 		
 		$('#statusbox').liveUrl({
 			loadStart : function(){
@@ -70,7 +72,7 @@ $(document).ready(function(){
 				
 				output.find('.close').one('click', function() 
 				{
-					var liveUrl     = $(this).parent();
+					var liveUrl  = $(this).parent();
 					liveUrl.hide('fast');
 					liveUrl.find('.video').html('').hide();
 					liveUrl.find('.image').html('');
@@ -132,7 +134,7 @@ $(document).ready(function(){
 					var linkTitle = $('#status_msg').find('.liveurl .title').html();
 					var linkDescription = $('#status_msg').find('.liveurl .description').html();
 					var linkUrl = $('#status_msg').find('.liveurl .url').html();
-					$('#statusbox_extra').val($('#statusbox_extra').val() + '<div class=\'padtop\'><a href=\''+linkUrl+'\' target=\'blank\'><img class=\'fleft thumb\' src=\''+linkImg+'\'><b>'+linkTitle+'</b></a></br><span class=\'xsmall\'>'+linkDescription+'<br>'+linkUrl+'</div>');
+					$('#statusbox_extra').val($('#statusbox_extra').val() + '<div id=\'nostriptag\' class=\'padtop\'><a href=\''+linkUrl+'\' target=\'blank\'><img class=\'fleft thumb\' src=\''+linkImg+'\'><b>'+linkTitle+'</b></a></br><span class=\'xsmall\'>'+linkDescription+'<br>'+linkUrl+'</div>');
 					//end niku implement	
 				}
 
