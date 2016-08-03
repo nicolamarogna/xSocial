@@ -550,7 +550,8 @@ $(document).ready(function(){
 								$("#right").fadeIn("slow").append(content);
 								viewcomments();							
 								//apply widget rating
-								$( "select[id^='rating']" ).barrating('show', {theme: 'fontawesome-stars-o',});		
+								$( "select[id^='rating']" ).barrating('show', {theme: 'fontawesome-stars-o',});	
+								$( "div[id^='rating_result']" ).slideDown('fast');	
 								pageNumber++;
 								view_rating_result();
 								//$('#loading').hide();
@@ -592,7 +593,7 @@ $(document).ready(function(){
 		function view_rating_result() {
 			$.each($("select[id^='single_rating_result_']"), function( i, val ) {
 				var currentRating = $(this).data('current-rating');
-	
+
 				$(this).barrating({
 					theme: 'fontawesome-stars-o',
 					showSelectedRating: false,
