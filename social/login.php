@@ -79,7 +79,10 @@ curl -i -X GET \
 		//prepare form
 		echo Form::doform('formadd', $_SERVER["REQUEST_URI"], $fields, array(NULL, 'Accedi'), 'post', 'enctype="multipart/form-data"');
         echo '<button onclick="_login();" type="submit" id="login_with_fb">Accedi con Facebook</button></div>';
-        
+        for ($n=0; $n<41; $n++) {
+			$exp .= '<option value="'.$n.'">'.$n.'</option>';
+		}
+				
         echo '<div id="right_content"><div id="head_under">Registrati</div>
 			<form class="formsignup" name="formsignup" action="'.$_SERVER["REQUEST_URI"].'" method="post" enctype="multipart/form-data">
 			<div id="status"></div>
@@ -95,6 +98,16 @@ curl -i -X GET \
 			<input type="text" name="email_verify" id="email_verify" value="" required>
 	   		<label for="password" >Password *</label>
 			<input type="password" name="password" id="password" value="" required>
+	   		<label for="birthday" >Data di nascita *</label>
+			<input type="text" name="birthday" id="birthday" class="dashboard_notime" value="" required>
+	   		<label for="sex" >Sesso *
+			<input type="radio" name="sex" id="sex" value="f"> Donna
+			<input type="radio" name="sex" id="sex" value="m"> Uomo
+			</label>
+			<label for="esperienza" >Anni di esperienza *
+			<select name="esperienza" id="esperienza">
+			'.$exp.'
+			</select></label>
         	<div class="clear"></div>
         <button type="submit">Iscriviti</button>
         <button onclick="_login();" type="submit" id="register_with_fb">Iscriviti con Facebook</button>
@@ -102,7 +115,7 @@ curl -i -X GET \
 	  </form>
      </div>';
 	}
-	
+
 	// login
 	public function do_login()
 	{		

@@ -29,6 +29,7 @@ datepicker.regional.it = {
 	firstDay: 1,
 	isRTL: false,
 	showMonthAfterYear: false,
+	yearRange: "-90",
 	yearSuffix: "" };
 datepicker.setDefaults( datepicker.regional.it );
 

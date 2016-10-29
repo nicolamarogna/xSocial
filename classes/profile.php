@@ -82,6 +82,33 @@ class Profile {
 			'extra' => 'class="dashboard_notime"',
 			);
 		$fields[] = array(
+			'label' => 'Sesso',
+			'type' => 'radio',
+			'value' => $_SESSION['user']->email,
+			'name' => 'email',
+			'rule' => 'required',
+			);
+		for ($n=0; $n<41; $n++) {
+			$exp[]= $n;
+		}
+		$fields[] = array(
+			'label' => 'Anni di esperienza',
+			'type' => 'selectarray',
+			'options' => array($exp, $_SESSION['user']->esperienza,$exp),
+			'value' => $_SESSION['user']->esperienza,
+			'name' => 'esperienza',
+			'rule' => 'required',
+			);
+		$fields[] = array(
+			'label' => 'Sesso',
+			'type' => 'radio',
+			'options' => array('f' => 'Donna','m' => 'Uomo'),
+			'value' => $_SESSION['user']->sex,
+			'name' => 'sex',
+			'checked' => 1,
+			'rule' => 'required',
+			);
+		$fields[] = array(
 			'label' => 'Citt&agrave;',
 			'type' => 'text',
 			'value' => stripslashes($_SESSION['user']->citta),
@@ -92,7 +119,7 @@ class Profile {
 			'label' => 'Foto',
 			'type' => 'file',
 			'value' => '',
-			'old' => 'crop_'.$_SESSION['user']->img,
+			'old' => (($_SESSION['user']->img) && ($_SESSION['user']->img != 'crop_')) ? 'crop_'.$_SESSION['user']->img : NULL,
 			'name' => 'img',
 			);
 		$fields[] = array(

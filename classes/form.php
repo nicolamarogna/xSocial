@@ -90,6 +90,13 @@ class Form {
 				$str .= '
 				<input type="checkbox" class="checked" name="'.$i['name'].'" id="'.$i['name'].'" value="'.$i['value'].'" '.$checked.' />';
 				break;
+			case 'radio':
+				foreach($i['options'] as $k => $v) {
+					$checked = ($i['value'] == $k) ? 'checked="checked"' : '';
+					$str .= '
+					<input type="radio" class="checked" name="'.$i['name'].'" id="'.$i['name'].'" value="'.$k.'" '.$checked.' /> '.$v;
+				}
+				break;
 			case 'textarea':
 				$textra = (isset($i['extra'])) ? $i['extra'] : '';
 				$str .= '
@@ -135,7 +142,7 @@ class Form {
 					$str .= '
 					<select name="'.$i['name'].'" id="'.$i['name'].'">';
 				// empty option
-				if (isset($i['options'][3])) 
+				if (isset($i['options'][3]))
 					$str .= '
 					<option>'.$i['options'][3].'</option>';
 				// other options
@@ -154,8 +161,42 @@ class Form {
 							$sel = (in_array($ii->$i['options'][1], $i['value'])) ? 'selected="selected"' : '';
 						else
 							$sel = ($i['value'] == $ii->$i['options'][1]) ? 'selected="selected"' : '';
-						$str .= '
+							$str .= '
 						<option value="'.$ii->$i['options'][1].'" '.$sel.$dis.'>'.$sign.' '.$ii->$i['options'][2].'</option>';
+					}
+				}
+				$str .= '
+				</select>';
+				break;
+			case 'selectarray':
+				if (isset($i['multiple']))
+					$str .= '
+					<select name="'.$i['name'].'[]" id="'.$i['name'].'" multiple="multiple" size="8">';
+				else 
+					$str .= '
+					<select name="'.$i['name'].'" id="'.$i['name'].'">';
+				// empty option
+				if (isset($i['options'][3]))
+					$str .= '
+					<option>'.$i['options'][3].'</option>';
+				// other options
+				if (!empty($i['options'][0])) {
+					foreach($i['options'][0] as $ii)
+					{
+						$sign = $dis = ' ';
+						if (isset($i['disabled'])) {
+							if ($ii->$i['disabled']) {
+								$dis = ' disabled = "disabled"';
+								$sign = 'x';
+							}
+						}
+						
+						if (is_array($i['value']))
+							$sel = (in_array($ii->$i['options'][1], $i['value'])) ? 'selected="selected"' : '';
+						else
+							$sel = ($i['value'] == $ii) ? 'selected="selected"' : '';
+							$str .= '
+						<option value="'.$ii.'" '.$sel.$dis.'>'.$sign.' '.$ii.'</option>';
 					}
 				}
 				$str .= '
